@@ -1,0 +1,98 @@
+# Configuration du système de logging
+
+version: 1
+disable_existing_loggers: false
+
+# Définition des formats de logs
+formatters:
+  # Format détaillé avec toutes les informations
+  detailed:
+    format: '%(asctime)s - %(name)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(funcName)s() - %(message)s'
+    datefmt: '%Y-%m-%d %H:%M:%S'
+  
+  # Format simple pour la console
+  simple:
+    format: '%(asctime)s - %(levelname)s - %(message)s'
+    datefmt: '%H:%M:%S'
+  
+  # Format pour les fichiers JSON (optionnel, pour parsing automatique)
+  json:
+    format: '{"time": "%(asctime)s", "level": "%(levelname)s", "module": "%(name)s", "message": "%(message)s"}'
+
+# Définition des handlers (où écrire les logs)
+handlers:
+  # Console (terminal)
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: simple
+    stream: ext://sys.stdout
+  
+  # Fichier pour tous les logs (INFO et supérieur)
+  file_info:
+    class: logging.handlers.RotatingFileHandler
+    level: INFO
+    formatter: detailed
+    filename: logs/pipeline_info.log
+    maxBytes: 10485760  # 10 MB
+    backupCount: 5
+    encoding: utf-8
+  
+  # Fichier pour les erreurs uniquement
+  file_error:
+    class: logging.handlers.RotatingFileHandler
+    level: ERROR
+    formatter: detailed
+    filename: logs/pipeline_error.log
+    maxBytes: 10485760  # 10 MB
+    backupCount: 10
+    encoding: utf-8
+  
+  # Fichier pour les logs quotidiens
+  file_daily:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: DEBUG
+    formatter: detailed
+    filename: logs/pipeline_daily.log
+    when: midnight
+    interval: 1
+    backupCount: 30
+    encoding: utf-8
+
+# Configuration des loggers par module
+loggers:
+  # Logger pour le module d'extraction
+  extract:
+    level: DEBUG
+    handlers: [console, file_info, file_error]
+    propagate: false
+  
+  # Logger pour le module de transformation
+  transform:
+    level: DEBUG
+    handlers: [console, file_info, file_error]
+    propagate: false
+  
+  # Logger pour le module de chargement
+  load:
+    level: DEBUG
+    handlers: [console, file_info, file_error]
+    propagate: false
+  
+  # Logger pour les validations
+  validator:
+    level: DEBUG
+    handlers: [console, file_info, file_error]
+    propagate: false
+
+# Configuration du logger racine (par défaut)
+root:
+  level: DEBUG
+  handlers: [console, file_info, file_error, file_daily]
+
+# Niveaux de logging disponibles :
+# DEBUG    - Informations détaillées, typiquement utiles pour diagnostiquer
+# INFO     - Confirmation que les choses fonctionnent comme prévu
+# WARNING  - Indication que quelque chose d'inattendu s'est produit
+# ERROR    - Erreur sérieuse, le logiciel n'a pas pu effectuer une fonction
+# CRITICAL - Erreur grave, le programme pourrait s'arrêter

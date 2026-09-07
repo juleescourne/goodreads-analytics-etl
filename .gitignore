@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE / OS
+.vscode/
+.idea/
+.spyproject/
+.DS_Store
+Thumbs.db
+
+# Runtime data and generated artifacts
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/archive/*
+!data/archive/.gitkeep
+data/database/*
+!data/database/.gitkeep
+logs/*
+!logs/.gitkeep
+*.db
+*.db-journal
+*.log
+
+# Power BI local files
+*.pbix
+*.pbit
+
+# Generated documentation
+docs/_build/
+
+# Local configuration overrides / secrets
+.env
+.env.*
+!.env.example
+*.ini

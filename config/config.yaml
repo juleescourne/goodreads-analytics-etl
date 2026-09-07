@@ -1,0 +1,292 @@
+# Configuration générale du pipeline ETL
+
+# Chemins des fichiers et dossiers
+paths:
+  raw_data: "data/raw"
+  processed_data: "data/processed"
+  archive: "data/archive"
+  logs: "logs"
+  database: "data/database/book_database.db"
+
+# Configuration de la base de données SQLite
+database:
+  name: "book_database.db"
+  timeout: 30  # secondes
+  check_same_thread: false
+  isolation_level: "DEFERRED"
+  
+  # Tables à créer
+  tables:
+    - name: "DimBooks"
+      schema: |
+        CREATE TABLE IF NOT EXISTS DimBooks (
+            bookID INTEGER PRIMARY KEY,
+            title TEXT NOT NULL,
+            isbn13 TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        
+    - name: "DimAuthors"
+      schema: |
+        CREATE TABLE IF NOT EXISTS DimAuthors (
+            authorID INTEGER PRIMARY KEY,
+            author_name TEXT UNIQUE NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        
+    - name: "DimPublishers"
+      schema: |
+        CREATE TABLE IF NOT EXISTS DimPublishers (
+            publisherID INTEGER PRIMARY KEY,
+            publisher_name TEXT UNIQUE NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        
+    - name: "DimGenres"
+      schema: |
+        CREATE TABLE IF NOT EXISTS DimGenres (
+            genreID INTEGER PRIMARY KEY,
+            genre_name TEXT UNIQUE NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        
+    - name: "DimLanguages"
+      schema: |
+        CREATE TABLE IF NOT EXISTS DimLanguages (
+            languageID INTEGER PRIMARY KEY,
+            language_code TEXT UNIQUE NOT NULL,
+            language_name TEXT NOT NULL,
+            country TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    
+    - name: "DimDates"
+      schema: |
+        CREATE TABLE IF NOT EXISTS DimDates (
+            dateID INTEGER PRIMARY KEY,
+            publication_date DATE UNIQUE NOT NULL,
+            year INTEGER NOT NULL,
+            month INTEGER NOT NULL,
+            day INTEGER NOT NULL,
+            month_name TEXT NOT NULL,
+            day_name TEXT NOT NULL,
+            quarter INTEGER NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        
+            
+    - name: "FactBooks"
+      schema: |
+        CREATE TABLE IF NOT EXISTS FactBooks (
+            bookID INTEGER PRIMARY KEY,
+            publisherID INTEGER NOT NULL,
+            languageID INTEGER NOT NULL,
+            dateID INTEGER NOT NULL,
+            genreID INTEGER NOT NULL,
+            num_pages INTEGER NOT NULL,
+            ratings_count INTEGER NOT NULL,
+            text_reviews_count INTEGER NOT NULL,
+            average_rating REAL NOT NULL,
+            engagement REAL NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (bookID) REFERENCES DimBooks(bookID) ON DELETE CASCADE,
+            FOREIGN KEY (publisherID) REFERENCES DimPublishers(publisherID) ON DELETE SET NULL,
+            FOREIGN KEY (languageID) REFERENCES DimLanguages(languageID) ON DELETE SET NULL,
+            FOREIGN KEY (dateID) REFERENCES DimDates(dateID) ON DELETE SET NULL,
+            FOREIGN KEY (genreID) REFERENCES DimGenres(genreID) ON DELETE SET NULL
+        ) 
+    
+    - name: "BridgeAuthorBook"
+      schema: |
+        CREATE TABLE IF NOT EXISTS BridgeAuthorBook (
+            bookID INTEGER NOT NULL,
+            authorID INTEGER NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (bookID, authorID),
+            FOREIGN KEY (bookID) REFERENCES DimBooks(bookID) ON DELETE CASCADE,
+            FOREIGN KEY (authorID) REFERENCES DimAuthors(authorID) ON DELETE CASCADE
+        ) 
+        
+    - name: "BookPCA"
+      schema: |
+        CREATE TABLE IF NOT EXISTS BookPCA (
+            bookID INTEGER PRIMARY KEY,
+            PC1 REAL NOT NULL,
+            PC2 REAL NOT NULL,
+            Cluster INTEGER NOT NULL,
+            Cluster_Label TEXT NOT NULL,
+            average_rating REAL NOT NULL,
+            ratings_count REAL NOT NULL,
+            engagement REAL NOT NULL,
+            num_pages REAL NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (bookID) REFERENCES DimBooks(bookID) ON DELETE CASCADE
+        )
+        
+    - name: "AuthorPCA"
+      schema: |
+        CREATE TABLE IF NOT EXISTS AuthorPCA (
+            authorID INTEGER PRIMARY KEY,
+            PC1 REAL NOT NULL,
+            PC2 REAL NOT NULL,
+            Cluster INTEGER NOT NULL,
+            Cluster_Label TEXT NOT NULL,
+            average_rating REAL NOT NULL,
+            ratings_count REAL NOT NULL,
+            engagement REAL NOT NULL,
+            num_pages REAL NOT NULL,
+            book_count REAL NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (authorID) REFERENCES DimAuthors(authorID) ON DELETE CASCADE
+        )
+        
+    - name: "PublisherPCA"
+      schema: |
+        CREATE TABLE IF NOT EXISTS PublisherPCA (
+            publisherID INTEGER PRIMARY KEY,
+            PC1 REAL NOT NULL,
+            PC2 REAL NOT NULL,
+            Cluster INTEGER NOT NULL,
+            Cluster_Label TEXT NOT NULL,
+            average_rating REAL NOT NULL,
+            ratings_count REAL NOT NULL,
+            engagement REAL NOT NULL,
+            num_pages REAL NOT NULL,
+            book_count REAL NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (publisherID) REFERENCES DimPublishers(publisherID) ON DELETE CASCADE
+        )
+        
+  # Index pour performance
+  indexes:
+    - name: "idx_factbooks_publisher"
+      table: "FactBooks"
+      schema: |
+        CREATE INDEX IF NOT EXISTS idx_factbooks_publisher
+        ON FactBooks(publisherID)
+    
+    - name: "idx_factbooks_date"
+      table: "FactBooks"
+      schema: |
+        CREATE INDEX IF NOT EXISTS idx_factbooks_date
+        ON FactBooks(dateID)
+    
+    - name: "idx_factbooks_genre"
+      table: "FactBooks"
+      schema: |
+        CREATE INDEX IF NOT EXISTS idx_factbooks_genre
+        ON FactBooks(genreID)
+    
+    - name: "idx_factbooks_language"
+      table: "FactBooks"
+      schema: |
+        CREATE INDEX IF NOT EXISTS idx_factbooks_language
+        ON FactBooks(languageID)
+    
+    - name: "idx_factbooks_rating"
+      table: "FactBooks"
+      schema: |
+        CREATE INDEX IF NOT EXISTS idx_factbooks_rating
+        ON FactBooks(average_rating)
+    
+    - name: "idx_factbooks_engagement"
+      table: "FactBooks"
+      schema: |
+        CREATE INDEX IF NOT EXISTS idx_factbooks_engagement
+        ON FactBooks(engagement)
+    
+    - name: "idx_bridge_book"
+      table: "BridgeAuthorBook"
+      schema: |
+        CREATE INDEX IF NOT EXISTS idx_bridge_book
+        ON BridgeAuthorBook(bookID)
+    
+    - name: "idx_bridge_author"
+      table: "BridgeAuthorBook"
+      schema: |
+        CREATE INDEX IF NOT EXISTS idx_bridge_author
+        ON BridgeAuthorBook(authorID)
+    
+    - name: "idx_dates_year"
+      table: "DimDates"
+      schema: |
+        CREATE INDEX IF NOT EXISTS idx_dates_year
+        ON DimDates(year)
+    
+    - name: "idx_dates_month"
+      table: "DimDates"
+      schema: |
+        CREATE INDEX IF NOT EXISTS idx_dates_month
+        ON DimDates(month)
+        
+# Configuration CSV
+csv:
+  encoding: "utf-8-sig"  # Pour gérer les BOM Excel
+  delimiter: ","
+  decimal: "."
+  date_format: "%Y-%m-%d"
+  skip_rows: 0
+  
+  # Colonnes attendues par fichier
+  expected_columns:
+    books: ['bookID','title','authors','average_rating','isbn13','language_code',
+            'num_pages','ratings_count','text_reviews_count','publication_date',
+            'publisher_name','genre_name']
+            
+
+# Configuration des transformations
+transformations:
+  remove_duplicates: true
+  handle_missing_values: true
+  validate_data_types: true
+  
+  # Valeurs par défaut pour données manquantes
+  default_values:
+    authors: "Anonymous"
+    publication_date: "2000-01-01"
+    publisher_name: "Unknown"
+    genre_name: "Other"
+    
+# Configuration spécifique pour les livres
+books:
+  genres:
+    - 'History & Politics'
+    - 'Health & Medicine'
+    - 'Mystery & Thriller'
+    - 'Arts & Design'
+    - 'Self-Help & Wellness'
+    - 'Sports & Recreation'
+    - 'Non-Fiction'
+    - 'Science Fiction & Fantasy'
+    - 'Countries & Geography'
+    - 'Other'
+    - 'Nature & Environment'
+    - 'Business & Finance'
+    - 'Romance'
+    - 'Literature & Fiction'
+    - 'Philosophy & Religion'
+    - 'Science & Technology'
+    - 'Children & Young Adult'
+    - 'Food & Cooking'
+    - 'Dictionary & Education'
+    - 'Biography & Autobiography'
+   
+# Configuration du pipeline
+pipeline:
+  batch_size: 1000  # Nombre de lignes à traiter par batch
+  max_retries: 3
+  retry_delay: 5  # secondes
+  enable_archive: true
+  archive_format: "%Y%m%d_%H%M%S"  # Format timestamp pour archivage
+
+
+# Configuration Power BI
+powerbi:
+  refresh_after_load: false
+  dataset_id: ""  # ID du dataset Power BI si refresh automatique
+
+# Mode d'exécution
+execution:
+  mode: "development"  # development | production
+  verbose: true
+  parallel_processing: false
