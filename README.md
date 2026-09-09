@@ -1,6 +1,45 @@
 # Goodreads Analytics ETL Pipeline
 
+[![Tests](https://github.com/juleescourne/goodreads-analytics-etl/actions/workflows/tests.yml/badge.svg)](https://github.com/juleescourne/goodreads-analytics-etl/actions/workflows/tests.yml)
+![Tests: 278](https://img.shields.io/badge/tests-278%20passing-brightgreen)
+![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)
+[![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
+
 A production-style **Python ETL pipeline** that transforms raw book data into a validated **SQLite analytical warehouse** designed for BI exploration. The project combines data cleaning, dimensional modeling, incremental loading, data-quality checks, PCA/K-means enrichment, automated scheduling, and a comprehensive test suite.
+
+> **Walkthrough with the Power BI dashboards:**
+> [juleescourne.github.io/portfolio-data-analyst/#/goodreads](https://juleescourne.github.io/portfolio-data-analyst/#/goodreads)
+
+## Run it in one minute
+
+The real dataset is not redistributed here, so the repository ships a generator that
+produces a structurally identical synthetic sample — including deliberate duplicates,
+missing values and out-of-range ratings, so the cleaning and validation stages have
+something to do:
+
+```bash
+pip install -r requirements.txt
+python scripts/generate_sample_data.py     # writes data/raw/books.csv
+python main.py                             # builds the analytical database
+```
+
+The pipeline completes in about 5 seconds and produces:
+
+| Table | Rows (sample run) |
+| --- | ---: |
+| `DimBooks` | 300 |
+| `DimAuthors` | 96 |
+| `DimDates` | 296 |
+| `DimGenres` | 7 |
+| `DimLanguages` | 6 |
+| `DimPublishers` | 6 |
+| `FactBooks` | 300 |
+| `BridgeAuthorBook` | 372 |
+| `BookPCA` / `AuthorPCA` / `PublisherPCA` | 299 / 92 / 6 |
+
+plus the 10 declared indexes, with referential-integrity checks passing.
+Numbers above come from the synthetic sample and carry no analytical meaning —
+they exist to show the pipeline runs end to end.
 
 ## What this project demonstrates
 
@@ -14,6 +53,17 @@ A production-style **Python ETL pipeline** that transforms raw book data into a 
 - **PCA + K-means** enrichment for books, authors, and publishers
 - Structured logging, retry handling, source archiving, and Windows scheduling
 - Automated testing with **278 pytest tests**
+
+## BI output
+
+The analytical database is consumed in Power BI. Three report pages cover the catalogue,
+the authors/publishers, and the genres/languages.
+
+| | |
+| --- | --- |
+| ![Books dashboard](docs/images/dashboard-books.webp) | ![Authors and publishers dashboard](docs/images/dashboard-authors.webp) |
+
+![Genres and languages dashboard](docs/images/dashboard-genres.webp)
 
 ## Pipeline architecture
 
