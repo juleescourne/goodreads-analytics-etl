@@ -132,7 +132,12 @@ class DatabaseLoader:
             self.logger.info("  Encodage UTF-8 activé pour SQLite")
             
             self.db_conn._create_tables()
-            
+
+            # Les index déclarés dans config.yaml étaient créés par create_indexes(),
+            # mais la méthode n'était jamais appelée par le pipeline : la base de
+            # production ne contenait donc aucun des index annoncés.
+            self.db_conn.create_indexes()
+
             self.changes_detected = False
             
             # 1. Charger dimensions et faits avec UPSERT
