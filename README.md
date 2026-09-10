@@ -1,35 +1,40 @@
-# Goodreads Analytics ETL Pipeline
+# Goodreads Analytics ETL
 
 [![Tests](https://github.com/juleescourne/goodreads-analytics-etl/actions/workflows/tests.yml/badge.svg)](https://github.com/juleescourne/goodreads-analytics-etl/actions/workflows/tests.yml)
-![Tests: 278](https://img.shields.io/badge/tests-278%20passing-brightgreen)
+![Tests : 278](https://img.shields.io/badge/tests-278%20passants-brightgreen)
 ![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)
-[![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
+[![Licence MIT](https://img.shields.io/badge/licence-MIT-lightgrey)](LICENSE)
 
-A production-style **Python ETL pipeline** that transforms raw book data into a validated **SQLite analytical warehouse** designed for BI exploration. The project combines data cleaning, dimensional modeling, incremental loading, data-quality checks, PCA/K-means enrichment, automated scheduling, and a comprehensive test suite.
+Pipeline ETL Python qui transforme un catalogue de livres brut en **entrepôt
+analytique en étoile**, prêt pour la BI : nettoyage, contrôles qualité, validation
+Pydantic, chargement incrémental et enrichissement ACP.
 
-> **Walkthrough with the Power BI dashboards:**
+> Parcours commenté avec les tableaux de bord Power BI —
 > [juleescourne.github.io/portfolio-data-analyst/#/goodreads](https://juleescourne.github.io/portfolio-data-analyst/#/goodreads)
 
-## Run it in one minute
+![Schéma en étoile](docs/images/star-schema.webp)
 
-The real dataset is not redistributed here, so the repository ships a generator that
-produces a structurally identical synthetic sample — including deliberate duplicates,
-missing values and out-of-range ratings, so the cleaning and validation stages have
-something to do:
+---
+
+## Exécutable en une minute
+
+Le dataset d'origine n'est pas redistribué. Le dépôt fournit un générateur qui
+produit un CSV de structure identique — **défauts inclus**, pour que les contrôles
+qualité aient quelque chose à faire :
 
 ```bash
 pip install -r requirements.txt
-python scripts/generate_sample_data.py     # writes data/raw/books.csv
-python main.py                             # builds the analytical database
+python scripts/generate_sample_data.py     # écrit data/raw/books.csv
+python main.py                             # construit l'entrepôt
 ```
 
-The pipeline completes in about 5 seconds and produces:
+Environ 5 secondes plus tard :
 
-| Table | Rows (sample run) |
+| Table | Lignes |
 | --- | ---: |
 | `DimBooks` | 300 |
-| `DimAuthors` | 96 |
-| `DimDates` | 296 |
+| `DimAuthors` | 98 |
+| `DimDates` | 295 |
 | `DimGenres` | 7 |
 | `DimLanguages` | 6 |
 | `DimPublishers` | 6 |
@@ -37,325 +42,134 @@ The pipeline completes in about 5 seconds and produces:
 | `BridgeAuthorBook` | 372 |
 | `BookPCA` / `AuthorPCA` / `PublisherPCA` | 299 / 92 / 6 |
 
-plus the 10 declared indexes, with referential-integrity checks passing.
-Numbers above come from the synthetic sample and carry no analytical meaning —
-they exist to show the pipeline runs end to end.
+Plus les 10 index déclarés, contrôles d'intégrité référentielle passés. Ces chiffres
+proviennent de l'échantillon synthétique et n'ont aucune portée analytique : ils
+montrent que la chaîne tourne de bout en bout.
 
-## What this project demonstrates
+---
 
-- End-to-end **Extract → Transform → Load** orchestration in Python
-- Data cleaning and quality control with pandas
-- **Star-schema / dimensional modeling** for analytical workloads
-- Many-to-many modeling through an author/book bridge table
-- Pydantic-based row validation and referential-integrity checks
-- Incremental SQLite loading with **UPSERT** logic
-- Derived analytical metrics for BI reporting
-- **PCA + K-means** enrichment for books, authors, and publishers
-- Structured logging, retry handling, source archiving, and Windows scheduling
-- Automated testing with **278 pytest tests**
+## Ce que le projet démontre
 
-## BI output
-
-The analytical database is consumed in Power BI. Three report pages cover the catalogue,
-the authors/publishers, and the genres/languages.
-
-| | |
+| Domaine | Éléments concrets |
 | --- | --- |
-| ![Books dashboard](docs/images/dashboard-books.webp) | ![Authors and publishers dashboard](docs/images/dashboard-authors.webp) |
+| Modélisation dimensionnelle | 6 dimensions, 1 table de faits, table de pont pour la relation N-N livre ↔ auteur |
+| Qualité des données | typage explicite, doublons, valeurs aberrantes, valeurs manquantes, validation Pydantic |
+| Intégrité | clés étrangères déclarées, `PRAGMA foreign_keys` activé, contrôle référentiel **avant** écriture |
+| Chargement incrémental | UPSERT, détection de changement, recalcul ACP conditionnel |
+| Ingénierie | schémas SQL en configuration, journalisation structurée, 278 tests, intégration continue |
 
-![Genres and languages dashboard](docs/images/dashboard-genres.webp)
+---
 
-## Pipeline architecture
+## La qualité des données, démontrée et non affirmée
+
+Le générateur d'échantillon injecte volontairement six défauts. La trace
+d'exécution montre le pipeline les traiter un à un :
+
+```text
+Fichier lu : 301 lignes, 12 colonnes
+Statistiques : 301 lignes, 1 doublons
+genre_name: valeurs invalides/NA remplacées par 'Other'
+average_rating: 1 valeurs corrigées [0-5]
+1 paires de doublons supprimées
+Transformation terminée : 300 lignes (1 supprimées, 0.3%)
+Aucune valeur manquante
+```
+
+Un échantillon parfaitement propre ne prouverait rien. Celui-ci contient une ligne
+dupliquée, une note à 7,4 sur une échelle de 5, une date impossible (31 février), un
+nombre de pages vide, une langue absente et un livre à zéro note — ce dernier pour
+forcer la garde sur le calcul d'engagement.
+
+---
+
+## Architecture
 
 ```mermaid
 flowchart LR
-    A[books.csv] --> B[CSV Extractor]
-    B --> C[Cleaning & Transformation]
-    C --> D[Dimensional Model Builder]
-    D --> E[Pydantic Validation]
-    E --> F[Incremental SQLite Loader]
-    F --> G[(Analytics Database)]
-    G --> H[PCA + K-means Enrichment]
+    A[books.csv] --> B[CSVExtractor]
+    B --> C[BooksTransformer<br/>nettoyage + qualite]
+    C --> D[TableBuilder<br/>modele dimensionnel]
+    D --> E[TableValidator<br/>Pydantic + integrite]
+    E --> F[DatabaseLoader<br/>UPSERT incremental]
+    F --> G[(SQLite)]
+    G --> H[PCACalculator<br/>ACP + K-means]
     H --> G
-    G --> I[Power BI / BI Tool]
+    G --> I[Power BI]
 ```
 
-The pipeline is orchestrated by `main.py` and each responsibility is isolated in a dedicated module under `src/`.
+Deux choix structurent le pipeline :
 
-## Analytical data model
+**La validation précède l'écriture.** L'intégrité référentielle est contrôlée sur
+les DataFrames, avant tout `INSERT`. La base ne peut donc pas se retrouver dans un
+état incohérent, même en cas d'échec au milieu du chargement.
 
-The warehouse separates descriptive dimensions from book-level metrics.
+**Le chargement est incrémental.** Un drapeau `changes_detected` évite de recalculer
+l'ACP et le K-means quand la source n'a pas bougé — sur un pipeline planifié
+quotidiennement, c'est l'essentiel du temps de calcul économisé.
 
-```mermaid
-erDiagram
-    DimBooks ||--|| FactBooks : describes
-    DimPublishers ||--o{ FactBooks : publisher
-    DimLanguages ||--o{ FactBooks : language
-    DimDates ||--o{ FactBooks : publication_date
-    DimGenres ||--o{ FactBooks : genre
-    DimBooks ||--o{ BridgeAuthorBook : book
-    DimAuthors ||--o{ BridgeAuthorBook : author
-    DimBooks ||--o| BookPCA : enrichment
-    DimAuthors ||--o| AuthorPCA : enrichment
-    DimPublishers ||--o| PublisherPCA : enrichment
-```
+Détail complet : [ARCHITECTURE.md](ARCHITECTURE.md).
 
-### Main tables
+---
 
-| Table | Purpose |
+## Restitution BI
+
+L'entrepôt alimente trois pages Power BI : catalogue, auteurs et éditeurs, genres et
+langues.
+
+| | |
 | --- | --- |
-| `DimBooks` | Book identity and title information |
-| `DimAuthors` | Unique authors |
-| `DimPublishers` | Publishers |
-| `DimLanguages` | Language metadata |
-| `DimDates` | Calendar attributes for publication dates |
-| `DimGenres` | Book genres |
-| `FactBooks` | Ratings, reviews, page counts, engagement and foreign keys |
-| `BridgeAuthorBook` | Many-to-many relationship between books and authors |
-| `BookPCA` | PCA coordinates and cluster assignment for books |
-| `AuthorPCA` | PCA coordinates and cluster assignment for authors |
-| `PublisherPCA` | PCA coordinates and cluster assignment for publishers |
+| ![Tableau de bord livres](docs/images/dashboard-books.webp) | ![Tableau de bord auteurs et éditeurs](docs/images/dashboard-authors.webp) |
 
-## ETL stages
+![Tableau de bord genres et langues](docs/images/dashboard-genres.webp)
 
-### 1. Extract
+---
 
-`CSVExtractor` reads `data/raw/books.csv`, applies the configured CSV options, reports source statistics, and can archive the source file with a timestamp.
+## Documentation
 
-### 2. Transform
+| Document | Contenu |
+| --- | --- |
+| [INSTALLATION.md](INSTALLATION.md) | prérequis, installation, configuration, automatisation, dépannage |
+| [UTILISATION.md](UTILISATION.md) | exécution, lecture des journaux, requêtes SQL types, branchement Power BI |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | modèle dimensionnel, qualité, chargement incrémental, ACP |
 
-`BooksTransformer` performs the main data-quality operations:
+---
 
-- required-column validation;
-- corrupted identifier filtering;
-- explicit type conversion;
-- missing-value handling;
-- text normalization;
-- duplicate removal;
-- outlier handling.
+## Stack
 
-### 3. Build the analytical model
+`Python 3.11+` · `pandas` · `NumPy` · `Pydantic` · `scikit-learn` · `SQLite`
+· `PyYAML` · `pytest` · `GitHub Actions` · `Power BI`
 
-`TableBuilder` turns the cleaned flat dataset into dimensions, facts and the author/book bridge table. It also derives analytical fields such as:
+Cinq dépendances d'exécution, toutes épinglées.
 
-```text
-engagement = text_reviews_count / ratings_count
-```
+---
 
-### 4. Validate
-
-`TableValidator` applies Pydantic models and verifies key constraints before loading. Referential-integrity checks cover both the fact table and the author/book bridge.
-
-### 5. Incremental load
-
-`DatabaseLoader` writes to SQLite while avoiding unnecessary full reloads:
-
-- new books are inserted;
-- modified books are updated;
-- dimension records are inserted incrementally;
-- author/book relationships are synchronized;
-- PCA enrichment is recalculated only when data changes are detected.
-
-### 6. Analytical enrichment
-
-`PCACalculator` aggregates and prepares numerical features, applies scaling/log transformations where relevant, computes two PCA components and performs K-means clustering.
-
-The implementation also handles small or constant datasets explicitly so degenerate inputs do not crash the analytical stage.
-
-## Tech stack
-
-**Data & analytics**
-
-- Python
-- pandas
-- NumPy
-- scikit-learn
-- Pydantic
-
-**Storage & modeling**
-
-- SQLite
-- Star schema / dimensional modeling
-- Incremental SQL loading
-
-**Engineering**
-
-- YAML configuration
-- Python logging
-- pytest / pytest-cov
-- GitHub Actions
-- Windows Task Scheduler automation
-
-**BI target**
-
-- Power BI or any tool able to query SQLite exports / derived datasets
-
-## Project structure
-
-```text
-.
-├── main.py
-├── config/
-│   ├── config.yaml
-│   └── logging_config.yaml
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   ├── archive/
-│   └── database/
-├── scheduler/
-│   ├── run.bat
-│   └── setup.ps1
-├── src/
-│   ├── extract/
-│   │   └── csv_extractor.py
-│   ├── transform/
-│   │   ├── book_transformer.py
-│   │   └── table_builder.py
-│   ├── validator/
-│   │   └── table_validator.py
-│   ├── load/
-│   │   ├── database_connection.py
-│   │   └── db_loader.py
-│   └── utils/
-│       ├── config_loader.py
-│       └── pca_calculator.py
-├── tests/
-├── .github/workflows/tests.yml
-├── requirements.txt
-└── requirements-dev.txt
-```
-
-## Input schema
-
-The dataset itself is not included in the repository. Place a compatible file at:
-
-```text
-data/raw/books.csv
-```
-
-Required columns:
-
-```text
-bookID
-title
-authors
-average_rating
-isbn13
-language_code
-num_pages
-ratings_count
-text_reviews_count
-publication_date
-publisher_name
-genre_name
-```
-
-See [`data/README.md`](data/README.md) for details.
-
-## Quick start
-
-### 1. Clone and create a virtual environment
-
-```bash
-git clone <repository-url>
-cd <repository-directory>
-python -m venv .venv
-```
-
-On Windows:
-
-```powershell
-.venv\Scripts\activate
-```
-
-On Linux/macOS:
-
-```bash
-source .venv/bin/activate
-```
-
-### 2. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Add the source CSV
-
-```text
-data/raw/books.csv
-```
-
-### 4. Run the pipeline
-
-```bash
-python main.py
-```
-
-The analytical SQLite database is generated at:
-
-```text
-data/database/book_database.db
-```
-
-## Run the tests
-
-Install development dependencies:
+## Tests
 
 ```bash
 pip install -r requirements-dev.txt
-```
-
-Run the suite:
-
-```bash
 pytest
 ```
 
-With coverage:
+**278 tests unitaires**, exécutés à chaque push par GitHub Actions.
 
-```bash
-pytest --cov=src --cov-report=term-missing
-```
+---
 
-The cleaned portfolio version passes **278 tests**. The source package reaches approximately **95% test coverage** in the local verification environment.
+## Limites assumées
 
-## Daily automation on Windows
+- **Le nombre de clusters K-means n'est pas justifié** par un critère quantitatif
+  (coude, silhouette). Les segments sont descriptifs, jamais prédictifs.
+- **L'orchestration est spécifique à Windows** (Planificateur de tâches). Un DAG ou
+  un cron rendraient le projet portable.
+- **La couverture n'est pas contrôlée en intégration continue** : elle est calculée,
+  mais aucun seuil n'est imposé et aucun linter n'est exécuté.
+- **Aucun test d'intégration de bout en bout** : les 278 tests sont unitaires.
 
-The `scheduler/` directory contains scripts for Windows Task Scheduler.
+Ces points, et un défaut corrigé — dix index déclarés qui n'étaient jamais créés —
+sont détaillés dans [ARCHITECTURE.md](ARCHITECTURE.md#8-limites-connues).
 
-To register a daily execution at midnight:
+---
 
-```powershell
-cd scheduler
-.\setup.ps1
-```
+## Licence
 
-The scheduled task runs `scheduler/run.bat`, activates a local virtual environment when present, executes the ETL, and writes scheduler status information to `logs/`.
-
-## Configuration
-
-Pipeline behavior is centralized in `config/config.yaml`, including:
-
-- source and destination paths;
-- CSV encoding and delimiter;
-- SQLite table/index definitions;
-- default values for missing data;
-- supported genres;
-- batch size;
-- retry behavior;
-- source archiving.
-
-Logging behavior is configured separately in `config/logging_config.yaml`.
-
-## Engineering notes
-
-This repository intentionally does **not** track source CSV files, generated SQLite databases, logs, Power BI files, virtual environments or generated documentation. This keeps the Git history focused on code and avoids publishing local or potentially licensed data artifacts.
-
-The PCA/K-means cluster labels are descriptive analytical segments, not supervised ground-truth classes. They should therefore be interpreted as exploratory BI enrichment rather than predictive labels.
-
-## Author
-
-**Jules Courné**  
-Data Analyst / Data Engineer — Python, SQL, ETL, BI & Machine Learning
+[MIT](LICENSE) — Jules Courné. Le jeu de données Goodreads n'est pas couvert par
+cette licence et n'est pas redistribué.
