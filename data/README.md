@@ -1,14 +1,14 @@
-# Data directory
+# Répertoire `data/`
 
-The source dataset is intentionally **not committed** to this repository.
+Le jeu de données source n'est **volontairement pas versionné** dans ce dépôt.
 
-Place the input file at:
+Placez le fichier d'entrée ici :
 
 ```text
 data/raw/books.csv
 ```
 
-The ETL expects the following columns:
+L'ETL attend les colonnes suivantes (les noms sont ceux du fichier source, en anglais) :
 
 ```text
 bookID
@@ -25,10 +25,19 @@ publisher_name
 genre_name
 ```
 
-During execution the pipeline can create:
+Pas de fichier source sous la main ? Un jeu de substitution est généré par :
 
-- `data/archive/` — timestamped copies of processed source files;
-- `data/processed/` — reserved for processed artifacts;
-- `data/database/book_database.db` — the SQLite analytical database.
+```bash
+python scripts/generate_sample_data.py
+```
 
-These generated files are ignored by Git.
+Il contient six défauts volontaires (doublons, dates invalides, valeurs manquantes,
+notes hors bornes) afin que les règles de validation soient réellement exercées.
+
+Pendant son exécution, le pipeline peut créer :
+
+- `data/archive/` — copies horodatées des fichiers sources traités ;
+- `data/processed/` — réservé aux artefacts intermédiaires ;
+- `data/database/book_database.db` — la base analytique SQLite.
+
+Ces fichiers générés sont ignorés par Git.
