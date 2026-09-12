@@ -173,3 +173,27 @@ sont détaillés dans [ARCHITECTURE.md](ARCHITECTURE.md#8-limites-connues).
 
 [MIT](LICENSE) — Jules Courné. Le jeu de données Goodreads n'est pas couvert par
 cette licence et n'est pas redistribué.
+
+## Laboratoire interactif du portfolio
+
+Le [portfolio](https://juleescourne.github.io/portfolio-data-analyst/#/goodreads)
+propose un laboratoire sur **798 livres fictifs**, distinct des captures Power BI
+historiques. Il permet de filtrer les genres/langues, d'examiner la concentration
+des avis et de comparer une note brute à un score régularisé par le volume d'avis.
+
+```bash
+python scripts/build_demo_data.py
+python -m unittest tests.test_demo_catalogue
+```
+
+`demo/catalogue.json` est reproductible (graine 42). Sur 801 lignes, le contrôle
+pédagogique rejette un doublon, une note hors échelle et une date impossible ; il
+conserve une langue inconnue et une pagination manquante. Ce contrôle est propre
+à la démo : il ne reproduit pas toutes les règles du transformateur historique.
+Le portfolio embarque une copie exacte de ce fichier dans `src/data/goodreads-demo.json`.
+
+Le score de découverte est `(n × R + m × C) / (n + m)` : nombre de notes `n`,
+note moyenne du titre `R`, moyenne non pondérée du catalogue complet `C`, force de
+régularisation `m` ajustable. Il stabilise le classement sans constituer un modèle
+validé de préférence ou de conversion. Les votes ne sont pas des ventes ; aucune
+hausse de revenus ni causalité n'est estimée à partir de ces données fictives.
