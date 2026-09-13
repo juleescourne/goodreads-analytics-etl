@@ -56,9 +56,10 @@ class PCACalculator:
         'publisher': ["Grandes maisons d'édition", "Éditeurs intermédiaires", "Éditeurs spécialisés"]
     }
     
-    def __init__(self, conn: sqlite3.Connection) -> None:
+    def __init__(self, conn: sqlite3.Connection, commit_on_load: bool = True) -> None:
         """Initialise le calculateur PCA."""
         self.conn = conn
+        self.commit_on_load = commit_on_load
         self.logger = logging.getLogger('pca')
         
         # Paramètres PCA/Clustering
@@ -520,7 +521,8 @@ class PCACalculator:
             query = f"INSERT INTO BookPCA ({', '.join(columns)}) VALUES ({placeholders})"
             
             cursor.executemany(query, records)
-            self.conn.commit()
+            if self.commit_on_load:
+                self.conn.commit()
             
             cursor.execute("SELECT COUNT(*) FROM BookPCA")
             count = cursor.fetchone()[0]
@@ -532,7 +534,8 @@ class PCACalculator:
             
         except Exception as e:
             self.logger.error(f"  Erreur lors du chargement BookPCA : {e}")
-            self.conn.rollback()
+            if self.commit_on_load:
+                self.conn.rollback()
             return False
     
     def _load_author_pca(self, df: pd.DataFrame) -> bool:
@@ -555,7 +558,8 @@ class PCACalculator:
             query = f"INSERT INTO AuthorPCA ({', '.join(columns)}) VALUES ({placeholders})"
             
             cursor.executemany(query, records)
-            self.conn.commit()
+            if self.commit_on_load:
+                self.conn.commit()
             
             cursor.execute("SELECT COUNT(*) FROM AuthorPCA")
             count = cursor.fetchone()[0]
@@ -567,7 +571,8 @@ class PCACalculator:
             
         except Exception as e:
             self.logger.error(f"  Erreur lors du chargement AuthorPCA : {e}")
-            self.conn.rollback()
+            if self.commit_on_load:
+                self.conn.rollback()
             return False
     
     def _load_publisher_pca(self, df: pd.DataFrame) -> bool:
@@ -590,7 +595,8 @@ class PCACalculator:
             query = f"INSERT INTO PublisherPCA ({', '.join(columns)}) VALUES ({placeholders})"
             
             cursor.executemany(query, records)
-            self.conn.commit()
+            if self.commit_on_load:
+                self.conn.commit()
             
             cursor.execute("SELECT COUNT(*) FROM PublisherPCA")
             count = cursor.fetchone()[0]
@@ -602,7 +608,8 @@ class PCACalculator:
             
         except Exception as e:
             self.logger.error(f"  Erreur lors du chargement PublisherPCA : {e}")
-            self.conn.rollback()
+            if self.commit_on_load:
+                self.conn.rollback()
             return False
 
 

@@ -143,7 +143,9 @@ class DatabaseLoader:
             # 1. Charger dimensions et faits avec UPSERT
             for table_db, table_name in insert_order:
                 self.logger.info(f"Traitement de '{table_db}'...")
-                changed = self._upsert_table(table_db, tables[table_name])
+                frame = (self._resolve_fact_keys(tables) if table_db == 'FactBooks'
+                         else tables[table_name])
+                changed = self._upsert_table(table_db, frame)
                 if changed:
                     self.changes_detected = True
             
@@ -153,23 +155,18 @@ class DatabaseLoader:
             if bridge_changed:
                 self.changes_detected = True
             
-            # IMPORTANT: Commit avant PCA pour que les données soient visibles
-            if self.changes_detected:
-                self.db_conn.commit()
-                self.logger.info("  Données committées avant calcul PCA")
-            
             # 3. Recalculer PCA si nécessaire
             if self.changes_detected:
                 self.logger.info(
                     "\n⚠ Modifications détectées → Recalcul PCA nécessaire"
                 )
-                calculator = PCACalculator(self.db_conn._connection)
+                calculator = PCACalculator(self.db_conn._connection, commit_on_load=False)
                 success = calculator.calculate_and_load_all()
                 
                 if success:
                     self.logger.info("  PCA recalculée et tables mises à jour")
                 else:
-                    self.logger.warning("   Erreur lors du recalcul PCA")
+                    raise RuntimeError("Échec ACP : le chargement complet est annulé")
             else:
                 self.logger.info("\n    Aucune modification → PCA conservée")
             
@@ -202,9 +199,48 @@ class DatabaseLoader:
         """
         if table_name == 'DimBooks':
             return self._upsert_dim_books(df)
+        elif table_name == 'FactBooks':
+            return self._upsert_facts(df)
         else:
             return self._insert_new_records(table_name, df)
     
+    def _resolve_fact_keys(self, tables: Dict[str, pd.DataFrame]) -> pd.DataFrame:
+        """Map batch-local dimension IDs to persistent IDs through natural keys."""
+        facts = tables['fact_books'].copy()
+        specs = [
+            ('dim_publishers', 'DimPublishers', 'publisherID', 'publisher_name'),
+            ('dim_languages', 'DimLanguages', 'languageID', 'language_code'),
+            ('dim_dates', 'DimDates', 'dateID', 'publication_date'),
+            ('dim_genres', 'DimGenres', 'genreID', 'genre_name'),
+        ]
+        for local, table, key, natural in specs:
+            normalize = (lambda v: pd.Timestamp(v).strftime('%Y-%m-%d')) if key == 'dateID' else str
+            persistent = {normalize(value): id_ for id_, value in
+                          self.db_conn.get_connection().execute(f'SELECT {key}, {natural} FROM {table}')}
+            mapping = {row[key]: persistent[normalize(row[natural])]
+                       for _, row in tables[local].iterrows()}
+            facts[key] = facts[key].map(mapping)
+            if facts[key].isna().any():
+                raise ValueError(f'Unresolved dimension: {key}')
+            facts[key] = facts[key].astype('int64')
+        return facts
+
+    def _upsert_facts(self, df: pd.DataFrame) -> bool:
+        """Current snapshot by stable source bookID; preserve creation timestamps."""
+        columns = [c for c in df.columns if c != 'created_at']
+        rows = self._prepare_data(df[columns])
+        cursor = self.db_conn.get_connection().cursor()
+        existing = {row[columns.index('bookID')]: row for row in
+                    cursor.execute(f"SELECT {', '.join(columns)} FROM FactBooks")}
+        changed = [row for row in rows if existing.get(row[columns.index('bookID')]) != row]
+        if not changed:
+            return False
+        updates = ', '.join(f'{c}=excluded.{c}' for c in columns if c != 'bookID')
+        cursor.executemany(
+            f"INSERT INTO FactBooks ({', '.join(columns)}) VALUES ({', '.join('?' for _ in columns)}) "
+            f"ON CONFLICT(bookID) DO UPDATE SET {updates}", changed)
+        return True
+
     def _upsert_dim_books(self, df: pd.DataFrame) -> bool:
         """
         UPSERT pour DimBooks basé sur ISBN13.
@@ -331,6 +367,10 @@ class DatabaseLoader:
         # Récupérer valeurs existantes
         cursor.execute(f"SELECT {unique_col} FROM {table_name}")
         existing_values = {row[0] for row in cursor.fetchall()}
+        if unique_col == 'publication_date':
+            df = df.copy()
+            df[unique_col] = pd.to_datetime(df[unique_col]).dt.strftime('%Y-%m-%d')
+            existing_values = {pd.Timestamp(v).strftime('%Y-%m-%d') for v in existing_values}
         
         # Filtrer nouvelles lignes
         new_rows = df[~df[unique_col].isin(existing_values)].copy()
@@ -413,6 +453,10 @@ class DatabaseLoader:
         
         # Calculer différences
         to_insert = new_relations - existing_relations
+        supplied_books = {int(v) for v in df['bookID']}
+        to_delete = {pair for pair in existing_relations - new_relations if pair[0] in supplied_books}
+        if to_delete:
+            cursor.executemany('DELETE FROM BridgeAuthorBook WHERE bookID=? AND authorID=?', list(to_delete))
         
         if to_insert:
             self.logger.info(f"  Ajout de {len(to_insert)} nouvelles relations")
@@ -422,8 +466,8 @@ class DatabaseLoader:
             )
             return True
         else:
-            self.logger.info("  BridgeAuthorBook à jour")
-            return False
+            self.logger.info("  BridgeAuthorBook synchronisée")
+            return bool(to_delete)
     
     def _prepare_data(self, df: pd.DataFrame) -> List[Tuple]:
         """Normalize DataFrame values for safe SQLite insertion.

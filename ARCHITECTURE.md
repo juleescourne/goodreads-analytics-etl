@@ -1,3 +1,6 @@
+> Chargement actualisé : faits mis à jour, clés remappées et transaction unique
+> jusqu’au chargement ACP. Voir les tests et le README pour le contrat de reprise.
+
 # Architecture et spécifications techniques
 
 Ce document décrit la chaîne ETL, le modèle dimensionnel, la stratégie de
@@ -33,7 +36,7 @@ Chaque responsabilité vit dans son module, orchestrée par `main.py` :
 | 7. Enrichissement | `src/utils/pca_calculator.py` | ACP + K-means sur livres, auteurs, éditeurs |
 
 Le pipeline complet s'exécute en **moins de 5 secondes** sur l'échantillon de
-démonstration, et il est couvert par **278 tests**.
+démonstration, et il est couvert par **tests automatisés**.
 
 ---
 
@@ -214,7 +217,7 @@ CSV, schémas SQL des tables et des index, valeurs par défaut, genres autorisé
 taille de lot, politique de réessai, archivage de la source.
 
 Le schéma des tables vit donc **dans la configuration**, pas dans le code Python.
-Ajouter une dimension ne demande pas de modifier `db_loader.py`.
+Une nouvelle dimension nécessite aussi son ordre de chargement et son mapping dans `db_loader.py`.
 
 `scheduler/setup.ps1` enregistre une tâche quotidienne dans le Planificateur de
 tâches Windows, qui exécute `run.bat` : activation de l'environnement virtuel,
@@ -232,5 +235,4 @@ lancement du pipeline, écriture d'un état dans `logs/`.
   calcule la couverture mais n'impose aucun seuil, et n'exécute pas de linter.
 - **Commentaires en français, README en anglais à l'origine** — hérité, en cours
   d'uniformisation.
-- **Aucun test d'intégration de bout en bout** : les 278 tests sont unitaires. Le
-  générateur d'échantillon rend pourtant un tel test facile à écrire.
+- Deux tests de bout en bout couvrent rechargement, mises à jour et rollback.
