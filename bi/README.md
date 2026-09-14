@@ -30,5 +30,8 @@ correcte des avis avec la somme artificiellement gonflée après jointure auteur
 À filtre identique, l'écart attendu SQL/DAX est nul à l'arrondi près.
 
 **Statut :** SQL exécuté ; DAX proposé, à valider dans Power BI Desktop. Ces
-mesures ne sont pas extraites des captures historiques. Le PBIX/PBIP original
-reste nécessaire pour auditer le rapport Power BI historique.
+mesures ne sont pas extraites des captures historiques. **Le fichier PBIX/PBIP
+original n’a pas été conservé : seules les images sont disponibles.** Le rapport
+historique ne peut donc pas être audité ni reproduit à l’identique à partir du dépôt.
+Ces mesures constituent une proposition de reconstruction, pas une récupération
+du modèle initial.

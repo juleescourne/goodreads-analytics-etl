@@ -112,8 +112,12 @@ Détail complet : [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Restitution BI
 
-L'entrepôt alimente trois pages Power BI : catalogue, auteurs et éditeurs, genres et
-langues.
+La restitution historique comporte trois pages Power BI : catalogue, auteurs et
+éditeurs, genres et langues. **Seules les captures ont été conservées ; le fichier
+PBIX/PBIP original n’est plus disponible.** Elles illustrent la restitution, mais
+ne permettent pas de vérifier les mesures DAX, les relations ni l’actualisation.
+Le pipeline ETL reste exécutable ; les [mesures proposées dans `bi/`](bi/README.md)
+sont une base de reconstruction distincte, non validée dans Power BI Desktop.
 
 | | |
 | --- | --- |
