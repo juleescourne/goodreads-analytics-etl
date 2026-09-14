@@ -1,0 +1,12 @@
+// Create each measure individually. New reference measures, not a historical PBIX export.
+Catalogue Books = DISTINCTCOUNT(FactBooks[bookID])
+
+Total Ratings = SUM(FactBooks[ratings_count])
+
+Average Book Rating = AVERAGE(FactBooks[average_rating])
+
+Rating Weighted By Votes =
+DIVIDE(SUMX(FactBooks, FactBooks[average_rating] * FactBooks[ratings_count]), [Total Ratings])
+
+Ratings For Selected Authors =
+CALCULATE([Total Ratings], TREATAS(VALUES(BridgeAuthorBook[bookID]), FactBooks[bookID]))

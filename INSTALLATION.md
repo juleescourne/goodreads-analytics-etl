@@ -78,7 +78,7 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
-**278 tests** doivent passer, en une quinzaine de secondes.
+La suite doit terminer sans échec. Elle couvre notamment le rechargement, les mises à jour et le rollback du pipeline complet ; le nombre courant de tests est affiché par pytest et la CI.
 
 Avec la couverture :
 

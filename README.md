@@ -1,7 +1,6 @@
 # Goodreads Analytics ETL
 
 [![Tests](https://github.com/juleescourne/goodreads-analytics-etl/actions/workflows/tests.yml/badge.svg)](https://github.com/juleescourne/goodreads-analytics-etl/actions/workflows/tests.yml)
-![Tests : 278](https://img.shields.io/badge/tests-278%20passants-brightgreen)
 ![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)
 [![Licence MIT](https://img.shields.io/badge/licence-MIT-lightgrey)](LICENSE)
 
@@ -56,7 +55,7 @@ montrent que la chaîne tourne de bout en bout.
 | Qualité des données | typage explicite, doublons, valeurs aberrantes, valeurs manquantes, validation Pydantic |
 | Intégrité | clés étrangères déclarées, `PRAGMA foreign_keys` activé, contrôle référentiel **avant** écriture |
 | Chargement incrémental | UPSERT, détection de changement, recalcul ACP conditionnel |
-| Ingénierie | schémas SQL en configuration, journalisation structurée, 278 tests, intégration continue |
+| Ingénierie | schémas SQL en configuration, journalisation structurée, tests automatisés, intégration continue |
 
 ---
 
@@ -150,7 +149,7 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
-**278 tests unitaires**, exécutés à chaque push par GitHub Actions.
+**Tests unitaires et de bout en bout**, exécutés à chaque push par GitHub Actions.
 
 ---
 
@@ -162,7 +161,7 @@ pytest
   un cron rendraient le projet portable.
 - **La couverture n'est pas contrôlée en intégration continue** : elle est calculée,
   mais aucun seuil n'est imposé et aucun linter n'est exécuté.
-- **Aucun test d'intégration de bout en bout** : les 278 tests sont unitaires.
+- Les `bookID` sources doivent rester stables entre chargements. Le pipeline conserve un état courant, sans historisation.
 
 Ces points, et un défaut corrigé — dix index déclarés qui n'étaient jamais créés —
 sont détaillés dans [ARCHITECTURE.md](ARCHITECTURE.md#8-limites-connues).
@@ -197,3 +196,18 @@ note moyenne du titre `R`, moyenne non pondérée du catalogue complet `C`, forc
 régularisation `m` ajustable. Il stabilise le classement sans constituer un modèle
 validé de préférence ou de conversion. Les votes ne sont pas des ventes ; aucune
 hausse de revenus ni causalité n'est estimée à partir de ces données fictives.
+
+## Rechargement et transaction
+
+`tests/test_pipeline_integration.py` exécute extraction, transformation, validation,
+écriture SQLite et ACP réelles. Il vérifie l’idempotence, les mises à jour des
+mesures, le réordonnancement des dimensions, le changement d’éditeur et d’auteur,
+puis une panne après écriture partielle des ACP et la reprise suivante.
+
+Les faits sont actualisés par `bookID`. Les clés de dimensions du lot sont
+traduites par clé naturelle vers les clés persistantes. Les liaisons auteurs sont
+synchronisées pour les livres présents dans le lot ; les livres absents restent
+conservés. Une transaction couvre dimensions, faits, liaisons et ACP. Une panne
+ACP annule le chargement et renvoie un code d’échec.
+
+[Contrat BI et mesures de référence](bi/README.md).
