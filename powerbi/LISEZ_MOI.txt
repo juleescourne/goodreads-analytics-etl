@@ -1,0 +1,85 @@
+GOODREADS — RAPPORT POWER BI
+
+1. PRÉPARER LES DONNÉES
+
+Suivre le README à la racine : télécharger les 23 fichiers de livres, puis exécuter
+python main.py. Les CSV doivent se trouver dans data/processed.
+
+2. OUVRIR
+
+Ouvrir Goodreads.pbip avec Power BI Desktop récent, prenant en charge les projets
+PBIP et les définitions de rapport PBIR. Garder Goodreads.Report et
+Goodreads.SemanticModel à côté du fichier .pbip.
+
+Le paramètre Power Query DossierDonnees pointe actuellement vers :
+D:\formation\Goodreads_ETL\data\processed
+
+Sur un autre ordinateur : Transformer les données > Gérer les paramètres,
+modifier DossierDonnees vers le dossier local data/processed, puis appliquer
+et actualiser. Il ne faut pas ouvrir directement les CSV dans Excel pour les
+réenregistrer : le modèle attend du UTF-8, des points décimaux et le séparateur ;.
+
+Le projet ne contient pas de cache de données. La première actualisation est
+donc nécessaire. Le format source PBIP est fourni pour versionner le rapport.
+
+3. MODÈLE
+
+Langues (1) ----> (*) Livres
+AuditImport : table séparée, sans relation.
+
+Livres : une fiche Goodreads par IdLivre. Ni une vente, ni une œuvre unique.
+Langues : filtre les fiches dans une seule direction.
+AuditImport : bilan fixe de l'import complet, insensible aux segments du rapport.
+33 mesures DAX sont regroupées dans Livres. Les tranches ont un ordre de tri.
+Pas de calendrier d'activité : l'année disponible est une année de publication.
+
+4. PAGES
+
+01 - Comprendre le catalogue : couverture, volumes de notes, langues et comparaisons.
+02 - Sélection en français : périmètre français fixé au niveau de la page,
+     candidats, représentants titre/auteur et liste des 20 propositions.
+03 - Qualité : défauts du périmètre filtré, puis bilan de l'import complet.
+
+Sur la page 02, les segments ne recalculent pas la sélection. Ils peuvent afficher
+moins de 20 propositions. Effacer les sélections pour retrouver la liste complète.
+La liste évite les répétitions textuelles après normalisation ; elle ne garantit
+pas 20 œuvres uniques et demande une vérification éditoriale.
+
+5. VALEURS À RETROUVER SANS FILTRE
+
+Catalogue : 1 850 032 fiches ; 75,58 % avec une note exploitable ; note moyenne
+3,83 ; médiane du nombre de notes 5 ; langue absente 86,40 %.
+Français : 16 327 fiches ; 3 002 candidats ; 2 716 représentants ; liste de 20.
+Qualité : 451 777 fiches à zéro notation ; 328 paginations > 5 000.
+Import : 1 850 310 lignes brutes ; 112 répétitions retirées ; 166 lignes isolées.
+
+Attention : un compteur manquant reste distinct du zéro. La mesure sans notation
+utilise == 0 en DAX, car = 0 ferait aussi correspondre BLANK. Les notes moyennes
+et médianes restent vides dans un groupe sans note exploitable.
+
+Le fichier Goodreads.SemanticModel/DAXQueries/Controle.dax fournit les requêtes
+à exécuter dans la vue Requête DAX après actualisation, une par une si nécessaire.
+Les taux DAX sont des fractions formatées en pourcentage ; controle_kpi.csv les
+exprime déjà en pourcentage.
+
+6. VÉRIFICATIONS ET LIMITE ACTUELLE
+
+Réalisé : notebooks exécutés, rapprochement des CSV, validation de 57 fichiers
+avec les schémas JSON Microsoft, références des champs et positions contrôlées.
+Les trois tables ont été actualisées dans le moteur local de Power BI Desktop,
+sans erreur. Les 33 mesures DAX ont été comparées à Pandas dans six contextes :
+catalogue, français, anglais, zéro notation, compteur absent et périmètre vide.
+Les 198 comparaisons concordent, ainsi que les neuf groupes de langues et la
+liste de 20 fiches (identifiants, rangs, titres, notes et compteurs).
+Le détail est conservé dans controle_resultats.json, à côté de ce guide.
+
+À terminer dans Desktop : contrôle visuel des trois pages, notamment des deux
+tableaux et de leurs interactions. Le composant de pilotage de l'application
+Windows était indisponible : les vérifications ont porté sur le moteur local,
+pas sur l'affichage. Les images du README proviennent des notebooks.
+
+Après ouverture : vérifier chaque page sans filtre, sélectionner Français puis
+une tranche de notes, effacer les sélections et confirmer que le bilan d'import
+reste identique. Sur le groupe « 0 note », la moyenne des notes doit rester vide.
+Sur la page française, vérifier les rangs, les titres longs et le défilement de
+la liste. Enregistrer le projet après une actualisation réussie.

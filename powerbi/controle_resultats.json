@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-01",
+  "moteur": "Power BI Desktop 2.158.1177.0 / Analysis Services 17.0.87.18",
+  "source": "Kaggle Goodreads version 18",
+  "actualisation": "3 tables Ready, aucune erreur",
+  "comparaisons_mesures_DAX_Pandas": 198,
+  "mesures": 33,
+  "contextes": {
+    "catalogue": {
+      "Nombre de fiches": 1850032,
+      "Note moyenne": 3.8291806352779973,
+      "Candidats": 3002,
+      "Representants": 2716,
+      "Liste de travail": 20,
+      "Fiches sans notation": 451777
+    },
+    "francais": {
+      "Nombre de fiches": 16327,
+      "Note moyenne": 3.818678592413659,
+      "Candidats": 3002,
+      "Representants": 2716,
+      "Liste de travail": 20,
+      "Fiches sans notation": 1010
+    },
+    "zero": {
+      "Nombre de fiches": 451777,
+      "Note moyenne": null,
+      "Candidats": 0,
+      "Representants": 0,
+      "Liste de travail": 0,
+      "Fiches sans notation": 451777
+    },
+    "absent": {
+      "Nombre de fiches": 1,
+      "Note moyenne": null,
+      "Candidats": 0,
+      "Representants": 0,
+      "Liste de travail": 0,
+      "Fiches sans notation": 0
+    },
+    "vide": {
+      "Nombre de fiches": 0,
+      "Note moyenne": null,
+      "Candidats": 0,
+      "Representants": 0,
+      "Liste de travail": 0,
+      "Fiches sans notation": 0
+    },
+    "anglais": {
+      "Nombre de fiches": 209543,
+      "Note moyenne": 3.8747568079004178,
+      "Candidats": 0,
+      "Representants": 0,
+      "Liste de travail": 0,
+      "Fiches sans notation": 6617
+    }
+  },
+  "selection_20_fiches": "Identifiants, rangs, titres, notes et compteurs concordants",
+  "groupes_langues": "9 groupes concordants",
+  "controle_visuel_desktop": "Non réalisé : composant de pilotage Windows indisponible"
+}

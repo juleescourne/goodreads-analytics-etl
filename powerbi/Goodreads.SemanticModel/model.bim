@@ -1,0 +1,655 @@
+{
+  "name": "Goodreads",
+  "compatibilityLevel": 1601,
+  "model": {
+    "culture": "fr-FR",
+    "sourceQueryCulture": "en-US",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "DossierDonnees",
+        "kind": "m",
+        "expression": "\"D:\\formation\\Goodreads_ETL\\data\\processed\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]",
+        "description": "Dossier des CSV exportés par les trois notebooks Goodreads."
+      }
+    ],
+    "tables": [
+      {
+        "name": "Livres",
+        "lineageTag": "cb5fbeac-84a2-50cd-9628-d8e43b91565e",
+        "description": "Une fiche Goodreads conservée après contrôle. Pas une œuvre unique ni une vente.",
+        "columns": [
+          {
+            "name": "IdLivre",
+            "dataType": "int64",
+            "sourceColumn": "IdLivre",
+            "summarizeBy": "none",
+            "lineageTag": "923a150d-45df-56a5-9e6f-8dc90a3395b4",
+            "isKey": true,
+            "formatString": "#,0"
+          },
+          {
+            "name": "Titre",
+            "dataType": "string",
+            "sourceColumn": "Titre",
+            "summarizeBy": "none",
+            "lineageTag": "7ff9f8c7-d63c-5d04-b2ad-aec10ae7b3d7"
+          },
+          {
+            "name": "Auteurs",
+            "dataType": "string",
+            "sourceColumn": "Auteurs",
+            "summarizeBy": "none",
+            "lineageTag": "feb550c8-e625-5409-b9c2-f46afe552b03"
+          },
+          {
+            "name": "Editeur",
+            "dataType": "string",
+            "sourceColumn": "Editeur",
+            "summarizeBy": "none",
+            "lineageTag": "ae6a47af-3b70-5bdf-b735-b657d5e071e8"
+          },
+          {
+            "name": "ISBN",
+            "dataType": "string",
+            "sourceColumn": "ISBN",
+            "summarizeBy": "none",
+            "lineageTag": "cc16ff0a-8fb4-545f-a2a7-beb5ce867d6e"
+          },
+          {
+            "name": "Langue",
+            "dataType": "string",
+            "sourceColumn": "Langue",
+            "summarizeBy": "none",
+            "lineageTag": "fcc8e94e-1286-5427-9f64-5e10496d03fe",
+            "isHidden": true
+          },
+          {
+            "name": "Note",
+            "dataType": "double",
+            "sourceColumn": "Note",
+            "summarizeBy": "none",
+            "lineageTag": "11bdf2cc-fa96-5204-81fa-d61afc0dd894",
+            "formatString": "0.00"
+          },
+          {
+            "name": "NbNotes",
+            "dataType": "int64",
+            "sourceColumn": "NbNotes",
+            "summarizeBy": "none",
+            "lineageTag": "a1159303-066d-5146-a254-2b68f8361a86",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Pages",
+            "dataType": "int64",
+            "sourceColumn": "Pages",
+            "summarizeBy": "none",
+            "lineageTag": "0fbd672b-2d6d-5afb-8c9d-8bc8d0a2786a",
+            "formatString": "#,0"
+          },
+          {
+            "name": "AnneePublication",
+            "dataType": "int64",
+            "sourceColumn": "AnneePublication",
+            "summarizeBy": "none",
+            "lineageTag": "6fdf24f4-abde-5104-90e3-029f5cd3fc8e",
+            "formatString": "#,0"
+          },
+          {
+            "name": "TranchePages",
+            "dataType": "string",
+            "sourceColumn": "TranchePages",
+            "summarizeBy": "none",
+            "lineageTag": "501434c2-044e-5397-9031-5cb7608f7f60",
+            "sortByColumn": "OrdrePages"
+          },
+          {
+            "name": "TrancheNotes",
+            "dataType": "string",
+            "sourceColumn": "TrancheNotes",
+            "summarizeBy": "none",
+            "lineageTag": "356110a6-1665-5b5e-879d-acc60c34c306",
+            "sortByColumn": "OrdreNotes"
+          },
+          {
+            "name": "PeriodePublication",
+            "dataType": "string",
+            "sourceColumn": "PeriodePublication",
+            "summarizeBy": "none",
+            "lineageTag": "d7be9ecc-e668-5aaa-b571-456cbb62c45f",
+            "sortByColumn": "OrdrePeriode"
+          },
+          {
+            "name": "NoteExploitable",
+            "dataType": "boolean",
+            "sourceColumn": "NoteExploitable",
+            "summarizeBy": "none",
+            "lineageTag": "6853f19c-102e-5f3b-aa7a-63c57c9de53d",
+            "isHidden": true
+          },
+          {
+            "name": "DistributionValide",
+            "dataType": "boolean",
+            "sourceColumn": "DistributionValide",
+            "summarizeBy": "none",
+            "lineageTag": "9d814cb3-6129-5dc5-ba68-865933f0fd89",
+            "isHidden": true
+          },
+          {
+            "name": "LangueAbsente",
+            "dataType": "boolean",
+            "sourceColumn": "LangueAbsente",
+            "summarizeBy": "none",
+            "lineageTag": "347af854-aea8-5d42-9939-d5c90d290376",
+            "isHidden": true
+          },
+          {
+            "name": "EditeurAbsent",
+            "dataType": "boolean",
+            "sourceColumn": "EditeurAbsent",
+            "summarizeBy": "none",
+            "lineageTag": "9d0a9a35-cf27-50bd-9ba4-e1c0b92c5751",
+            "isHidden": true
+          },
+          {
+            "name": "AuteurAbsent",
+            "dataType": "boolean",
+            "sourceColumn": "AuteurAbsent",
+            "summarizeBy": "none",
+            "lineageTag": "6516e485-11e8-5bd7-b3ef-16406ffc34e0",
+            "isHidden": true
+          },
+          {
+            "name": "PagesAbsentes",
+            "dataType": "boolean",
+            "sourceColumn": "PagesAbsentes",
+            "summarizeBy": "none",
+            "lineageTag": "cc02ba4e-97a3-54a1-987a-a8a874fbef02",
+            "isHidden": true
+          },
+          {
+            "name": "PagesAtypiques",
+            "dataType": "boolean",
+            "sourceColumn": "PagesAtypiques",
+            "summarizeBy": "none",
+            "lineageTag": "6b04a7c6-6835-5ade-8c70-211a3b996a1e",
+            "isHidden": true
+          },
+          {
+            "name": "AnneeInvalide",
+            "dataType": "boolean",
+            "sourceColumn": "AnneeInvalide",
+            "summarizeBy": "none",
+            "lineageTag": "a779d7e2-6e08-581e-bcbd-8beacd2a2ec5",
+            "isHidden": true
+          },
+          {
+            "name": "TitreAuteurRepete",
+            "dataType": "boolean",
+            "sourceColumn": "TitreAuteurRepete",
+            "summarizeBy": "none",
+            "lineageTag": "46093308-a800-5133-8823-43c3e141aead",
+            "isHidden": true
+          },
+          {
+            "name": "Candidat",
+            "dataType": "boolean",
+            "sourceColumn": "Candidat",
+            "summarizeBy": "none",
+            "lineageTag": "d3c81ad9-7e7d-55df-822d-8bcd1c4f650f",
+            "isHidden": true
+          },
+          {
+            "name": "RepresentantSelection",
+            "dataType": "boolean",
+            "sourceColumn": "RepresentantSelection",
+            "summarizeBy": "none",
+            "lineageTag": "1ed6ac85-1eb3-51e5-998d-d853c371889d",
+            "isHidden": true
+          },
+          {
+            "name": "DansTop20",
+            "dataType": "boolean",
+            "sourceColumn": "DansTop20",
+            "summarizeBy": "none",
+            "lineageTag": "686963eb-296f-5b68-8986-70b2673d2874",
+            "isHidden": true
+          },
+          {
+            "name": "RangSelection",
+            "dataType": "int64",
+            "sourceColumn": "RangSelection",
+            "summarizeBy": "none",
+            "lineageTag": "d37a071b-6ed2-54a5-b76f-21f8cd4414ff",
+            "formatString": "#,0"
+          },
+          {
+            "name": "OrdrePages",
+            "dataType": "int64",
+            "sourceColumn": "OrdrePages",
+            "summarizeBy": "none",
+            "lineageTag": "80a357d5-e4f2-5bee-987b-f13936b1c3ac",
+            "isHidden": true,
+            "formatString": "#,0"
+          },
+          {
+            "name": "OrdreNotes",
+            "dataType": "int64",
+            "sourceColumn": "OrdreNotes",
+            "summarizeBy": "none",
+            "lineageTag": "f4b9a9c1-bd07-5f82-be28-ec609002c72b",
+            "isHidden": true,
+            "formatString": "#,0"
+          },
+          {
+            "name": "OrdrePeriode",
+            "dataType": "int64",
+            "sourceColumn": "OrdrePeriode",
+            "summarizeBy": "none",
+            "lineageTag": "ff8004a8-b96a-5111-a9ca-c1eb8e10ed08",
+            "isHidden": true,
+            "formatString": "#,0"
+          },
+          {
+            "name": "FichierSource",
+            "dataType": "string",
+            "sourceColumn": "FichierSource",
+            "summarizeBy": "none",
+            "lineageTag": "b2b96f7c-e292-5ae2-86f6-65ff1017712a",
+            "isHidden": true
+          },
+          {
+            "name": "LigneSource",
+            "dataType": "int64",
+            "sourceColumn": "LigneSource",
+            "summarizeBy": "none",
+            "lineageTag": "85e08f1f-6325-515c-9fca-61c2eacc95c1",
+            "isHidden": true,
+            "formatString": "#,0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Livres",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DossierDonnees & \"\\livres_powerbi.csv\"), [Delimiter=\";\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Entetes = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Vides = Table.ReplaceValue(Entetes, \"\", null, Replacer.ReplaceValue, Table.ColumnNames(Entetes)),",
+                "    Types = Table.TransformColumnTypes(Vides, {{\"IdLivre\", Int64.Type}, {\"Titre\", type text}, {\"Auteurs\", type text}, {\"Editeur\", type text}, {\"ISBN\", type text}, {\"Langue\", type text}, {\"Note\", type number}, {\"NbNotes\", Int64.Type}, {\"Pages\", Int64.Type}, {\"AnneePublication\", Int64.Type}, {\"TranchePages\", type text}, {\"TrancheNotes\", type text}, {\"PeriodePublication\", type text}, {\"NoteExploitable\", type logical}, {\"DistributionValide\", type logical}, {\"LangueAbsente\", type logical}, {\"EditeurAbsent\", type logical}, {\"AuteurAbsent\", type logical}, {\"PagesAbsentes\", type logical}, {\"PagesAtypiques\", type logical}, {\"AnneeInvalide\", type logical}, {\"TitreAuteurRepete\", type logical}, {\"Candidat\", type logical}, {\"RepresentantSelection\", type logical}, {\"DansTop20\", type logical}, {\"RangSelection\", Int64.Type}, {\"OrdrePages\", Int64.Type}, {\"OrdreNotes\", Int64.Type}, {\"OrdrePeriode\", Int64.Type}, {\"FichierSource\", type text}, {\"LigneSource\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Types"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Nombre de fiches",
+            "expression": "COALESCE(COUNTROWS(Livres), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Catalogue",
+            "description": "Grain : une fiche Goodreads, pas une œuvre unique.",
+            "lineageTag": "c4f46281-4931-5b93-af9a-f867c25e54f1"
+          },
+          {
+            "name": "Fiches note exploitable",
+            "expression": "COALESCE(CALCULATE(COUNTROWS(Livres), KEEPFILTERS(Livres[NoteExploitable] = TRUE())), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Catalogue",
+            "description": "",
+            "lineageTag": "eb9e4392-afb3-5279-bbc6-ed2d7b9c6ab6"
+          },
+          {
+            "name": "Part note exploitable",
+            "expression": "DIVIDE([Fiches note exploitable], [Nombre de fiches])",
+            "formatString": "0.0%",
+            "displayFolder": "Catalogue",
+            "description": "",
+            "lineageTag": "56054a1d-7923-5f55-a634-25baf25bceb3"
+          },
+          {
+            "name": "Note moyenne",
+            "expression": "AVERAGE(Livres[Note])",
+            "formatString": "0.00",
+            "displayFolder": "Catalogue",
+            "description": "Moyenne non pondérée des notes exploitables des fiches. Chaque fiche a le même poids.",
+            "lineageTag": "f31c57e4-4cca-5a52-94b0-d580508095e4"
+          },
+          {
+            "name": "Note mediane",
+            "expression": "MEDIAN(Livres[Note])",
+            "formatString": "0.00",
+            "displayFolder": "Catalogue",
+            "description": "",
+            "lineageTag": "d1d5099c-329a-5e94-b9d1-1200349d40f8"
+          },
+          {
+            "name": "Mediane nombre de notes",
+            "expression": "MEDIAN(Livres[NbNotes])",
+            "formatString": "#,0",
+            "displayFolder": "Catalogue",
+            "description": "Inclut les fiches à zéro note. Ne somme pas les compteurs entre éditions.",
+            "lineageTag": "58906c4a-f3ed-59b3-b43d-d6df38c21ed3"
+          },
+          {
+            "name": "Fiches 100 notes",
+            "expression": "COALESCE(CALCULATE(COUNTROWS(Livres), KEEPFILTERS(Livres[NbNotes] >= 100)), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Catalogue",
+            "description": "",
+            "lineageTag": "92fbbdb8-853c-59ef-8c02-8e0c227aac7a"
+          },
+          {
+            "name": "Part 100 notes",
+            "expression": "DIVIDE([Fiches 100 notes], [Nombre de fiches])",
+            "formatString": "0.0%",
+            "displayFolder": "Catalogue",
+            "description": "",
+            "lineageTag": "7f476af5-c161-5fb7-b601-1819be7e1158"
+          },
+          {
+            "name": "Fiches sans notation",
+            "expression": "COALESCE(CALCULATE(COUNTROWS(Livres), KEEPFILTERS(Livres[NbNotes] == 0)), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "8c2dd824-b474-585c-8629-c0e50ec2d2cf"
+          },
+          {
+            "name": "Part sans notation",
+            "expression": "DIVIDE([Fiches sans notation], [Nombre de fiches])",
+            "formatString": "0.0%",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "ca1cefda-ada9-5288-a0dd-f5cb45b2f601"
+          },
+          {
+            "name": "Fiches langue absente",
+            "expression": "COALESCE(CALCULATE(COUNTROWS(Livres), KEEPFILTERS(Livres[LangueAbsente] = TRUE())), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "7f09a346-ff84-508c-9250-562f83f853ea"
+          },
+          {
+            "name": "Part langue absente",
+            "expression": "DIVIDE([Fiches langue absente], [Nombre de fiches])",
+            "formatString": "0.0%",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "6d0da2a0-d398-53d3-93f5-9d32ab0d7400"
+          },
+          {
+            "name": "Fiches editeur absent",
+            "expression": "COALESCE(CALCULATE(COUNTROWS(Livres), KEEPFILTERS(Livres[EditeurAbsent] = TRUE())), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "6beaa207-4939-53d6-acda-332a626ff066"
+          },
+          {
+            "name": "Part editeur absent",
+            "expression": "DIVIDE([Fiches editeur absent], [Nombre de fiches])",
+            "formatString": "0.0%",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "c7eaf24c-4f9d-5fa0-a1ea-bed42e8dfedd"
+          },
+          {
+            "name": "Fiches pages absentes",
+            "expression": "COALESCE(CALCULATE(COUNTROWS(Livres), KEEPFILTERS(Livres[PagesAbsentes] = TRUE())), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "48e49e52-2769-5226-b207-7e0636d6832a"
+          },
+          {
+            "name": "Part pages absentes",
+            "expression": "DIVIDE([Fiches pages absentes], [Nombre de fiches])",
+            "formatString": "0.0%",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "2686f3bb-228a-59f4-b468-f0c80fc6c439"
+          },
+          {
+            "name": "Fiches pages atypiques",
+            "expression": "COALESCE(CALCULATE(COUNTROWS(Livres), KEEPFILTERS(Livres[PagesAtypiques] = TRUE())), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "93abc7a2-7ce4-5489-bfac-970e7829ca8b"
+          },
+          {
+            "name": "Part pages atypiques",
+            "expression": "DIVIDE([Fiches pages atypiques], [Nombre de fiches])",
+            "formatString": "0.0%",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "165ab374-f221-52ec-9215-7779264bf684"
+          },
+          {
+            "name": "Fiches annee invalide",
+            "expression": "COALESCE(CALCULATE(COUNTROWS(Livres), KEEPFILTERS(Livres[AnneeInvalide] = TRUE())), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "a9383710-acf5-54ce-bb0f-013b04661a41"
+          },
+          {
+            "name": "Part annee invalide",
+            "expression": "DIVIDE([Fiches annee invalide], [Nombre de fiches])",
+            "formatString": "0.0%",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "5fdb71ed-8d7a-5e51-9228-83bc3b93acfa"
+          },
+          {
+            "name": "Fiches titre auteur repete",
+            "expression": "COALESCE(CALCULATE(COUNTROWS(Livres), KEEPFILTERS(Livres[TitreAuteurRepete] = TRUE())), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "d7a6c272-54f2-59a7-b9f2-2b017dd89f70"
+          },
+          {
+            "name": "Part titre auteur repete",
+            "expression": "DIVIDE([Fiches titre auteur repete], [Nombre de fiches])",
+            "formatString": "0.0%",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "5fd28951-8df5-563e-ad5d-daa76c1e35b5"
+          },
+          {
+            "name": "Fiches note incoherente",
+            "expression": "COALESCE(CALCULATE(COUNTROWS(Livres), KEEPFILTERS(Livres[NbNotes] > 0), KEEPFILTERS(Livres[NoteExploitable] = FALSE())), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Qualite",
+            "description": "",
+            "lineageTag": "b4563bf7-57a1-5711-8aab-9f339f9314b4"
+          },
+          {
+            "name": "Candidats",
+            "expression": "COALESCE(CALCULATE(COUNTROWS(Livres), KEEPFILTERS(Livres[Candidat] = TRUE())), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Selection",
+            "description": "Marqueur fixe de la source complète ; les filtres réduisent l’affichage sans recalculer la sélection.",
+            "lineageTag": "35712d47-a049-5bbb-b244-df3ecf962891"
+          },
+          {
+            "name": "Representants",
+            "expression": "COALESCE(CALCULATE(COUNTROWS(Livres), KEEPFILTERS(Livres[RepresentantSelection] = TRUE())), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Selection",
+            "description": "Marqueur fixe de la source complète ; les filtres réduisent l’affichage sans recalculer la sélection.",
+            "lineageTag": "fcc6879f-72ec-563c-a35a-ae67bde3cfcf"
+          },
+          {
+            "name": "Liste de travail",
+            "expression": "COALESCE(CALCULATE(COUNTROWS(Livres), KEEPFILTERS(Livres[DansTop20] = TRUE())), 0)",
+            "formatString": "#,0",
+            "displayFolder": "Selection",
+            "description": "Marqueur fixe de la source complète ; les filtres réduisent l’affichage sans recalculer la sélection.",
+            "lineageTag": "a889fdaa-621b-5a57-ac8a-8727e69b34f9"
+          },
+          {
+            "name": "Note mediane groupe",
+            "expression": "IF([Fiches note exploitable] >= 30, [Note mediane])",
+            "formatString": "0.00",
+            "displayFolder": "Selection",
+            "description": "Masque la médiane sous 30 fiches notées. Seuil de lecture, pas test statistique.",
+            "lineageTag": "2015641d-4c95-552c-b0e9-61093d369948"
+          },
+          {
+            "name": "Rang de la fiche",
+            "expression": "SELECTEDVALUE(Livres[RangSelection])",
+            "formatString": "#,0",
+            "displayFolder": "Selection",
+            "description": "",
+            "lineageTag": "b292e18b-bf69-5e8d-ab50-9b08c519d2f9"
+          },
+          {
+            "name": "Note de la fiche",
+            "expression": "SELECTEDVALUE(Livres[Note])",
+            "formatString": "0.00",
+            "displayFolder": "Selection",
+            "description": "",
+            "lineageTag": "6d146a59-3e39-5c57-8314-59ff5d3f719e"
+          },
+          {
+            "name": "Nombre de notes fiche",
+            "expression": "SELECTEDVALUE(Livres[NbNotes])",
+            "formatString": "#,0",
+            "displayFolder": "Selection",
+            "description": "",
+            "lineageTag": "23b7dbcd-7404-5932-8c71-d0d700f2a12b"
+          },
+          {
+            "name": "Lignes brutes",
+            "expression": "CALCULATE(SUM(AuditImport[Effectif]), AuditImport[Controle] = \"Lignes brutes\")",
+            "formatString": "#,0",
+            "displayFolder": "Import complet",
+            "description": "Import complet, indépendant des filtres du catalogue.",
+            "lineageTag": "b88a9b3a-1aad-5a64-bfe0-84b340a3b7b6"
+          },
+          {
+            "name": "Repetitions retirees",
+            "expression": "CALCULATE(SUM(AuditImport[Effectif]), AuditImport[Controle] = \"Répétitions retirées\")",
+            "formatString": "#,0",
+            "displayFolder": "Import complet",
+            "description": "Import complet, indépendant des filtres du catalogue.",
+            "lineageTag": "dd319b8f-abd0-5b73-98ad-19a0855a8923"
+          },
+          {
+            "name": "Lignes quarantaine",
+            "expression": "CALCULATE(SUM(AuditImport[Effectif]), AuditImport[Controle] = \"Lignes en quarantaine\")",
+            "formatString": "#,0",
+            "displayFolder": "Import complet",
+            "description": "Import complet, indépendant des filtres du catalogue.",
+            "lineageTag": "d6a0e60f-7b88-5162-b74f-2f5223f8e2ad"
+          }
+        ]
+      },
+      {
+        "name": "Langues",
+        "lineageTag": "3efee69f-f685-55b3-aa7f-839841800c7c",
+        "description": "Une langue regroupée par ligne ; filtre les fiches du catalogue.",
+        "columns": [
+          {
+            "name": "Langue",
+            "dataType": "string",
+            "sourceColumn": "Langue",
+            "summarizeBy": "none",
+            "lineageTag": "433f1b29-9a71-524b-a24e-fe51a72b71d2",
+            "isKey": true
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Langues",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DossierDonnees & \"\\langues.csv\"), [Delimiter=\";\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Entetes = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Vides = Table.ReplaceValue(Entetes, \"\", null, Replacer.ReplaceValue, Table.ColumnNames(Entetes)),",
+                "    Types = Table.TransformColumnTypes(Vides, {{\"Langue\", type text}}, \"en-US\")",
+                "in",
+                "    Types"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "AuditImport",
+        "lineageTag": "5b58a8e5-58d2-59fe-b36f-ddeb5238afd4",
+        "description": "Journal de contrôle de l’import complet. Sans relation : les filtres du catalogue ne modifient pas ces effectifs.",
+        "columns": [
+          {
+            "name": "Controle",
+            "dataType": "string",
+            "sourceColumn": "Controle",
+            "summarizeBy": "none",
+            "lineageTag": "9650ce28-83c1-5324-a403-7a7e2d2b3db7"
+          },
+          {
+            "name": "Effectif",
+            "dataType": "int64",
+            "sourceColumn": "Effectif",
+            "summarizeBy": "none",
+            "lineageTag": "df3b64a9-f8d8-51db-9ff7-48dbe5eb6a5d",
+            "formatString": "#,0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "AuditImport",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DossierDonnees & \"\\controle_qualite.csv\"), [Delimiter=\";\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Entetes = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Vides = Table.ReplaceValue(Entetes, \"\", null, Replacer.ReplaceValue, Table.ColumnNames(Entetes)),",
+                "    Types = Table.TransformColumnTypes(Vides, {{\"Controle\", type text}, {\"Effectif\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Types"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "Langues_vers_Livres",
+        "fromTable": "Livres",
+        "fromColumn": "Langue",
+        "toTable": "Langues",
+        "toColumn": "Langue",
+        "fromCardinality": "many",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      }
+    ],
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"DossierDonnees\",\"Langues\",\"Livres\",\"AuditImport\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      }
+    ]
+  }
+}

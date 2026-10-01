@@ -1,0 +1,30 @@
+SUJET — GOODREADS : AUDITER UN CATALOGUE ET PRÉPARER UNE SÉLECTION EN FRANÇAIS
+
+CONTEXTE FICTIF
+La librairie en ligne « Lire & Choisir » souhaite tester une page de découverte de livres en français. Elle dispose d'une extraction publique Goodreads. Avant de choisir des livres à mettre en avant, la responsable catalogue veut savoir si les données sont exploitables et quelles fiches examiner en priorité.
+
+DÉCISION ATTENDUE
+Proposer une liste de travail de 20 fiches à vérifier, en s'appuyant sur la note, le nombre de notations et les métadonnées disponibles. Expliquer pourquoi cette liste ne suffit pas à prédire des ventes ni à garantir la disponibilité des livres.
+
+SOURCE ET PÉRIMÈTRE
+https://www.kaggle.com/datasets/bahramjannesarr/goodreads-book-datasets-10m
+Version 18, mise à jour le 3 décembre 2020. Utiliser les 23 fichiers book*.csv. Les fichiers user_rating restent hors périmètre. Compter les lignes réellement présentes : « 10m » dans l'adresse n'est pas le volume à annoncer.
+
+ÉTAPES
+1. Cadrer : qui décide, quel problème, quel grain, quelles questions et quelles limites ?
+2. Définir les KPI et leurs dénominateurs avant de construire les graphiques.
+3. Auditer : schémas différents, types, manquants, identifiants répétés, versions contradictoires, cohérence de la distribution des notes, pagination et années atypiques.
+4. Préparer une ligne par fiche Goodreads. Garder les fichiers bruts et une quarantaine traçable. Ne pas inventer de genre, de pays ou de note.
+5. Analyser globalement les langues, le volume de notes, la pagination et les périodes de publication renseignées. Ne pas présenter ces dernières comme un historique de ventes.
+6. Approfondir les fiches en français : comparer à volume de notes comparable, tester des seuils, éviter les répétitions évidentes de titre et auteur dans la liste de travail.
+7. Construire trois pages Power BI : catalogue, sélection en français, qualité et limites. Vérifier les KPI avec les notebooks.
+8. Formuler une recommandation, les données complémentaires nécessaires et une action réversible à tester.
+
+CRITÈRES DE TRAVAIL
+Point de départ : français renseigné, note exploitable >= 4/5 et au moins 100 notations. Vérifier l'auteur, l'éditeur et la pagination. Signaler les paginations au-delà de 5 000 pages avant sélection. Tester aussi les seuils 3,8 / 4 / 4,2 et 100 / 500 / 1 000 notations. Ce sont des choix exploratoires, pas des seuils de significativité statistique.
+
+LIVRABLES
+docs/Cadrage.md ; docs/Dictionnaire.md ; docs/Qualité.md ; docs/Analyse.md ; trois notebooks exécutés ; CSV dans data/processed ; projet Power BI PBIP avec DAX et Power Query ; README et instructions de reproduction.
+
+RÉUSSITE
+Un lecteur peut retrouver la provenance d'une fiche, comprendre les exclusions, recalculer un KPI et distinguer une fiche Goodreads, une œuvre, un lecteur et une vente. La sélection finale reste une proposition à vérifier, avec des limites visibles.

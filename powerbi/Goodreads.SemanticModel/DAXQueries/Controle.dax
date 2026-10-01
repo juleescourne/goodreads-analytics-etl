@@ -1,0 +1,34 @@
+// Exécuter dans la vue Requête DAX après actualisation.
+// Comparer à data/processed/controle_kpi.csv et selection_francais.csv.
+// Les pourcentages DAX sont des fractions formatées : multiplier par 100 pour le CSV.
+EVALUATE
+ROW("Fiches", [Nombre de fiches], "Notes exploitables", [Fiches note exploitable],
+    "Note moyenne", [Note moyenne], "Note mediane", [Note mediane],
+    "Mediane volume notes", [Mediane nombre de notes],
+    "Part 100 notes", [Part 100 notes], "Part langue absente", [Part langue absente],
+    "Lignes brutes", [Lignes brutes], "Repetitions", [Repetitions retirees], "Quarantaine", [Lignes quarantaine])
+
+EVALUATE
+CALCULATETABLE(
+    ROW("Francais", [Nombre de fiches], "Candidats", [Candidats],
+        "Representants", [Representants], "Liste", [Liste de travail]),
+    Langues[Langue] = "Français"
+)
+
+// Groupe sans notation : les notes moyenne et médiane doivent être BLANK.
+EVALUATE
+CALCULATETABLE(ROW("Fiches", [Nombre de fiches], "Note moyenne", [Note moyenne], "Note mediane", [Note mediane]), Livres[NbNotes] == 0)
+
+// Le compteur absent concerne une fiche, sans note exploitable et sans notation zéro.
+EVALUATE
+CALCULATETABLE(
+    ROW("Fiches", [Nombre de fiches], "Sans notation", [Fiches sans notation], "Note moyenne", [Note moyenne]),
+    ISBLANK(Livres[NbNotes])
+)
+
+// Un périmètre vide donne 0 fiche et un ratio vide ; le bilan d'import reste fixe.
+EVALUATE
+CALCULATETABLE(
+    ROW("Fiches", [Nombre de fiches], "Part langue absente", [Part langue absente], "Lignes brutes", [Lignes brutes]),
+    Livres[IdLivre] = -1
+)

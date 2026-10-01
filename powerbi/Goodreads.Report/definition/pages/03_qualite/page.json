@@ -1,0 +1,426 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "03_qualite",
+  "displayName": "03 · Qualité et limites",
+  "displayOption": "FitToPage",
+  "width": 1440,
+  "height": 1080,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F5F5F1'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "03_qualite_langue",
+      "target": "03_qualite_pages",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_langue",
+      "target": "03_qualite_volume",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_langue",
+      "target": "03_qualite_periode",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_langue",
+      "target": "03_qualite_kpi_0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_langue",
+      "target": "03_qualite_kpi_1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_langue",
+      "target": "03_qualite_kpi_2",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_langue",
+      "target": "03_qualite_kpi_3",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_langue",
+      "target": "03_qualite_kpi_4",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_langue",
+      "target": "03_qualite_pages",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_langue",
+      "target": "03_qualite_repetition",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_langue",
+      "target": "03_qualite_import_0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_langue",
+      "target": "03_qualite_import_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_langue",
+      "target": "03_qualite_import_2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_langue",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_volume",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_periode",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_kpi_0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_kpi_1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_kpi_2",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_kpi_3",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_kpi_4",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_pages",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_repetition",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_import_0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_import_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_import_2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_volume",
+      "target": "03_qualite_langue",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_volume",
+      "target": "03_qualite_pages",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_volume",
+      "target": "03_qualite_periode",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_volume",
+      "target": "03_qualite_kpi_0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_volume",
+      "target": "03_qualite_kpi_1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_volume",
+      "target": "03_qualite_kpi_2",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_volume",
+      "target": "03_qualite_kpi_3",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_volume",
+      "target": "03_qualite_kpi_4",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_volume",
+      "target": "03_qualite_pages",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_volume",
+      "target": "03_qualite_repetition",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_volume",
+      "target": "03_qualite_import_0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_volume",
+      "target": "03_qualite_import_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_volume",
+      "target": "03_qualite_import_2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_periode",
+      "target": "03_qualite_langue",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_periode",
+      "target": "03_qualite_pages",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_periode",
+      "target": "03_qualite_volume",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_periode",
+      "target": "03_qualite_kpi_0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_periode",
+      "target": "03_qualite_kpi_1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_periode",
+      "target": "03_qualite_kpi_2",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_periode",
+      "target": "03_qualite_kpi_3",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_periode",
+      "target": "03_qualite_kpi_4",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_periode",
+      "target": "03_qualite_pages",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_periode",
+      "target": "03_qualite_repetition",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_periode",
+      "target": "03_qualite_import_0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_periode",
+      "target": "03_qualite_import_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_periode",
+      "target": "03_qualite_import_2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_langue",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_pages",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_volume",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_periode",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_kpi_0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_kpi_1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_kpi_2",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_kpi_3",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_kpi_4",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_repetition",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_import_0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_import_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_pages",
+      "target": "03_qualite_import_2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_repetition",
+      "target": "03_qualite_langue",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_repetition",
+      "target": "03_qualite_pages",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_repetition",
+      "target": "03_qualite_volume",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_repetition",
+      "target": "03_qualite_periode",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_repetition",
+      "target": "03_qualite_kpi_0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_repetition",
+      "target": "03_qualite_kpi_1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_repetition",
+      "target": "03_qualite_kpi_2",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_repetition",
+      "target": "03_qualite_kpi_3",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_repetition",
+      "target": "03_qualite_kpi_4",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_repetition",
+      "target": "03_qualite_pages",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03_qualite_repetition",
+      "target": "03_qualite_import_0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_repetition",
+      "target": "03_qualite_import_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "03_qualite_repetition",
+      "target": "03_qualite_import_2",
+      "type": "NoFilter"
+    }
+  ]
+}

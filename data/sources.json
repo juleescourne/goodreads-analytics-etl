@@ -1,0 +1,147 @@
+{
+  "source": "https://www.kaggle.com/datasets/bahramjannesarr/goodreads-book-datasets-10m",
+  "version": 18,
+  "last_updated": "2020-12-03",
+  "downloaded_on": "2026-10-01",
+  "licence_declared": "CC0: Public Domain",
+  "files": [
+    {
+      "name": "book1-100k.csv",
+      "bytes": 8934363,
+      "sha256": "f6b5f1fecbde301b6830f5106c1f7de7825bbb28d09ef2517164214243c09b37",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book1-100k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book1000k-1100k.csv",
+      "bytes": 34102711,
+      "sha256": "3d6def107b80529f7975e4204e8c36ed66ea3c1374c921c901a834f6b3c4efa5",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book1000k-1100k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book100k-200k.csv",
+      "bytes": 8831432,
+      "sha256": "59930309250e77e873df6fa0f2e6ca912ee3ea06c163b91e6c523287751c30fe",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book100k-200k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book1100k-1200k.csv",
+      "bytes": 35160030,
+      "sha256": "d84e805c84cf23ae9f41cadbfd901bdc7b18436cc4a19cc4b3e680b78133399b",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book1100k-1200k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book1200k-1300k.csv",
+      "bytes": 35812005,
+      "sha256": "09561b5cefe20cc54adeaa46c2dd537739c1d0d4dfafb696980062ef4ab48a0c",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book1200k-1300k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book1300k-1400k.csv",
+      "bytes": 30735724,
+      "sha256": "090844dd181b0010646bdc8cdec57552678c5021ce7fdf0e0446a8518c477b00",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book1300k-1400k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book1400k-1500k.csv",
+      "bytes": 28059512,
+      "sha256": "93ef7f2ec0d44a181526aba0ac0ae184457dc3944ee49ba0191615f9b7e61d08",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book1400k-1500k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book1500k-1600k.csv",
+      "bytes": 26812628,
+      "sha256": "4510a276062e9861e3280a885aa1bc28c4c5e860799bcba3dd9e98bbfd0489a2",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book1500k-1600k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book1600k-1700k.csv",
+      "bytes": 26054850,
+      "sha256": "65445820b56da5a16b0bf27d42bdd12af8de2e8010c550221466c1a8c24f7f38",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book1600k-1700k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book1700k-1800k.csv",
+      "bytes": 25266302,
+      "sha256": "229b6c3c600de9eee6d7a271e943eca02ebe731dea7731d948782d81fd5d6127",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book1700k-1800k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book1800k-1900k.csv",
+      "bytes": 29743736,
+      "sha256": "c7d088ef8e38f23d07319e6faab157cba73657c11c58251b021d7677bec6ed88",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book1800k-1900k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book1900k-2000k.csv",
+      "bytes": 32780026,
+      "sha256": "e877aa973ef0af65f6e574be6d85cc26eec058524e1b7b2424c84f93de6ba379",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book1900k-2000k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book2000k-3000k.csv",
+      "bytes": 288534047,
+      "sha256": "367038dcde07b08276962278e9a3acfc6f8c8a43071fe0ebe641a5a1ca62a36a",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book2000k-3000k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book200k-300k.csv",
+      "bytes": 8677615,
+      "sha256": "8a74e861231d49cab60e138a76f89407ccfacb897ad7e0ea984ca01272e1216b",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book200k-300k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book3000k-4000k.csv",
+      "bytes": 173402461,
+      "sha256": "498da6f313bea5624e5ece31f7005c349b9e53ac828bf42ab1e53e406645fd2b",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book3000k-4000k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book300k-400k.csv",
+      "bytes": 8723848,
+      "sha256": "dbf2c436981f15950230b55c1bae4270c10a077075abd9c7865a2bd5d279e375",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book300k-400k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book4000k-5000k.csv",
+      "bytes": 179415476,
+      "sha256": "618802af76bf084d7c638ea3bfe819b2bc93873b87944ed5e6d2d3c31c5e4f3c",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book4000k-5000k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book400k-500k.csv",
+      "bytes": 8460802,
+      "sha256": "dc5e8c340b493e038973288737749d2f8d2885103a1da1258ae50485e160e1bd",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book400k-500k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book500k-600k.csv",
+      "bytes": 8387670,
+      "sha256": "9aafa0b0c9fc77e5aa9593d05715ff5abd9c96c118a9892329b8bd2b577974cc",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book500k-600k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book600k-700k.csv",
+      "bytes": 44962005,
+      "sha256": "3727e8c49d932403393efc0a8b249a9d7a224455b2c53a571d7c6a852e04958f",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book600k-700k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book700k-800k.csv",
+      "bytes": 43883994,
+      "sha256": "d6f5762009b765a8f207012c08a134e04bb98f01afec5f8c4b08c7ae79c58293",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book700k-800k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book800k-900k.csv",
+      "bytes": 42544701,
+      "sha256": "8d094d3c03a40b394bf3bb630a74371e023edf5d05f92ce500f8c8d5c2c5b965",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book800k-900k.csv?datasetVersionNumber=18"
+    },
+    {
+      "name": "book900k-1000k.csv",
+      "bytes": 35316611,
+      "sha256": "d3bd51d2e4f36c180b2070889244331d35bebf48470d7df2b8a8395aee1ecbc3",
+      "url": "https://www.kaggle.com/api/v1/datasets/download/bahramjannesarr/goodreads-book-datasets-10m/book900k-1000k.csv?datasetVersionNumber=18"
+    }
+  ]
+}

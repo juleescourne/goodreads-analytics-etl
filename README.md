@@ -1,213 +1,121 @@
-# Goodreads Analytics ETL
+# Goodreads — Du contrôle qualité à une sélection éditoriale
 
-[![Tests](https://github.com/juleescourne/goodreads-analytics-etl/actions/workflows/tests.yml/badge.svg)](https://github.com/juleescourne/goodreads-analytics-etl/actions/workflows/tests.yml)
-![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)
-[![Licence MIT](https://img.shields.io/badge/licence-MIT-lightgrey)](LICENSE)
+**Projet personnel de Data Analyst junior — Python, Pandas et Power BI.**
 
-Pipeline ETL Python qui transforme un catalogue de livres brut en **entrepôt
-analytique en étoile**, prêt pour la BI : nettoyage, contrôles qualité, validation
-Pydantic, chargement incrémental et enrichissement ACP.
+Comment préparer une page de découverte de livres en français à partir d'un catalogue Goodreads imparfait ? Pour la librairie fictive **Lire & Choisir**, j'ai contrôlé les données, étudié les segments puis construit une liste de **20 fiches à vérifier** avant un éventuel test.
 
-> Parcours commenté avec les tableaux de bord Power BI —
-> [juleescourne.github.io/portfolio-data-analyst/#/goodreads](https://juleescourne.github.io/portfolio-data-analyst/#/goodreads)
+L'étude utilise les **23 fichiers de livres** du [dataset Kaggle de Bahram Jannesar](https://www.kaggle.com/datasets/bahramjannesarr/goodreads-book-datasets-10m), **version 18, décembre 2020**. Les résultats proviennent des données réelles du dataset. Le grain est une **fiche Goodreads**, qui peut correspondre à une édition ; ce n'est ni une vente ni nécessairement une œuvre unique.
 
-![Schéma en étoile](docs/images/star-schema.webp)
+## Ce que j'ai trouvé
 
----
+- **1 850 032 fiches conservées** sur 1 850 310 lignes : 112 répétitions retirées et 166 versions contradictoires isolées.
+- **86,40 % de langues absentes** et seulement **5 notations en médiane** par fiche : la qualité et le volume de notes doivent guider la lecture des scores.
+- **16 327 fiches explicitement en français**, dont **3 002 candidates**, puis **2 716 groupes titre/auteur** après rapprochement textuel. La liste de 20 demande encore une vérification des éditions, des séries et de la disponibilité.
 
-## Exécutable en une minute
+![Passage du catalogue français à la sélection](docs/images/selection-francais.png)
 
-Le dataset d'origine n'est pas redistribué. Le dépôt fournit un générateur qui
-produit un CSV de structure identique — **défauts inclus**, pour que les contrôles
-qualité aient quelque chose à faire :
+*Figure extraite du notebook d'analyse approfondie. Les seuils sont des choix de travail, pas une garantie de ventes.*
 
-```bash
-pip install -r requirements.txt
-python scripts/generate_sample_data.py     # écrit data/raw/books.csv
-python main.py                             # construit l'entrepôt
+## Parcours du projet
+
+| Étape | Livrable | Ce qu'on y trouve |
+|---|---|---|
+| 1. Poser le problème | [Sujet](subject.txt) et [cadrage](docs/Cadrage.md) | Décision, périmètre, acteurs, questions et limites |
+| 2. Définir les mesures | [Dictionnaire et KPI](docs/Dictionnaire.md) | Grain, dénominateurs et règles de sélection |
+| 3. Contrôler les données | [Notebook qualité](notebooks/01_data_quality.ipynb) et [rapport qualité](docs/Qualité.md) | Doublons, conflits, manquants, bornes, distributions de notes |
+| 4. Comprendre le catalogue | [Analyse globale](notebooks/02_analyse_globale.ipynb) | Langues, volume de notes, pagination et années renseignées |
+| 5. Approfondir | [Analyse ciblée](notebooks/03_analyse_approfondie.ipynb) et [synthèse](docs/Analyse.md) | Périmètre français, critères, sensibilité et liste de travail |
+| 6. Restituer | [Projet Power BI](powerbi/Goodreads.pbip) et [guide](powerbi/LISEZ_MOI.txt) | Trois pages : catalogue, sélection en français et qualité |
+
+Les notebooks sont enregistrés **avec leurs résultats et graphiques** pour être lisibles sans relancer le traitement. Le code reste volontairement simple : filtres, regroupements, jointure contrôlée et exports CSV.
+
+Les contrôles GitHub Actions vérifient les fichiers versionnés : syntaxe Python, notebooks exécutés sans erreur enregistrée, liens locaux et références des champs Power BI. Ils ne téléchargent pas le catalogue et ne remplacent pas l'exécution complète de l'analyse. Pour les lancer localement : `python scripts/verifier_livrables.py`.
+
+## Pourquoi ne pas simplement trier les notes ?
+
+**79 824 fiches notées 5/5 ont moins de 100 notations.** La langue est souvent absente et plusieurs fiches peuvent décrire des éditions d'un même titre. Je combine donc la note, son volume et des métadonnées utilisables, puis je rapproche les titres et auteurs.
+
+Le seuil de 100 notes reste discutable : à note ≥ 4, passer à 500 notes réduit les candidats de 3 002 à 2 409. Cinq fiches du premier top 20 seraient concernées. Je présente cette sensibilité et les limites au décideur au lieu d'annoncer une sélection optimale.
+
+![Sensibilité aux critères de sélection](docs/images/sensibilite.png)
+
+## Reproduire l'analyse
+
+Exécution vérifiée sous **Windows avec Python 3.10.9** et les versions de [requirements.txt](requirements.txt). Power BI Desktop est nécessaire pour ouvrir le rapport ; aucune licence Office n'est nécessaire pour les notebooks.
+
+Les CSV bruts représentent environ **1,17 Go**, et les exports environ **1,14 Go**. Prévoir plusieurs Go libres, en plus de l'environnement Python. Les notebooks chargent le catalogue en mémoire ; la durée dépend de la machine. La dernière exécution complète a pris environ quatre minutes sur la machine de préparation.
+
+Depuis la racine du dépôt, dans PowerShell :
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m ipykernel install --sys-prefix --name python3 --display-name "Python (Goodreads)"
+.\.venv\Scripts\python.exe scripts/telecharger_donnees.py
+.\.venv\Scripts\python.exe main.py
+.\.venv\Scripts\python.exe scripts/verifier_exports.py
 ```
 
-Environ 5 secondes plus tard :
+Le téléchargement vise la **version 18**, vérifie chaque empreinte du [manifeste](data/sources.json) et réutilise les fichiers déjà présents si leur empreinte correspond. Si Kaggle demande une connexion ou bloque l'accès automatisé, télécharger cette version depuis la page du dataset et placer les 23 `book*.csv` dans `data/raw/kaggle_v18`, puis relancer le script de vérification du téléchargement.
 
-| Table | Lignes |
-| --- | ---: |
-| `DimBooks` | 300 |
-| `DimAuthors` | 98 |
-| `DimDates` | 295 |
-| `DimGenres` | 7 |
-| `DimLanguages` | 6 |
-| `DimPublishers` | 6 |
-| `FactBooks` | 300 |
-| `BridgeAuthorBook` | 372 |
-| `BookPCA` / `AuthorPCA` / `PublisherPCA` | 299 / 92 / 6 |
+`main.py` exécute les trois notebooks dans l'ordre et enregistre leurs résultats. Pour les parcourir à la main :
 
-Plus les 10 index déclarés, contrôles d'intégrité référentielle passés. Ces chiffres
-proviennent de l'échantillon synthétique et n'ont aucune portée analytique : ils
-montrent que la chaîne tourne de bout en bout.
+```powershell
+.\.venv\Scripts\python.exe -m jupyter lab
+```
 
----
+Choisir le noyau **Python (Goodreads)**, puis exécuter qualité → globale → approfondie. Les [données et exports](data/README.md) sont décrits séparément.
 
-## Ce que le projet démontre
+## Ouvrir Power BI
 
-| Domaine | Éléments concrets |
-| --- | --- |
-| Modélisation dimensionnelle | 6 dimensions, 1 table de faits, table de pont pour la relation N-N livre ↔ auteur |
-| Qualité des données | typage explicite, doublons, valeurs aberrantes, valeurs manquantes, validation Pydantic |
-| Intégrité | clés étrangères déclarées, `PRAGMA foreign_keys` activé, contrôle référentiel **avant** écriture |
-| Chargement incrémental | UPSERT, détection de changement, recalcul ACP conditionnel |
-| Ingénierie | schémas SQL en configuration, journalisation structurée, tests automatisés, intégration continue |
+Après génération des CSV, ouvrir [Goodreads.pbip](powerbi/Goodreads.pbip). Les deux dossiers voisins font partie du projet et doivent rester ensemble. Le rapport utilise un modèle à trois tables, une relation à sens unique et **33 mesures DAX**.
 
----
+Sur un autre ordinateur, modifier le paramètre Power Query `DossierDonnees` vers le dossier `data/processed`, puis actualiser. Le chemin local de préparation est documenté dans le [guide](powerbi/LISEZ_MOI.txt).
 
-## La qualité des données, démontrée et non affirmée
+| Page | Usage |
+|---|---|
+| Comprendre le catalogue | Lire les KPI, les langues et les volumes de notes |
+| Sélection en français | Examiner les candidats et les 20 fiches proposées |
+| Qualité des données | Lire les défauts du périmètre filtré et le bilan fixe de l'import |
 
-Le générateur d'échantillon injecte volontairement six défauts. La trace
-d'exécution montre le pipeline les traiter un à un :
+Les filtres réduisent la liste proposée sans recalculer le top 20. Les marqueurs de sélection sont calculés sur le catalogue complet. Les compteurs d'import restent fixes et les taux de qualité du catalogue suivent les filtres.
+
+**Validation effectuée :** trois notebooks exécutés sans erreur ; rapprochement des exports ; contrôles des clés, des KPI et des critères ; 57 fichiers Power BI validés avec les schémas Microsoft ; références des champs et positions des visuels contrôlées. Les trois tables ont ensuite été **actualisées dans le moteur de Power BI Desktop**. Les **33 mesures DAX ont été comparées à Pandas dans six contextes**, soit 198 comparaisons concordantes. La liste de 20 et les neuf groupes de langues concordent aussi. Les [résultats de contrôle](powerbi/controle_resultats.json) sont conservés avec le projet.
+
+**Validation visuelle à compléter :** les données et les calculs ont été contrôlés dans le moteur de Power BI Desktop ; le rendu des pages et leurs interactions restent à vérifier manuellement dans l'application. Le projet est fourni au format source PBIP sans cache de données versionné. Les images de ce README sont issues des notebooks.
+
+## Limites et recommandation
+
+Cette photographie de 2020 n'est pas représentative du marché actuel. Il n'y a ni ventes, ni stock, ni prix, ni historique daté des notations dans les fichiers étudiés. Les genres ne sont pas fournis dans ce périmètre. Les compteurs d'éditions ne sont pas additionnés pour annoncer des lecteurs uniques.
+
+Je recommande une **relecture des 20 fiches**, une vérification dans le catalogue commercial, puis un petit test de mise en avant. La disponibilité et la diversité de la liste sont des garde-fous. Aucun gain commercial ni effet causal n'est revendiqué.
+
+## Organisation et versionnement
 
 ```text
-Fichier lu : 301 lignes, 12 colonnes
-Statistiques : 301 lignes, 1 doublons
-genre_name: valeurs invalides/NA remplacées par 'Other'
-average_rating: 1 valeurs corrigées [0-5]
-1 paires de doublons supprimées
-Transformation terminée : 300 lignes (1 supprimées, 0.3%)
-Aucune valeur manquante
+Goodreads_ETL/
+├── subject.txt
+├── README.md
+├── main.py
+├── requirements.txt
+├── docs/                 # Cadrage, dictionnaire, qualité, analyse, figures
+├── notebooks/            # Trois notebooks exécutés
+├── scripts/              # Téléchargement et vérification des exports
+├── data/
+│   ├── sources.json      # Version, URLs, tailles et empreintes
+│   ├── raw/              # Fichiers source, exclus de Git
+│   └── processed/        # CSV régénérables, exclus de Git
+└── powerbi/              # PBIP, rapport PBIR, modèle et requêtes de contrôle
 ```
 
-Un échantillon parfaitement propre ne prouverait rien. Celui-ci contient une ligne
-dupliquée, une note à 7,4 sur une échelle de 5, une date impossible (31 février), un
-nombre de pages vide, une langue absente et un livre à zéro note — ce dernier pour
-forcer la garde sur le calcul d'engagement.
+Les fichiers volumineux, les caches locaux Power BI et les environnements Python sont exclus de Git. Les résultats des notebooks, les documents et les définitions du rapport sont versionnés.
 
----
+### Évolution du projet
 
-## Architecture
+Cette version prolonge le travail sur la qualité des données avec une étude métier complète sur les fichiers Kaggle : cadrage, analyse descriptive, sélection argumentée et restitution Power BI. Le [pipeline ETL précédent et sa démo synthétique](https://github.com/juleescourne/goodreads-analytics-etl/tree/8f0540dd420b14f6f3e97fa3f511692aa629c089) restent consultables dans l'historique, avec leurs tests et leur documentation. La démo interactive historique du portfolio utilise un jeu fictif distinct de cette analyse.
 
-```mermaid
-flowchart LR
-    A[books.csv] --> B[CSVExtractor]
-    B --> C[BooksTransformer<br/>nettoyage + qualite]
-    C --> D[TableBuilder<br/>modele dimensionnel]
-    D --> E[TableValidator<br/>Pydantic + integrite]
-    E --> F[DatabaseLoader<br/>UPSERT incremental]
-    F --> G[(SQLite)]
-    G --> H[PCACalculator<br/>ACP + K-means]
-    H --> G
-    G --> I[Power BI]
-```
+## Source et licence
 
-Deux choix structurent le pipeline :
+Source : [Goodreads Book Datasets With User Rating 2M — Bahram Jannesar](https://www.kaggle.com/datasets/bahramjannesarr/goodreads-book-datasets-10m), version 18, mise à jour le 3 décembre 2020, téléchargée le 1er octobre 2026. Le titre et le slug de la page ne sont pas le décompte des lignes utilisées : les 23 fichiers de livres totalisent 1 850 310 lignes avant contrôle. Les sept fichiers `user_rating*.csv` sont hors périmètre.
 
-**La validation précède l'écriture.** L'intégrité référentielle est contrôlée sur
-les DataFrames, avant tout `INSERT`. La base ne peut donc pas se retrouver dans un
-état incohérent, même en cas d'échec au milieu du chargement.
-
-**Le chargement est incrémental.** Un drapeau `changes_detected` évite de recalculer
-l'ACP et le K-means quand la source n'a pas bougé — sur un pipeline planifié
-quotidiennement, c'est l'essentiel du temps de calcul économisé.
-
-Détail complet : [ARCHITECTURE.md](ARCHITECTURE.md).
-
----
-
-## Restitution BI
-
-L'entrepôt alimente trois pages Power BI : catalogue, auteurs et éditeurs, genres et
-langues.
-
-| | |
-| --- | --- |
-| ![Tableau de bord livres](docs/images/dashboard-books.webp) | ![Tableau de bord auteurs et éditeurs](docs/images/dashboard-authors.webp) |
-
-![Tableau de bord genres et langues](docs/images/dashboard-genres.webp)
-
----
-
-## Documentation
-
-| Document | Contenu |
-| --- | --- |
-| [INSTALLATION.md](INSTALLATION.md) | prérequis, installation, configuration, automatisation, dépannage |
-| [UTILISATION.md](UTILISATION.md) | exécution, lecture des journaux, requêtes SQL types, branchement Power BI |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | modèle dimensionnel, qualité, chargement incrémental, ACP |
-
----
-
-## Stack
-
-`Python 3.11+` · `pandas` · `NumPy` · `Pydantic` · `scikit-learn` · `SQLite`
-· `PyYAML` · `pytest` · `GitHub Actions` · `Power BI`
-
-Cinq dépendances d'exécution, toutes épinglées.
-
----
-
-## Tests
-
-```bash
-pip install -r requirements-dev.txt
-pytest
-```
-
-**Tests unitaires et de bout en bout**, exécutés à chaque push par GitHub Actions.
-
----
-
-## Limites assumées
-
-- **Le nombre de clusters K-means n'est pas justifié** par un critère quantitatif
-  (coude, silhouette). Les segments sont descriptifs, jamais prédictifs.
-- **L'orchestration est spécifique à Windows** (Planificateur de tâches). Un DAG ou
-  un cron rendraient le projet portable.
-- **La couverture n'est pas contrôlée en intégration continue** : elle est calculée,
-  mais aucun seuil n'est imposé et aucun linter n'est exécuté.
-- Les `bookID` sources doivent rester stables entre chargements. Le pipeline conserve un état courant, sans historisation.
-
-Ces points, et un défaut corrigé — dix index déclarés qui n'étaient jamais créés —
-sont détaillés dans [ARCHITECTURE.md](ARCHITECTURE.md#8-limites-connues).
-
----
-
-## Licence
-
-[MIT](LICENSE) — Jules Courné. Le jeu de données Goodreads n'est pas couvert par
-cette licence et n'est pas redistribué.
-
-## Laboratoire interactif du portfolio
-
-Le [portfolio](https://juleescourne.github.io/portfolio-data-analyst/#/goodreads)
-propose un laboratoire sur **798 livres fictifs**, distinct des captures Power BI
-historiques. Il permet de filtrer les genres/langues, d'examiner la concentration
-des avis et de comparer une note brute à un score régularisé par le volume d'avis.
-
-```bash
-python scripts/build_demo_data.py
-python -m unittest tests.test_demo_catalogue
-```
-
-`demo/catalogue.json` est reproductible (graine 42). Sur 801 lignes, le contrôle
-pédagogique rejette un doublon, une note hors échelle et une date impossible ; il
-conserve une langue inconnue et une pagination manquante. Ce contrôle est propre
-à la démo : il ne reproduit pas toutes les règles du transformateur historique.
-Le portfolio embarque une copie exacte de ce fichier dans `src/data/goodreads-demo.json`.
-
-Le score de découverte est `(n × R + m × C) / (n + m)` : nombre de notes `n`,
-note moyenne du titre `R`, moyenne non pondérée du catalogue complet `C`, force de
-régularisation `m` ajustable. Il stabilise le classement sans constituer un modèle
-validé de préférence ou de conversion. Les votes ne sont pas des ventes ; aucune
-hausse de revenus ni causalité n'est estimée à partir de ces données fictives.
-
-## Rechargement et transaction
-
-`tests/test_pipeline_integration.py` exécute extraction, transformation, validation,
-écriture SQLite et ACP réelles. Il vérifie l’idempotence, les mises à jour des
-mesures, le réordonnancement des dimensions, le changement d’éditeur et d’auteur,
-puis une panne après écriture partielle des ACP et la reprise suivante.
-
-Les faits sont actualisés par `bookID`. Les clés de dimensions du lot sont
-traduites par clé naturelle vers les clés persistantes. Les liaisons auteurs sont
-synchronisées pour les livres présents dans le lot ; les livres absents restent
-conservés. Une transaction couvre dimensions, faits, liaisons et ACP. Une panne
-ACP annule le chargement et renvoie un code d’échec.
-
-[Contrat BI et mesures de référence](bi/README.md).
+Kaggle déclare **CC0: Public Domain** pour ce dataset. Les fichiers bruts ne sont pas redistribués dans le dépôt. Le code du projet reste sous [licence MIT](LICENSE). Le [manifeste](data/sources.json) permet d'identifier précisément les fichiers analysés.

@@ -1,0 +1,27 @@
+{
+  "name": "Goodreads - Jules Courne",
+  "dataColors": [
+    "#176B65",
+    "#2C7BE5",
+    "#B36B16",
+    "#8A7090",
+    "#60758C"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#153D3A",
+  "tableAccent": "#176B65",
+  "textClasses": {
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 11
+    },
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 13
+    },
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 28
+    }
+  }
+}

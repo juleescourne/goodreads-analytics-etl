@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.0.0/schema.json",
+  "pageOrder": [
+    "01_catalogue",
+    "02_selection",
+    "03_qualite"
+  ],
+  "activePageName": "01_catalogue"
+}
