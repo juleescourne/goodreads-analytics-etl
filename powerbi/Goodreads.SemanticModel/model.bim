@@ -626,6 +626,72 @@
             }
           }
         ]
+      },
+      {
+        "name": "Sensibilite",
+        "description": "Scénarios sur le catalogue français complet, avant rapprochement titre/auteur. Sans relation aux filtres du catalogue.",
+        "lineageTag": "b6a6ad7c-af85-5a40-be07-2c62749df1fb",
+        "columns": [
+          {
+            "name": "NoteMinimum",
+            "sourceColumn": "NoteMinimum",
+            "dataType": "double",
+            "summarizeBy": "none",
+            "formatString": "0.0",
+            "lineageTag": "6dffcabe-4fad-5199-84f0-412c1f38d496"
+          },
+          {
+            "name": "NotesMinimum",
+            "sourceColumn": "NotesMinimum",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "formatString": "#,0",
+            "lineageTag": "88b7bff4-06b7-5035-9ced-dea9cda9e55d"
+          },
+          {
+            "name": "NbFiches",
+            "sourceColumn": "NbFiches",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "formatString": "#,0",
+            "lineageTag": "40e02ed3-4150-5e94-87f9-bf1e44dda9d3"
+          },
+          {
+            "name": "NbTitresAuteurs",
+            "sourceColumn": "NbTitresAuteurs",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "formatString": "#,0",
+            "lineageTag": "01eb64f2-88d3-59c9-9bb5-c5fe66088f0c"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Sensibilite",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DossierDonnees & \"\\sensibilite.csv\"), [Delimiter=\";\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Entetes = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Types = Table.TransformColumnTypes(Entetes, {{\"NoteMinimum\", type number}, {\"NotesMinimum\", Int64.Type}, {\"NbFiches\", Int64.Type}, {\"NbTitresAuteurs\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Types"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Candidats du scenario",
+            "expression": "SELECTEDVALUE(Sensibilite[NbFiches])",
+            "formatString": "#,0",
+            "displayFolder": "Selection",
+            "description": "Effectif pour un couple de seuils. Vide si plusieurs effectifs sont sélectionnés ; ne pas sommer les scénarios cumulatifs.",
+            "lineageTag": "11833d13-d276-576a-81d1-5e4adc3a732c"
+          }
+        ]
       }
     ],
     "relationships": [
@@ -644,7 +710,7 @@
     "annotations": [
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"DossierDonnees\",\"Langues\",\"Livres\",\"AuditImport\"]"
+        "value": "[\"DossierDonnees\", \"Langues\", \"Livres\", \"AuditImport\", \"Sensibilite\"]"
       },
       {
         "name": "__PBI_TimeIntelligenceEnabled",

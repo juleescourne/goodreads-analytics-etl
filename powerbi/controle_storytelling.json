@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-03",
+  "perimetre": "Rapport Goodreads après ajout des scénarios et du graphique auteurs",
+  "mode_execution": "Base de contrôle temporaire dans le moteur Power BI Desktop local ; supprimée après vérification",
+  "actualisation": "4 tables actualisées sans erreur",
+  "tables": 4,
+  "mesures": 34,
+  "mesures_catalogue": {
+    "mesures": 33,
+    "contextes": 6,
+    "comparaisons_DAX_Pandas": 198,
+    "concordance": true
+  },
+  "scenarios": {
+    "couples": 9,
+    "concordance_csv": true,
+    "independance_filtres_catalogue": true,
+    "mesure_sans_couple_unique": null,
+    "note_4_candidats": {
+      "100": 3002,
+      "500": 2409,
+      "1000": 2123
+    }
+  },
+  "liste": {
+    "fiches": 20,
+    "libelles_auteur": 12,
+    "Hiromu_Arakawa": 6,
+    "sous_500_notations": 5,
+    "repartition_DAX_Pandas_sans_filtre": true,
+    "repartition_DAX_Pandas_500_notations": true
+  },
+  "fichiers": {
+    "schemas_Microsoft": 57,
+    "erreurs_schema": 0,
+    "debordements": 0,
+    "chevauchements": 0,
+    "interactions_selection_verifiees": true
+  },
+  "controle_visuel_desktop": "Non réalisé : échec initialisation du contrôle Windows, même après réinitialisation",
+  "controle_precedent": "controle_resultats.json conserve les résultats du 01/10/2026 pour la version à trois tables"
+}

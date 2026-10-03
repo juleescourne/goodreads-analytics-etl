@@ -107,7 +107,11 @@ La disponibilité et la diversité sont des garde-fous. Aucun gain de clic, de p
 | Page | Question traitée |
 |---|---|
 | Comprendre le catalogue | Quelle est la couverture des données et comment se répartissent les fiches ? |
-| Sélection en français | Combien de fiches passent les critères et quelles sont les 20 propositions ? |
+| Sélection en français | Combien de fiches passent les critères, quel est l'effet du seuil de notations et quelle diversité présente la liste ? |
 | Qualité des données | Quels défauts restent dans le périmètre filtré et combien de lignes ont été retirées à l'import ? |
 
 Les KPI du catalogue réagissent aux filtres. Le bilan d'import reste fixe. Les critères et le classement sont calculés sur la source complète : filtrer la liste réduit l'affichage, sans fabriquer un nouveau top 20. Le [guide Power BI](../powerbi/LISEZ_MOI.txt) décrit l'ouverture et les valeurs de contrôle.
+
+La page de sélection montre désormais deux résultats utiles à la décision : **3 002, 2 409 et 2 123 candidats** selon le minimum de notations, et la répartition de la liste par libellé d'auteur (**6 fiches sur 20 pour Hiromu Arakawa**, sans filtre). Le graphique des seuils reste sur le catalogue français complet, indépendamment des menus ; celui des auteurs suit le périmètre visible. La comparaison des notes selon la pagination reste consultable dans le notebook approfondi.
+
+Le [script vidéo](Script_video.txt) suit le cadrage puis les trois pages : choix des indicateurs, résultats, interprétation et suites proposées. La sensibilité est une comparaison de scénarios déjà calculés, pas un outil qui recalcule une sélection de vingt fiches à chaque clic.

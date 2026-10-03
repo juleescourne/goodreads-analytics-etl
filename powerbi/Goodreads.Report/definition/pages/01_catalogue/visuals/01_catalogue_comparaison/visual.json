@@ -365,14 +365,21 @@
             "wordWrap": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
             "autoSizeColumnWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'growToFit'"
                 }
               }
             }
@@ -453,92 +460,6 @@
                 }
               }
             }
-          }
-        }
-      ],
-      "general": [
-        {
-          "properties": {
-            "columnWidth": {
-              "expr": {
-                "Literal": {
-                  "Value": "230D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Langues.Langue"
-          }
-        },
-        {
-          "properties": {
-            "columnWidth": {
-              "expr": {
-                "Literal": {
-                  "Value": "170D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Livres.Nombre de fiches"
-          }
-        },
-        {
-          "properties": {
-            "columnWidth": {
-              "expr": {
-                "Literal": {
-                  "Value": "220D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Livres.Part note exploitable"
-          }
-        },
-        {
-          "properties": {
-            "columnWidth": {
-              "expr": {
-                "Literal": {
-                  "Value": "220D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Livres.Note mediane"
-          }
-        },
-        {
-          "properties": {
-            "columnWidth": {
-              "expr": {
-                "Literal": {
-                  "Value": "250D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Livres.Mediane nombre de notes"
-          }
-        },
-        {
-          "properties": {
-            "columnWidth": {
-              "expr": {
-                "Literal": {
-                  "Value": "250D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Livres.Part pages absentes"
           }
         }
       ]

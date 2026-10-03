@@ -149,7 +149,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Liste de travail à valider : ni prévision de ventes, ni sélection automatiquement actualisée par les filtres. Vérifier éditions, stock et droits.",
+                    "value": "Comparer les seuils, puis relire les 20 propositions : équilibre des auteurs et séries, éditions et disponibilité à vérifier.",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "11pt",

@@ -90,14 +90,104 @@
   },
   "visualInteractions": [
     {
-      "source": "02_selection_pages",
+      "source": "02_selection_comparaison_notes",
+      "target": "02_selection_formats",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_comparaison_notes",
+      "target": "02_selection_kpi_0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_comparaison_notes",
+      "target": "02_selection_kpi_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_comparaison_notes",
+      "target": "02_selection_kpi_2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_comparaison_notes",
+      "target": "02_selection_kpi_3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_comparaison_notes",
+      "target": "02_selection_pages",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_comparaison_notes",
+      "target": "02_selection_periode",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_comparaison_notes",
+      "target": "02_selection_selection20",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_comparaison_notes",
       "target": "02_selection_volume",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_formats",
+      "target": "02_selection_comparaison_notes",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_formats",
+      "target": "02_selection_kpi_0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_formats",
+      "target": "02_selection_kpi_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_formats",
+      "target": "02_selection_kpi_2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_formats",
+      "target": "02_selection_kpi_3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_formats",
+      "target": "02_selection_pages",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_formats",
+      "target": "02_selection_periode",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_formats",
+      "target": "02_selection_selection20",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_formats",
+      "target": "02_selection_volume",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_pages",
+      "target": "02_selection_comparaison_notes",
       "type": "DataFilter"
     },
     {
       "source": "02_selection_pages",
-      "target": "02_selection_periode",
-      "type": "DataFilter"
+      "target": "02_selection_formats",
+      "type": "NoFilter"
     },
     {
       "source": "02_selection_pages",
@@ -121,17 +211,137 @@
     },
     {
       "source": "02_selection_pages",
-      "target": "02_selection_formats",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_pages",
-      "target": "02_selection_comparaison_notes",
+      "target": "02_selection_periode",
       "type": "DataFilter"
     },
     {
       "source": "02_selection_pages",
       "target": "02_selection_selection20",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_pages",
+      "target": "02_selection_volume",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_periode",
+      "target": "02_selection_comparaison_notes",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_periode",
+      "target": "02_selection_formats",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_periode",
+      "target": "02_selection_kpi_0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_periode",
+      "target": "02_selection_kpi_1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_periode",
+      "target": "02_selection_kpi_2",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_periode",
+      "target": "02_selection_kpi_3",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_periode",
+      "target": "02_selection_pages",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_periode",
+      "target": "02_selection_selection20",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_periode",
+      "target": "02_selection_volume",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_selection20",
+      "target": "02_selection_comparaison_notes",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_selection20",
+      "target": "02_selection_formats",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_selection20",
+      "target": "02_selection_kpi_0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_selection20",
+      "target": "02_selection_kpi_1",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_selection20",
+      "target": "02_selection_kpi_2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_selection20",
+      "target": "02_selection_kpi_3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_selection20",
+      "target": "02_selection_pages",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_selection20",
+      "target": "02_selection_periode",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_selection20",
+      "target": "02_selection_volume",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_volume",
+      "target": "02_selection_comparaison_notes",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_volume",
+      "target": "02_selection_formats",
+      "type": "NoFilter"
+    },
+    {
+      "source": "02_selection_volume",
+      "target": "02_selection_kpi_0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_volume",
+      "target": "02_selection_kpi_1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_volume",
+      "target": "02_selection_kpi_2",
+      "type": "DataFilter"
+    },
+    {
+      "source": "02_selection_volume",
+      "target": "02_selection_kpi_3",
       "type": "DataFilter"
     },
     {
@@ -146,217 +356,7 @@
     },
     {
       "source": "02_selection_volume",
-      "target": "02_selection_kpi_0",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_volume",
-      "target": "02_selection_kpi_1",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_volume",
-      "target": "02_selection_kpi_2",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_volume",
-      "target": "02_selection_kpi_3",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_volume",
-      "target": "02_selection_formats",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_volume",
-      "target": "02_selection_comparaison_notes",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_volume",
       "target": "02_selection_selection20",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_periode",
-      "target": "02_selection_pages",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_periode",
-      "target": "02_selection_volume",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_periode",
-      "target": "02_selection_kpi_0",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_periode",
-      "target": "02_selection_kpi_1",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_periode",
-      "target": "02_selection_kpi_2",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_periode",
-      "target": "02_selection_kpi_3",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_periode",
-      "target": "02_selection_formats",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_periode",
-      "target": "02_selection_comparaison_notes",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_periode",
-      "target": "02_selection_selection20",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_formats",
-      "target": "02_selection_pages",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_formats",
-      "target": "02_selection_volume",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_formats",
-      "target": "02_selection_periode",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_formats",
-      "target": "02_selection_kpi_0",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_formats",
-      "target": "02_selection_kpi_1",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_formats",
-      "target": "02_selection_kpi_2",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_formats",
-      "target": "02_selection_kpi_3",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_formats",
-      "target": "02_selection_comparaison_notes",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_formats",
-      "target": "02_selection_selection20",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_comparaison_notes",
-      "target": "02_selection_pages",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_comparaison_notes",
-      "target": "02_selection_volume",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_comparaison_notes",
-      "target": "02_selection_periode",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_comparaison_notes",
-      "target": "02_selection_kpi_0",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_comparaison_notes",
-      "target": "02_selection_kpi_1",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_comparaison_notes",
-      "target": "02_selection_kpi_2",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_comparaison_notes",
-      "target": "02_selection_kpi_3",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_comparaison_notes",
-      "target": "02_selection_formats",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_comparaison_notes",
-      "target": "02_selection_selection20",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_selection20",
-      "target": "02_selection_pages",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_selection20",
-      "target": "02_selection_volume",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_selection20",
-      "target": "02_selection_periode",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_selection20",
-      "target": "02_selection_kpi_0",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_selection20",
-      "target": "02_selection_kpi_1",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_selection20",
-      "target": "02_selection_kpi_2",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_selection20",
-      "target": "02_selection_kpi_3",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_selection20",
-      "target": "02_selection_formats",
-      "type": "DataFilter"
-    },
-    {
-      "source": "02_selection_selection20",
-      "target": "02_selection_comparaison_notes",
       "type": "DataFilter"
     }
   ]

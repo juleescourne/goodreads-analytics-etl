@@ -77,6 +77,8 @@ Les exports de contrôle sont `audit_sources.csv`, `controle_qualite.csv` et `qu
 
 ## 6. Vérification dans Power BI
 
-Les trois tables ont été actualisées sans erreur dans le moteur local de Power BI Desktop. Les **33 mesures** retrouvent les calculs Pandas dans **six contextes** : catalogue, français, anglais, zéro notation, compteur absent et périmètre vide. Les 20 identifiants proposés, leur rang, leur titre, leur note et leur compteur concordent également.
+Les trois tables initiales ont été actualisées sans erreur dans le moteur local de Power BI Desktop le 1er octobre. Les **33 mesures** retrouvaient les calculs Pandas dans **six contextes** : catalogue, français, anglais, zéro notation, compteur absent et périmètre vide. Les 20 identifiants proposés, leur rang, leur titre, leur note et leur compteur concordaient également.
+
+Le 3 octobre, le contrôle a été renouvelé sur les **quatre tables** du modèle, dans une base temporaire supprimée ensuite : les 198 comparaisons du catalogue concordent toujours. La mesure ajoutée pour `Sensibilite` retrouve les neuf scénarios et ne varie pas avec les filtres du catalogue. Les répartitions par auteur concordent avec la liste, avec et sans restriction aux fiches d'au moins 500 notations. Les [résultats de cette version](../powerbi/controle_storytelling.json) distinguent ces contrôles du rendu visuel, qui reste à vérifier dans Desktop.
 
 Le contrôle du zéro a notamment permis d'utiliser `== 0` en DAX, afin de ne pas inclure le compteur manquant dans les fiches sans notation. Le bilan d'import reste fixe sous filtres et les ratios sans dénominateur restent vides. Les [résultats de contrôle](../powerbi/controle_resultats.json) sont conservés. Le rendu visuel des pages reste à vérifier dans Desktop.

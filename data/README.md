@@ -28,6 +28,6 @@ Exécuter les trois notebooks avec `python main.py`. Le séparateur des exports 
 | sensibilite.csv | Un couple de seuils de note et de volume ; 9 combinaisons |
 | selection_francais.csv | Une proposition par ligne ; liste ordonnée de 20 fiches |
 
-Le modèle Power BI importe uniquement `livres_powerbi.csv`, `langues.csv` et `controle_qualite.csv`. Les autres exports servent à l'analyse et au contrôle. `python scripts/verifier_exports.py` rapproche les exports et les règles de sélection.
+Le modèle Power BI importe `livres_powerbi.csv`, `langues.csv`, `controle_qualite.csv` et `sensibilite.csv`. Cette dernière table est indépendante : ses neuf scénarios décrivent le catalogue français complet, avant rapprochement titre/auteur. Les menus du rapport ne les recalculent pas. Les autres exports servent à l'analyse et au contrôle. `python scripts/verifier_exports.py` rapproche les exports, les règles de sélection et les neuf scénarios.
 
 Les exports sont régénérables et exclus de Git. Les chiffres à commenter sont dans les notebooks exécutés et dans [Analyse.md](../docs/Analyse.md). Ne pas confondre « fiche Goodreads », « œuvre unique », « lecteur » et « vente ».

@@ -17,6 +17,7 @@ sources = pd.read_csv(dossier / 'audit_sources.csv', sep=';')
 quarantaine = pd.read_csv(dossier / 'quarantaine.csv', sep=';')
 langues = pd.read_csv(dossier / 'langues.csv', sep=';')
 selection = pd.read_csv(dossier / 'selection_francais.csv', sep=';', dtype={'ISBN': 'string'})
+sensibilite = pd.read_csv(dossier / 'sensibilite.csv', sep=';')
 
 # Retrouver les lignes et les clés, sans mélanger catalogue et quarantaine.
 assert len(livres) == qualite['Fiches conservées'] == kpi['NbFiches']
@@ -69,9 +70,30 @@ assert selection['IdLivre'].tolist() == livres.loc[livres['DansTop20']].sort_val
 assert selection['RangSelection'].tolist() == list(range(1, len(selection) + 1))
 assert len(selection) == 20 and selection['IdLivre'].is_unique
 
+# Les scénarios affichés dans Power BI doivent retrouver le catalogue français.
+assert len(sensibilite) == 9
+assert not sensibilite.duplicated(['NoteMinimum', 'NotesMinimum']).any()
+base_francais = livres.loc[
+    livres['Langue'].eq('Français') & ~livres['AuteurAbsent']
+    & ~livres['EditeurAbsent'] & livres['Pages'].between(1, 5000)
+].copy()
+base_francais['Cle'] = (
+    base_francais['Titre'].str.casefold().str.replace(r'[^\w\s]', ' ', regex=True)
+    .str.replace(r'\s+', ' ', regex=True).str.strip()
+    + ' | ' + base_francais['Auteurs'].str.casefold().str.replace(r'\s+', ' ', regex=True).str.strip()
+)
+for scenario in sensibilite.itertuples(index=False):
+    groupe = base_francais.loc[
+        base_francais['Note'].ge(scenario.NoteMinimum)
+        & base_francais['NbNotes'].ge(scenario.NotesMinimum)
+    ]
+    assert len(groupe) == scenario.NbFiches
+    assert groupe['Cle'].nunique() == scenario.NbTitresAuteurs
+
 # Le modèle doit lire les mêmes colonnes que les CSV et trier chaque tranche sans ambiguïté.
 modele = json.loads((racine / 'powerbi/Goodreads.SemanticModel/model.bim').read_text(encoding='utf-8'))['model']
-fichiers = {'Livres': 'livres_powerbi.csv', 'Langues': 'langues.csv', 'AuditImport': 'controle_qualite.csv'}
+fichiers = {'Livres': 'livres_powerbi.csv', 'Langues': 'langues.csv',
+            'AuditImport': 'controle_qualite.csv', 'Sensibilite': 'sensibilite.csv'}
 for table in modele['tables']:
     colonnes_csv = pd.read_csv(dossier / fichiers[table['name']], sep=';', nrows=0).columns.tolist()
     assert [c['sourceColumn'] for c in table['columns']] == colonnes_csv

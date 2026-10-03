@@ -32,3 +32,20 @@ CALCULATETABLE(
     ROW("Fiches", [Nombre de fiches], "Part langue absente", [Part langue absente], "Lignes brutes", [Lignes brutes]),
     Livres[IdLivre] = -1
 )
+
+// Scénarios à note minimale 4 : 3002, 2409, 2123 candidats.
+// Cette table est indépendante des filtres du catalogue.
+EVALUATE
+CALCULATETABLE(
+    SUMMARIZECOLUMNS(Sensibilite[NotesMinimum], "Candidats", [Candidats du scenario]),
+    Sensibilite[NoteMinimum] = 4
+)
+ORDER BY Sensibilite[NotesMinimum]
+
+// Répartition de la liste : 12 libellés, 20 fiches, dont 6 Hiromu Arakawa.
+EVALUATE
+CALCULATETABLE(
+    SUMMARIZECOLUMNS(Livres[Auteurs], "Fiches", [Liste de travail]),
+    Livres[DansTop20] = TRUE()
+)
+ORDER BY [Fiches] DESC

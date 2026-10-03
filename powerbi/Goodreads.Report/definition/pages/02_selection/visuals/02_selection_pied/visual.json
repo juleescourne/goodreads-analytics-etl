@@ -149,7 +149,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Un filtre peut réduire la liste visible. Les variantes de titre peuvent encore cacher une même œuvre ; contrôle humain nécessaire.",
+                    "value": "Les menus réduisent la liste sans recalculer le top 20. Le graphique des seuils reste sur le catalogue français complet.",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "10pt",

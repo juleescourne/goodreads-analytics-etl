@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Lire la note avec le volume de notations'"
+                  "Value": "'2 · Examiner la diversité des auteurs'"
                 }
               }
             },
@@ -152,7 +152,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Français ; médiane affichée à partir de 30 fiches notées'"
+                  "Value": "'Fiches de la liste par libellé auteur · suit les filtres · défiler si nécessaire'"
                 }
               }
             },
@@ -198,11 +198,11 @@
                       "Entity": "Livres"
                     }
                   },
-                  "Property": "TrancheNotes"
+                  "Property": "Auteurs"
                 }
               },
-              "queryRef": "Livres.TrancheNotes",
-              "nativeQueryRef": "TrancheNotes"
+              "queryRef": "Livres.Auteurs",
+              "nativeQueryRef": "Auteurs"
             }
           ]
         },
@@ -216,57 +216,11 @@
                       "Entity": "Livres"
                     }
                   },
-                  "Property": "Note mediane groupe"
+                  "Property": "Liste de travail"
                 }
               },
-              "queryRef": "Livres.Note mediane groupe",
-              "nativeQueryRef": "Note mediane groupe"
-            }
-          ]
-        },
-        "Tooltips": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Livres"
-                    }
-                  },
-                  "Property": "Nombre de fiches"
-                }
-              },
-              "queryRef": "Livres.Nombre de fiches",
-              "nativeQueryRef": "Nombre de fiches"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Livres"
-                    }
-                  },
-                  "Property": "Fiches note exploitable"
-                }
-              },
-              "queryRef": "Livres.Fiches note exploitable",
-              "nativeQueryRef": "Fiches note exploitable"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Livres"
-                    }
-                  },
-                  "Property": "Note mediane"
-                }
-              },
-              "queryRef": "Livres.Note mediane",
-              "nativeQueryRef": "Note mediane"
+              "queryRef": "Livres.Liste de travail",
+              "nativeQueryRef": "Liste de travail"
             }
           ]
         }
@@ -275,13 +229,26 @@
         "sort": [
           {
             "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Livres"
+                  }
+                },
+                "Property": "Liste de travail"
+              }
+            },
+            "direction": "Descending"
+          },
+          {
+            "field": {
               "Column": {
                 "Expression": {
                   "SourceRef": {
                     "Entity": "Livres"
                   }
                 },
-                "Property": "TrancheNotes"
+                "Property": "Auteurs"
               }
             },
             "direction": "Ascending"
@@ -345,7 +312,7 @@
             "labelPrecision": {
               "expr": {
                 "Literal": {
-                  "Value": "2D"
+                  "Value": "0D"
                 }
               }
             }
@@ -411,7 +378,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "02_selection_comparaison_notes_filtre_TrancheNotes",
+        "name": "auteurs_liste_20",
         "field": {
           "Column": {
             "Expression": {
@@ -419,7 +386,7 @@
                 "Entity": "Livres"
               }
             },
-            "Property": "TrancheNotes"
+            "Property": "DansTop20"
           }
         },
         "type": "Categorical",
@@ -444,7 +411,7 @@
                             "Source": "t"
                           }
                         },
-                        "Property": "TrancheNotes"
+                        "Property": "DansTop20"
                       }
                     }
                   ],
@@ -452,28 +419,7 @@
                     [
                       {
                         "Literal": {
-                          "Value": "'1-99'"
-                        }
-                      }
-                    ],
-                    [
-                      {
-                        "Literal": {
-                          "Value": "'100-999'"
-                        }
-                      }
-                    ],
-                    [
-                      {
-                        "Literal": {
-                          "Value": "'1 000-9 999'"
-                        }
-                      }
-                    ],
-                    [
-                      {
-                        "Literal": {
-                          "Value": "'10 000 et plus'"
+                          "Value": "true"
                         }
                       }
                     ]

@@ -29,6 +29,8 @@ L'étude utilise les **23 fichiers de livres** du [dataset Kaggle de Bahram Jann
 
 Les notebooks sont enregistrés **avec leurs résultats et graphiques** pour être lisibles sans relancer le traitement. Le code reste volontairement simple : filtres, regroupements, jointure contrôlée et exports CSV.
 
+Le [script de démonstration vidéo](docs/Script_video.txt) suit les trois pages du rapport, avec le texte à dire et les gestes à l'écran.
+
 Les contrôles GitHub Actions vérifient les fichiers versionnés : syntaxe Python, notebooks exécutés sans erreur enregistrée, liens locaux et références des champs Power BI. Ils ne téléchargent pas le catalogue et ne remplacent pas l'exécution complète de l'analyse. Pour les lancer localement : `python scripts/verifier_livrables.py`.
 
 ## Pourquoi ne pas simplement trier les notes ?
@@ -68,19 +70,19 @@ Choisir le noyau **Python (Goodreads)**, puis exécuter qualité → globale →
 
 ## Ouvrir Power BI
 
-Après génération des CSV, ouvrir [Goodreads.pbip](powerbi/Goodreads.pbip). Les deux dossiers voisins font partie du projet et doivent rester ensemble. Le rapport utilise un modèle à trois tables, une relation à sens unique et **33 mesures DAX**.
+Après génération des CSV, ouvrir [Goodreads.pbip](powerbi/Goodreads.pbip). Les deux dossiers voisins font partie du projet et doivent rester ensemble. Le rapport utilise un modèle à quatre tables, une relation à sens unique et **34 mesures DAX**. `Sensibilite` apporte les scénarios déjà calculés dans le notebook, indépendamment des filtres du catalogue.
 
 Sur un autre ordinateur, modifier le paramètre Power Query `DossierDonnees` vers le dossier `data/processed`, puis actualiser. Le chemin local de préparation est documenté dans le [guide](powerbi/LISEZ_MOI.txt).
 
 | Page | Usage |
 |---|---|
 | Comprendre le catalogue | Lire les KPI, les langues et les volumes de notes |
-| Sélection en français | Examiner les candidats et les 20 fiches proposées |
+| Sélection en français | Comparer les seuils de notations, examiner les auteurs et les 20 propositions |
 | Qualité des données | Lire les défauts du périmètre filtré et le bilan fixe de l'import |
 
-Les filtres réduisent la liste proposée sans recalculer le top 20. Les marqueurs de sélection sont calculés sur le catalogue complet. Les compteurs d'import restent fixes et les taux de qualité du catalogue suivent les filtres.
+Les filtres réduisent la liste proposée et son graphique d'auteurs sans recalculer le top 20. Les marqueurs de sélection sont calculés sur le catalogue complet. Le graphique des seuils reste sur le catalogue français complet : 3 002, 2 409 et 2 123 candidats pour au moins 100, 500 et 1 000 notations, à note ≥ 4. Les compteurs d'import restent fixes et les taux de qualité du catalogue suivent les filtres. Les tableaux gardent une hauteur fixe avec défilement interne et répartition automatique des colonnes dans leur largeur.
 
-**Validation effectuée :** trois notebooks exécutés sans erreur ; rapprochement des exports ; contrôles des clés, des KPI et des critères ; 57 fichiers Power BI validés avec les schémas Microsoft ; références des champs et positions des visuels contrôlées. Les trois tables ont ensuite été **actualisées dans le moteur de Power BI Desktop**. Les **33 mesures DAX ont été comparées à Pandas dans six contextes**, soit 198 comparaisons concordantes. La liste de 20 et les neuf groupes de langues concordent aussi. Les [résultats de contrôle](powerbi/controle_resultats.json) sont conservés avec le projet.
+**Validation effectuée :** trois notebooks exécutés sans erreur ; rapprochement des exports ; contrôles des clés, des KPI et des critères ; 57 fichiers Power BI validés avec les schémas Microsoft ; références des champs et positions des visuels contrôlées. Le 3 octobre, les **quatre tables ont été actualisées dans une base de contrôle temporaire du moteur Power BI Desktop**, supprimée ensuite. Les 33 mesures du catalogue retrouvent Pandas dans six contextes, soit **198 comparaisons concordantes**. La nouvelle mesure de sensibilité retrouve les neuf scénarios et reste indépendante des filtres du catalogue ; la répartition des auteurs concorde avec la liste, avec et sans restriction aux fiches d'au moins 500 notations. Les [contrôles de cette version](powerbi/controle_storytelling.json) et les [contrôles initiaux du 1er octobre](powerbi/controle_resultats.json) sont conservés séparément.
 
 **Validation visuelle à compléter :** les données et les calculs ont été contrôlés dans le moteur de Power BI Desktop ; le rendu des pages et leurs interactions restent à vérifier manuellement dans l'application. Le projet est fourni au format source PBIP sans cache de données versionné. Les images de ce README sont issues des notebooks.
 

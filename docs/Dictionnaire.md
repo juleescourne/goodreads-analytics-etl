@@ -73,6 +73,7 @@ Sauf indication contraire, les mesures portent sur les fiches conservées dans l
 | Nombre de candidats | Candidat = vrai | Critères éditoriaux ci-dessous |
 | Nombre de représentants | RepresentantSelection = vrai | Une fiche candidate par clé titre/auteur |
 | Liste de travail | DansTop20 = vrai | Jusqu'à 20 fiches classées sur la source complète |
+| Candidats du scénario | Effectif de Sensibilite pour le couple note minimum / nombre minimum de notations | Catalogue français complet, avant rapprochement ; ne pas sommer les scénarios |
 
 Dans les CSV de contrôle, les pourcentages sont multipliés par 100. Les mesures DAX renvoient une fraction formatée en `%`. Un ratio sans dénominateur reste vide.
 
@@ -91,3 +92,7 @@ Le rapprochement textuel ne garantit pas une œuvre unique : une variation de ti
 `Langues[Langue]` filtre `Livres[Langue]` en relation **1 vers plusieurs**, à sens unique. Les mesures restent au grain fiche. Les auteurs ne sont pas éclatés, ce qui évite de multiplier les notes et les fiches dans une jointure.
 
 `AuditImport` est une petite table indépendante issue du journal de contrôle. Ses indicateurs d'import ne suivent pas les filtres du catalogue. Les taux de qualité filtrables sont recalculés depuis les colonnes de `Livres`.
+
+`Sensibilite` importe les neuf couples de seuils du notebook approfondi : `NoteMinimum`, `NotesMinimum`, `NbFiches` et `NbTitresAuteurs`. Elle n'a pas de relation au catalogue. La page de sélection fixe la note minimale à 4 et compare 100, 500 et 1 000 notations, avec les mêmes critères de métadonnées. Les effectifs ne se cumulent pas. La mesure `Candidats du scenario` utilise `SELECTEDVALUE(NbFiches)` et reste vide quand plusieurs effectifs sont présents.
+
+Le graphique des auteurs utilise `Liste de travail` par libellé `Auteurs`, avec `DansTop20 = vrai`. Les auteurs/contributeurs ne sont pas éclatés. Sans filtre : 20 fiches et 12 libellés ; Hiromu Arakawa représente 6 fiches, soit 30 %. Les menus réduisent ce graphique et le tableau de la liste, sans recalcul du classement. Les clics sur les graphiques de cette page ne filtrent pas les autres visuels.

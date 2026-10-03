@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Candidats par pagination'"
+                  "Value": "'1 · Tester le seuil de notations'"
                 }
               }
             },
@@ -152,7 +152,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Seules les fiches respectant les critères sont comptées'"
+                  "Value": "'Français complet · note ≥ 4 · avant rapprochement · indépendant des filtres'"
                 }
               }
             },
@@ -195,14 +195,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Livres"
+                      "Entity": "Sensibilite"
                     }
                   },
-                  "Property": "TranchePages"
+                  "Property": "NotesMinimum"
                 }
               },
-              "queryRef": "Livres.TranchePages",
-              "nativeQueryRef": "TranchePages"
+              "queryRef": "Sensibilite.NotesMinimum",
+              "nativeQueryRef": "NotesMinimum"
             }
           ]
         },
@@ -213,60 +213,14 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Livres"
+                      "Entity": "Sensibilite"
                     }
                   },
-                  "Property": "Candidats"
+                  "Property": "Candidats du scenario"
                 }
               },
-              "queryRef": "Livres.Candidats",
-              "nativeQueryRef": "Candidats"
-            }
-          ]
-        },
-        "Tooltips": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Livres"
-                    }
-                  },
-                  "Property": "Nombre de fiches"
-                }
-              },
-              "queryRef": "Livres.Nombre de fiches",
-              "nativeQueryRef": "Nombre de fiches"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Livres"
-                    }
-                  },
-                  "Property": "Fiches note exploitable"
-                }
-              },
-              "queryRef": "Livres.Fiches note exploitable",
-              "nativeQueryRef": "Fiches note exploitable"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Livres"
-                    }
-                  },
-                  "Property": "Note mediane"
-                }
-              },
-              "queryRef": "Livres.Note mediane",
-              "nativeQueryRef": "Note mediane"
+              "queryRef": "Sensibilite.Candidats du scenario",
+              "nativeQueryRef": "Candidats du scenario"
             }
           ]
         }
@@ -278,10 +232,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Livres"
+                    "Entity": "Sensibilite"
                   }
                 },
-                "Property": "TranchePages"
+                "Property": "NotesMinimum"
               }
             },
             "direction": "Ascending"
@@ -365,7 +319,7 @@
             "showAxisTitle": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -373,6 +327,13 @@
               "expr": {
                 "Literal": {
                   "Value": "10D"
+                }
+              }
+            },
+            "titleText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Minimum de notations'"
                 }
               }
             }
@@ -392,7 +353,7 @@
             "showAxisTitle": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -402,10 +363,74 @@
                   "Value": "10D"
                 }
               }
+            },
+            "titleText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Fiches candidates'"
+                }
+              }
             }
           }
         }
       ]
     }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "scenario_note_4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Sensibilite"
+              }
+            },
+            "Property": "NoteMinimum"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "s",
+              "Entity": "Sensibilite",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "s"
+                          }
+                        },
+                        "Property": "NoteMinimum"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "4D"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
   }
 }
