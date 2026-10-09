@@ -75,11 +75,13 @@ python -m unittest discover -s tests -v
 python scripts/verifier_livrables.py
 ```
 
-Les tests couvrent : compteur négatif distinct du zéro, versions contradictoires, langue absente, édition représentante, égalités de classement, plafond auteur et recalcul des remplaçants. Les notebooks utilisent ces mêmes fonctions de [règles](scripts/regles_catalogue.py). Le contrôle des exports recalcule séparément les résultats sur tout le catalogue. GitHub Actions exécute les petits tests et les contrôles de fichiers, sans charger les sources complètes.
+Les tests couvrent : compteur négatif distinct du zéro, versions contradictoires, langue absente, édition représentante, égalités de classement, plafond auteur et recalcul des remplaçants. Les notebooks utilisent ces mêmes fonctions de [règles](scripts/regles_catalogue.py). Cinq tests supplémentaires vérifient la configuration des chemins, le déplacement du projet et le refus des exports absents ou incompatibles. Le contrôle des exports recalcule séparément les résultats sur tout le catalogue. GitHub Actions exécute les petits tests et les contrôles de fichiers, sans charger les sources complètes.
 
 ## Rapport Power BI
 
-Le modèle contient **cinq tables et 34 mesures DAX**. `Langues` filtre `Livres` ; `AuditImport`, `Sensibilite` et `ComparaisonSelections` sont indépendantes. Ouvrir le PBIP avec ses deux dossiers voisins, renseigner `DossierDonnees` vers `data/processed`, puis actualiser.
+Le modèle contient **cinq tables et 34 mesures DAX**. `Langues` filtre `Livres` ; `AuditImport`, `Sensibilite` et `ComparaisonSelections` sont indépendantes. Après génération des exports, double-cliquer sur [Ouvrir_Goodreads.cmd](Ouvrir_Goodreads.cmd), à la racine du projet, puis cliquer sur **Actualiser** dans Power BI Desktop. Le lanceur calcule le chemin de `data/processed` depuis son propre emplacement, vérifie les cinq CSV et configure `DossierDonnees` avant d’ouvrir le PBIP. Après un déplacement du projet, relancer ce fichier.
+
+Le lanceur nécessite Python 3, sans bibliothèque supplémentaire ; il utilise `.venv` si présent, sinon Python installé sur Windows. Pour configurer sans ouvrir Desktop : `python scripts/configurer_powerbi.py`. `main.py` configure aussi le chemin après la réussite des trois notebooks. Le modèle versionné contient un paramètre vide pour éviter tout chemin personnel : la configuration locale du paramètre ne doit pas être publiée. Si le rapport était déjà ouvert, le fermer puis le rouvrir via le lanceur ; conserver d’abord les modifications non enregistrées dans une copie.
 
 - **Catalogue :** KPI, langues et volumes de notations.
 - **Sélection :** comparaison des six listes, diversité et détail des 20 propositions plafonnées à deux par auteur.

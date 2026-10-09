@@ -4,6 +4,7 @@ import time
 
 import nbformat
 from nbclient import NotebookClient
+from scripts.configurer_powerbi import configurer
 
 racine = Path(__file__).resolve().parent
 notebooks = [
@@ -26,3 +27,4 @@ for nom in notebooks:
     print(f'{nom} : OK ({time.time() - debut:.0f} secondes)', flush=True)
 
 print('Notebooks exécutés. Exports disponibles dans data/processed.', flush=True)
+print('Power BI : ' + configurer(racine), flush=True)

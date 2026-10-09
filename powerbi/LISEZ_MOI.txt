@@ -3,9 +3,16 @@ GOODREADS — RAPPORT POWER BI
 
 1. OUVRIR ET ACTUALISER
 
-Ouvrir Goodreads.pbip avec Goodreads.Report et Goodreads.SemanticModel à côté.
-Après exécution des trois notebooks, renseigner le paramètre Power Query
-DossierDonnees vers le chemin absolu du dossier data/processed, puis actualiser.
+Après exécution des trois notebooks, double-cliquer sur Ouvrir_Goodreads.cmd
+à la racine du projet, puis cliquer sur Actualiser dans Power BI Desktop.
+Le lanceur utilise Python 3 (sans bibliothèque supplémentaire), vérifie les cinq
+exports et renseigne DossierDonnees depuis le dossier courant du projet.
+Après un déplacement, relancer Ouvrir_Goodreads.cmd. Conserver les deux dossiers
+Goodreads.Report et Goodreads.SemanticModel à côté de Goodreads.pbip.
+Pour configurer sans ouvrir : python scripts/configurer_powerbi.py.
+main.py configure également le chemin après exécution des trois notebooks.
+Si un export manque, le régénérer avec main.py avant de relancer.
+Le paramètre versionné est vide : ne pas publier le chemin personnel calculé.
 Fermer et rouvrir le PBIP pour charger les modifications des visuels sur disque.
 Conserver les modifications non enregistrées dans une copie avant de fermer.
 
@@ -71,6 +78,7 @@ Un compteur manquant reste distinct du zéro : la mesure sans notation utilise
 Les trois notebooks ont été réexécutés le 9 octobre. Les contrôles des exports
 recalculent séparément les règles, les six listes, leurs métriques et mouvements.
 Dix petits tests vérifient les fonctions de nettoyage et de sélection.
+Cinq autres vérifient les chemins et les contrôles des fichiers avant ouverture.
 Les 57 fichiers concernés passent les schémas Microsoft ; références et positions
 sont contrôlées. Voir controle_evolution.json pour l'état de cette version.
 

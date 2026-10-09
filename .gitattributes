@@ -14,3 +14,4 @@ LICENSE text eol=lf
 *.bim text eol=lf
 *.dax text eol=lf
 *.png binary
+*.cmd text eol=crlf

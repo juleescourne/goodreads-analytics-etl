@@ -9,8 +9,8 @@
       {
         "name": "DossierDonnees",
         "kind": "m",
-        "expression": "\"D:\\formation\\Goodreads_ETL\\data\\processed\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]",
-        "description": "Dossier des CSV exportés par les trois notebooks Goodreads."
+        "expression": "\"\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]",
+        "description": "Configuré depuis le dossier du projet par Ouvrir_Goodreads.cmd ou scripts/configurer_powerbi.py."
       }
     ],
     "tables": [
