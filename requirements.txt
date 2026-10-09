@@ -1,4 +1,4 @@
-# Environnement exécuté : Python 3.10.9, Windows
+# Exécuté : Python 3.10.9 / Windows ; Python 3.12 / Linux le 09/10/2026
 numpy==2.2.6
 pandas==2.3.3
 matplotlib==3.10.9

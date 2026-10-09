@@ -149,7 +149,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Les menus réduisent la liste sans recalculer le top 20. Le graphique des seuils reste sur le catalogue français complet.",
+                    "value": "Les menus réduisent la proposition sans refaire son classement. Les six scénarios restent fixes sur le catalogue français complet.",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "10pt",

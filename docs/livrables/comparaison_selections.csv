@@ -1,0 +1,7 @@
+﻿Scenario;Regle;NotesMinimum;NbCandidats;NbRepresentants;NbFiches;NbAuteurs;MaxParAuteur;NbCommunsReference;NbEntrees;NbSorties;NoteMoyenne;NoteMinimum;CommunsInitiale100
+Initiale · 100;Initiale;100;3002;2716;20;12;6;20;0;0;4.646;4.59;20
+Initiale · 500;Initiale;500;2409;2144;20;10;9;15;5;5;4.635000000000001;4.58;15
+Initiale · 1000;Initiale;1000;2123;1869;20;10;9;15;5;5;4.635000000000001;4.58;15
+Deux par auteur · 100;Deux par auteur;100;3002;2716;20;16;2;20;0;0;4.641500000000001;4.57;16
+Deux par auteur · 500;Deux par auteur;500;2409;2144;20;16;2;15;5;5;4.6245;4.5600000000000005;11
+Deux par auteur · 1000;Deux par auteur;1000;2123;1869;20;16;2;15;5;5;4.6245;4.5600000000000005;11

@@ -49,3 +49,15 @@ CALCULATETABLE(
     Livres[DansTop20] = TRUE()
 )
 ORDER BY [Fiches] DESC
+
+
+// Évolution du 09/10 : six listes recalculées, tableau indépendant des menus.
+EVALUATE ComparaisonSelections
+ORDER BY ComparaisonSelections[Regle], ComparaisonSelections[NotesMinimum]
+
+// Attendu sans filtre : 20 fiches, 16 libellés auteur, au maximum 2 par libellé.
+EVALUATE
+CALCULATETABLE(
+    SUMMARIZECOLUMNS(Livres[Auteurs], "Fiches", [Liste de travail]),
+    Livres[DansTop20] = TRUE()
+)

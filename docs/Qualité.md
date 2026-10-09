@@ -82,3 +82,8 @@ Les trois tables initiales ont été actualisées sans erreur dans le moteur loc
 Le 3 octobre, le contrôle a été renouvelé sur les **quatre tables** du modèle, dans une base temporaire supprimée ensuite : les 198 comparaisons du catalogue concordent toujours. La mesure ajoutée pour `Sensibilite` retrouve les neuf scénarios et ne varie pas avec les filtres du catalogue. Les répartitions par auteur concordent avec la liste, avec et sans restriction aux fiches d'au moins 500 notations. Les [résultats de cette version](../powerbi/controle_storytelling.json) distinguent ces contrôles du rendu visuel, qui reste à vérifier dans Desktop.
 
 Le contrôle du zéro a notamment permis d'utiliser `== 0` en DAX, afin de ne pas inclure le compteur manquant dans les fiches sans notation. Le bilan d'import reste fixe sous filtres et les ratios sans dénominateur restent vides. Les [résultats de contrôle](../powerbi/controle_resultats.json) sont conservés. Le rendu visuel des pages reste à vérifier dans Desktop.
+
+
+## 7. Évolution du 9 octobre 2026
+
+Les trois notebooks ont été réexécutés sur les sources vérifiées par empreinte ; les totaux qualité sont conservés. Dix tests ciblés vérifient les règles utilisées dans les notebooks. Le contrôle des exports recalcule les six listes, les métriques de diversité et les entrées/sorties. La proposition principale contient désormais 20 fiches et 16 libellés auteur, au maximum deux fiches par libellé normalisé. Les contrôles du moteur DAX des 1er et 3 octobre décrits ci-dessus sont historiques ; ils ne valident pas cette évolution à cinq tables. Voir le [bilan actuel](../powerbi/controle_evolution.json).

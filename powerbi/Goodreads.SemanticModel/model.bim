@@ -692,6 +692,141 @@
             "lineageTag": "11833d13-d276-576a-81d1-5e4adc3a732c"
           }
         ]
+      },
+      {
+        "name": "ComparaisonSelections",
+        "description": "Six listes recalculées. Stabilité comparée au seuil 100 de la même règle. Indépendante des filtres du catalogue.",
+        "lineageTag": "9f9c3c7d-8485-5cb0-a631-c064db0ebf44",
+        "columns": [
+          {
+            "name": "Scenario",
+            "sourceColumn": "Scenario",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "lineageTag": "2642cb80-f791-52bc-bf95-9adf5b90ce35"
+          },
+          {
+            "name": "Regle",
+            "sourceColumn": "Regle",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "lineageTag": "a5ac42ed-d0c9-592c-aaad-bd99dc6f94b5"
+          },
+          {
+            "name": "NotesMinimum",
+            "sourceColumn": "NotesMinimum",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "lineageTag": "d0f702bf-b94a-51bd-b1a9-68851d5d1774",
+            "formatString": "#,0"
+          },
+          {
+            "name": "NbCandidats",
+            "sourceColumn": "NbCandidats",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "lineageTag": "f262c445-594b-515a-80cd-d56c9447d7ed",
+            "formatString": "#,0"
+          },
+          {
+            "name": "NbRepresentants",
+            "sourceColumn": "NbRepresentants",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "lineageTag": "10edcbc4-83a3-5d85-af97-ba168c3782ae",
+            "formatString": "#,0"
+          },
+          {
+            "name": "NbFiches",
+            "sourceColumn": "NbFiches",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "lineageTag": "2110d5de-dd27-56f8-b0ba-a3f5bb435c42",
+            "formatString": "#,0"
+          },
+          {
+            "name": "NbAuteurs",
+            "sourceColumn": "NbAuteurs",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "lineageTag": "8c688d36-1cc2-5c93-8abc-0785497c7bcf",
+            "formatString": "#,0"
+          },
+          {
+            "name": "MaxParAuteur",
+            "sourceColumn": "MaxParAuteur",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "lineageTag": "1657d951-3d7c-5d3c-b0d7-43d0d8834944",
+            "formatString": "#,0"
+          },
+          {
+            "name": "NbCommunsReference",
+            "sourceColumn": "NbCommunsReference",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "lineageTag": "d9d85877-1b27-5819-a309-13eaeb58134e",
+            "formatString": "#,0"
+          },
+          {
+            "name": "NbEntrees",
+            "sourceColumn": "NbEntrees",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "lineageTag": "155267c3-b6ed-50de-8e5e-6ecae2c5ff0a",
+            "formatString": "#,0"
+          },
+          {
+            "name": "NbSorties",
+            "sourceColumn": "NbSorties",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "lineageTag": "bc4dc6ed-c06d-5a2d-bb44-4ac5d7d62eb4",
+            "formatString": "#,0"
+          },
+          {
+            "name": "NoteMoyenne",
+            "sourceColumn": "NoteMoyenne",
+            "dataType": "double",
+            "summarizeBy": "none",
+            "lineageTag": "edefa2bc-dcc7-5775-b53f-211d1bd4a676",
+            "formatString": "0.00"
+          },
+          {
+            "name": "NoteMinimum",
+            "sourceColumn": "NoteMinimum",
+            "dataType": "double",
+            "summarizeBy": "none",
+            "lineageTag": "7da364dc-265c-5722-a1c6-3ad86287e5d0",
+            "formatString": "0.00"
+          },
+          {
+            "name": "CommunsInitiale100",
+            "sourceColumn": "CommunsInitiale100",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "lineageTag": "636a0f9e-7e0e-53f8-a0e6-33ddfb3abae8",
+            "formatString": "#,0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "ComparaisonSelections",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DossierDonnees & \"\\comparaison_selections.csv\"), [Delimiter=\";\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Entetes = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Types = Table.TransformColumnTypes(Entetes, {{\"Scenario\", type text}, {\"Regle\", type text}, {\"NotesMinimum\", Int64.Type}, {\"NbCandidats\", Int64.Type}, {\"NbRepresentants\", Int64.Type}, {\"NbFiches\", Int64.Type}, {\"NbAuteurs\", Int64.Type}, {\"MaxParAuteur\", Int64.Type}, {\"NbCommunsReference\", Int64.Type}, {\"NbEntrees\", Int64.Type}, {\"NbSorties\", Int64.Type}, {\"NoteMoyenne\", type number}, {\"NoteMinimum\", type number}, {\"CommunsInitiale100\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Types"
+              ]
+            }
+          }
+        ],
+        "measures": []
       }
     ],
     "relationships": [
@@ -710,7 +845,7 @@
     "annotations": [
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"DossierDonnees\", \"Langues\", \"Livres\", \"AuditImport\", \"Sensibilite\"]"
+        "value": "[\"DossierDonnees\", \"Langues\", \"Livres\", \"AuditImport\", \"Sensibilite\", \"ComparaisonSelections\"]"
       },
       {
         "name": "__PBI_TimeIntelligenceEnabled",

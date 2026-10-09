@@ -10,7 +10,7 @@
     "tabOrder": 26
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "tableEx",
     "visualContainerObjects": {
       "title": [
         {
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'1 · Tester le seuil de notations'"
+                  "Value": "'1 · Recalculer les 20 propositions'"
                 }
               }
             },
@@ -152,7 +152,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Français complet · note ≥ 4 · avant rapprochement · indépendant des filtres'"
+                  "Value": "'Communs : avec le seuil 100 de la même règle · scénarios fixes, hors filtres'"
                 }
               }
             },
@@ -188,39 +188,82 @@
     "drillFilterOtherVisuals": true,
     "query": {
       "queryState": {
-        "Category": {
+        "Values": {
           "projections": [
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Sensibilite"
+                      "Entity": "ComparaisonSelections"
+                    }
+                  },
+                  "Property": "Regle"
+                }
+              },
+              "queryRef": "ComparaisonSelections.Regle",
+              "nativeQueryRef": "Regle",
+              "displayName": "Règle"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ComparaisonSelections"
                     }
                   },
                   "Property": "NotesMinimum"
                 }
               },
-              "queryRef": "Sensibilite.NotesMinimum",
-              "nativeQueryRef": "NotesMinimum"
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
+              "queryRef": "ComparaisonSelections.NotesMinimum",
+              "nativeQueryRef": "NotesMinimum",
+              "displayName": "Seuil"
+            },
             {
               "field": {
-                "Measure": {
+                "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Sensibilite"
+                      "Entity": "ComparaisonSelections"
                     }
                   },
-                  "Property": "Candidats du scenario"
+                  "Property": "NbCommunsReference"
                 }
               },
-              "queryRef": "Sensibilite.Candidats du scenario",
-              "nativeQueryRef": "Candidats du scenario"
+              "queryRef": "ComparaisonSelections.NbCommunsReference",
+              "nativeQueryRef": "NbCommunsReference",
+              "displayName": "Communs / 20"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ComparaisonSelections"
+                    }
+                  },
+                  "Property": "NbAuteurs"
+                }
+              },
+              "queryRef": "ComparaisonSelections.NbAuteurs",
+              "nativeQueryRef": "NbAuteurs",
+              "displayName": "Auteurs"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ComparaisonSelections"
+                    }
+                  },
+                  "Property": "MaxParAuteur"
+                }
+              },
+              "queryRef": "ComparaisonSelections.MaxParAuteur",
+              "nativeQueryRef": "MaxParAuteur",
+              "displayName": "Max / auteur"
             }
           ]
         }
@@ -232,7 +275,20 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Sensibilite"
+                    "Entity": "ComparaisonSelections"
+                  }
+                },
+                "Property": "Regle"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "ComparaisonSelections"
                   }
                 },
                 "Property": "NotesMinimum"
@@ -245,40 +301,55 @@
       }
     },
     "objects": {
-      "legend": [
+      "grid": [
         {
           "properties": {
-            "show": {
+            "gridVertical": {
               "expr": {
                 "Literal": {
                   "Value": "false"
                 }
               }
             },
-            "position": {
+            "gridHorizontal": {
               "expr": {
                 "Literal": {
-                  "Value": "'Bottom'"
+                  "Value": "true"
                 }
               }
             },
-            "fontSize": {
+            "rowPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "6D"
                 }
               }
             }
           }
         }
       ],
-      "labels": [
+      "columnHeaders": [
         {
           "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#153D3A'"
+                    }
+                  }
                 }
               }
             },
@@ -289,37 +360,74 @@
                 }
               }
             },
-            "labelDisplayUnits": {
+            "wordWrap": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "true"
                 }
               }
             },
-            "labelPrecision": {
+            "autoSizeColumnWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "true"
+                }
+              }
+            },
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'growToFit'"
                 }
               }
             }
           }
         }
       ],
-      "categoryAxis": [
+      "values": [
         {
           "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
+            "fontColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#153D3A'"
+                    }
+                  }
                 }
               }
             },
-            "showAxisTitle": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
+            "fontColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#153D3A'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#EFF5F0'"
+                    }
+                  }
                 }
               }
             },
@@ -330,44 +438,23 @@
                 }
               }
             },
-            "titleText": {
+            "wordWrap": {
               "expr": {
                 "Literal": {
-                  "Value": "'Minimum de notations'"
+                  "Value": "true"
                 }
               }
             }
           }
         }
       ],
-      "valueAxis": [
+      "total": [
         {
           "properties": {
-            "show": {
+            "totals": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "showAxisTitle": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
-                }
-              }
-            },
-            "titleText": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Fiches candidates'"
+                  "Value": "false"
                 }
               }
             }
@@ -375,62 +462,5 @@
         }
       ]
     }
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "scenario_note_4",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Sensibilite"
-              }
-            },
-            "Property": "NoteMinimum"
-          }
-        },
-        "type": "Categorical",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "s",
-              "Entity": "Sensibilite",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "In": {
-                  "Expressions": [
-                    {
-                      "Column": {
-                        "Expression": {
-                          "SourceRef": {
-                            "Source": "s"
-                          }
-                        },
-                        "Property": "NoteMinimum"
-                      }
-                    }
-                  ],
-                  "Values": [
-                    [
-                      {
-                        "Literal": {
-                          "Value": "4D"
-                        }
-                      }
-                    ]
-                  ]
-                }
-              }
-            }
-          ]
-        }
-      }
-    ]
   }
 }

@@ -83,7 +83,7 @@ Dans les CSV de contrôle, les pourcentages sont multipliés par 100. Les mesure
 
 `RepresentantSelection` conserve, parmi les candidats d'une même clé titre/auteur, le plus grand NbNotes, puis le plus petit IdLivre en cas d'égalité. Les autres fiches restent dans le catalogue.
 
-`RangSelection` classe ces représentants par Note décroissante, NbNotes décroissant, puis IdLivre croissant. `DansTop20` marque les 20 premiers. **Ces marqueurs sont calculés sur la source complète : un filtre du dashboard réduit la liste affichée, sans refaire le classement.**
+Les représentants sont classés par Note décroissante, NbNotes décroissant puis IdLivre croissant. La proposition retient au maximum deux fiches par libellé auteur normalisé (casse et espaces), puis les 20 premières. RangSelection donne le rang de cette proposition et reste vide ailleurs. DansTop20 marque ces 20 fiches plafonnées. **Les marqueurs sont fixés sur la source complète : les menus du dashboard réduisent l’affichage sans refaire le classement.** La liste initiale sans plafond reste exportée séparément.
 
 Le rapprochement textuel ne garantit pas une œuvre unique : une variation de titre peut masquer une autre édition. Les seuils de note, de volume, de pagination et de 30 fiches par groupe dans les graphiques sont des choix de travail, pas des tests statistiques.
 
@@ -93,6 +93,9 @@ Le rapprochement textuel ne garantit pas une œuvre unique : une variation de ti
 
 `AuditImport` est une petite table indépendante issue du journal de contrôle. Ses indicateurs d'import ne suivent pas les filtres du catalogue. Les taux de qualité filtrables sont recalculés depuis les colonnes de `Livres`.
 
-`Sensibilite` importe les neuf couples de seuils du notebook approfondi : `NoteMinimum`, `NotesMinimum`, `NbFiches` et `NbTitresAuteurs`. Elle n'a pas de relation au catalogue. La page de sélection fixe la note minimale à 4 et compare 100, 500 et 1 000 notations, avec les mêmes critères de métadonnées. Les effectifs ne se cumulent pas. La mesure `Candidats du scenario` utilise `SELECTEDVALUE(NbFiches)` et reste vide quand plusieurs effectifs sont présents.
+`Sensibilite` importe les neuf couples de seuils du notebook approfondi : `NoteMinimum`, `NotesMinimum`, `NbFiches` et `NbTitresAuteurs`. Elle n'a pas de relation au catalogue. La table conserve les neuf scénarios de candidature du notebook. Le visuel principal présente désormais la stabilité des listes via ComparaisonSelections. Les effectifs ne se cumulent pas. La mesure `Candidats du scenario` utilise `SELECTEDVALUE(NbFiches)` et reste vide quand plusieurs effectifs sont présents.
 
-Le graphique des auteurs utilise `Liste de travail` par libellé `Auteurs`, avec `DansTop20 = vrai`. Les auteurs/contributeurs ne sont pas éclatés. Sans filtre : 20 fiches et 12 libellés ; Hiromu Arakawa représente 6 fiches, soit 30 %. Les menus réduisent ce graphique et le tableau de la liste, sans recalcul du classement. Les clics sur les graphiques de cette page ne filtrent pas les autres visuels.
+Le graphique des auteurs utilise `Liste de travail` par libellé `Auteurs`, avec `DansTop20 = vrai`. Les auteurs/contributeurs ne sont pas éclatés. Sans filtre : 20 fiches et 16 libellés auteur, au maximum deux fiches par libellé normalisé. Les menus réduisent ce graphique et le tableau de la liste, sans recalcul du classement. Les clics sur les graphiques de cette page ne filtrent pas les autres visuels.
+
+
+ComparaisonSelections contient six lignes : deux règles × trois seuils de notations. Elle reste indépendante des filtres du catalogue. NbCommunsReference, NbEntrees et NbSorties comparent chaque liste au seuil 100 de sa propre règle. CommunsInitiale100 donne séparément les fiches communes avec la liste initiale sans plafond à 100. NbAuteurs compte les libellés auteur distincts ; MaxParAuteur mesure la concentration maximale. Ces comptes ne doivent pas être additionnés entre scénarios.

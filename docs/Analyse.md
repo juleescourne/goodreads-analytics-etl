@@ -80,38 +80,49 @@ Effectifs candidats avant rapprochement titre/auteur, avec les mêmes critères 
 
 Le passage de 100 à 500 notations à note ≥ 4 réduit le nombre de candidats de **593**, soit **19,75 %**. Dans la liste initiale de 20, **5 fiches** ont moins de 500 notations. Le choix du seuil a donc un effet concret. Je garde 100 comme base de travail et présente cette limite au décideur ; ce n'est pas un seuil « optimal » démontré.
 
-## 4. Lire la liste proposée
+## 4. Comparer la liste initiale et la proposition diversifiée
 
-La liste contient **20 fiches et 12 libellés d'auteur distincts**. Elle comprend notamment *Mafalda, l'intégrale*, *Le Monogramme*, des albums de Calvin et Hobbes et plusieurs tomes de *Fullmetal Alchemist*. Six fiches sont attribuées à Hiromu Arakawa : un classement automatique peut concentrer les propositions sur une même série.
+La liste initiale contient 20 fiches et 12 libellés auteur. Six fiches concernent Hiromu Arakawa. Pour une page de découverte, je compare un plafond de **deux fiches par libellé auteur normalisé**. Les fiches au-delà du plafond laissent place aux suivantes dans le même classement.
 
-Il n'y a pas d'ISBN manquant dans cette liste, mais cela ne valide ni l'ISBN ni l'édition. Une des fiches appartient à un groupe titre/auteur répété dans le catalogue ; seule sa représentante entre dans la liste.
+| Indicateur au seuil 100 | Liste initiale | Proposition plafonnée |
+|---|---:|---:|
+| Fiches | 20 | 20 |
+| Libellés auteur distincts | 12 | 16 |
+| Maximum de fiches par auteur | 6 | 2 |
+| Note moyenne | 4,646 | 4,642 |
+| Note minimale | 4,59 | 4,57 |
 
-Le résultat ne doit donc pas être publié tel quel comme « les 20 meilleurs livres ». Il faut relire les titres, distinguer les coffrets, les séries et les éditions, puis vérifier l'offre réelle de la librairie. La sélection complète est exportée dans `data/processed/selection_francais.csv` et affichée dans le notebook approfondi.
+Les moyennes sont arrondies à trois décimales. **16 fiches restent communes** ; les quatre remplaçantes sont attribuées à Hayao Miyazaki, Pierre Clostermann, Stephen King et Natsuki Takaya. Les listes sont publiées dans [les petits exports](livrables/listes_scenarios.csv).
 
-## 5. Recommandation
+Les nouveaux titres comprennent encore des tomes ou épisodes avancés. Le plafond ne suffit pas à construire une page de découverte définitive. Une [relecture des titres](Relecture_selection.md) précise les points à vérifier sans inventer de disponibilité ni de catégorie commerciale.
 
-Je recommande de **faire vérifier les 20 propositions**, puis de tester une petite page de découverte avec les titres réellement disponibles. La priorité est la qualité et la diversité de la liste avant un classement plus sophistiqué.
+## 5. Recalculer les listes et mesurer leur stabilité
 
-| Prochaine action | Données ou validation attendues |
-|---|---|
-| Vérifier les fiches | Bon titre, édition, ISBN, format et identifiant d'œuvre |
-| Équilibrer la sélection | Éviter trop de tomes d'une même série ; catégories validées par l'équipe catalogue |
-| Vérifier la faisabilité | Catalogue commercial, disponibilité, stock, prix et droits |
-| Actualiser le signal | Notes récentes et date de collecte documentée |
-| Tester la page | Taux de clic = clics sur les livres / impressions des livres ; taux d'ajout = sessions avec ajout / sessions ayant consulté la page, avec règles de comptage stables |
+Les comparaisons portent sur les identifiants de fiche, avec comme référence **la liste à 100 notations de la même règle**. Un changement d’édition représentante compte comme un changement de fiche.
 
-La disponibilité et la diversité sont des garde-fous. Aucun gain de clic, de panier ou de chiffre d'affaires n'est calculé : ces données ne sont pas fournies. Cette analyse est descriptive et ne justifie pas un test statistique causal sur les seules fiches Goodreads.
+| Règle | Minimum de notations | Fiches communes / 20 | Entrées / sorties | Libellés auteur | Maximum / auteur |
+|---|---:|---:|---:|---:|---:|
+| Initiale | 100 | 20 | 0 / 0 | 12 | 6 |
+| Initiale | 500 | 15 | 5 / 5 | 10 | 9 |
+| Initiale | 1 000 | 15 | 5 / 5 | 10 | 9 |
+| Deux par auteur | 100 | 20 | 0 / 0 | 16 | 2 |
+| Deux par auteur | 500 | 15 | 5 / 5 | 16 | 2 |
+| Deux par auteur | 1 000 | 15 | 5 / 5 | 16 | 2 |
 
-## 6. Traduction dans Power BI
+Les deux seuils supérieurs donnent les mêmes listes dans cette extraction. Au seuil 500, la liste initiale se concentre davantage sur un auteur. Un minimum de notations plus élevé ne garantit donc pas une diversité accrue. Les [titres entrants et sortants](livrables/mouvements_selections.csv) permettent de comprendre concrètement les changements.
 
-| Page | Question traitée |
-|---|---|
-| Comprendre le catalogue | Quelle est la couverture des données et comment se répartissent les fiches ? |
-| Sélection en français | Combien de fiches passent les critères, quel est l'effet du seuil de notations et quelle diversité présente la liste ? |
-| Qualité des données | Quels défauts restent dans le périmètre filtré et combien de lignes ont été retirées à l'import ? |
+## 6. Recommandation
 
-Les KPI du catalogue réagissent aux filtres. Le bilan d'import reste fixe. Les critères et le classement sont calculés sur la source complète : filtrer la liste réduit l'affichage, sans fabriquer un nouveau top 20. Le [guide Power BI](../powerbi/LISEZ_MOI.txt) décrit l'ouverture et les valeurs de contrôle.
+Je propose **le seuil de 100 notations et le plafond de deux fiches par libellé auteur** comme point de départ. Cette règle conserve une liste de 20, augmente la diversité des auteurs et modifie peu sa note moyenne. Elle reste un choix éditorial, pas un optimum statistique. La stabilité de 15 fiches sur 20 aux seuils supérieurs donne un repère descriptif ; elle ne mesure pas une performance commerciale.
 
-La page de sélection montre désormais deux résultats utiles à la décision : **3 002, 2 409 et 2 123 candidats** selon le minimum de notations, et la répartition de la liste par libellé d'auteur (**6 fiches sur 20 pour Hiromu Arakawa**, sans filtre). Le graphique des seuils reste sur le catalogue français complet, indépendamment des menus ; celui des auteurs suit le périmètre visible. La comparaison des notes selon la pagination reste consultable dans le notebook approfondi.
+Avant publication, vérifier les titres, éditions, ISBN et séries, puis la disponibilité, le stock, le prix et les droits dans le catalogue réel. Les genres et les publics doivent être validés par l’équipe catalogue. Les notes doivent être actualisées : cette étude utilise une photographie de 2020.
 
-Le [script vidéo](Script_video.txt) suit le cadrage puis les trois pages : choix des indicateurs, résultats, interprétation et suites proposées. La sensibilité est une comparaison de scénarios déjà calculés, pas un outil qui recalcule une sélection de vingt fiches à chaque clic.
+Un test de mise en avant pourrait ensuite suivre le taux de clic (clics sur les livres / impressions des livres) et le taux d’ajout (sessions avec ajout / sessions ayant consulté la page), avec des règles de comptage stables. Aucun gain financier ni causalité n’est établi par les données Goodreads.
+
+## 7. Restitution et contrôles
+
+La [synthèse PDF](livrables/Goodreads_synthese.pdf), les figures et les listes sont générées depuis les résultats Python. Le [portfolio](https://juleescourne.github.io/portfolio-data-analyst/#/goodreads) permet de comparer les six scénarios réels, leurs titres et leurs mouvements.
+
+La page de sélection Power BI présente une table de stabilité indépendante des filtres, la répartition des auteurs et les 20 propositions plafonnées à deux par auteur. Les menus réduisent l’affichage de cette proposition sans recalculer le classement. Les cinq tables sont décrites dans le [guide](../powerbi/LISEZ_MOI.txt).
+
+Les notebooks ont été réexécutés le 9 octobre 2026 ; dix tests ciblés portent sur les règles de nettoyage et de sélection. Les vérifications historiques du moteur DAX ne sont pas présentées comme une validation de la nouvelle version. L’actualisation et le rendu dans Desktop restent à contrôler après ouverture.

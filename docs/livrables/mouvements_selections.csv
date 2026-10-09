@@ -1,0 +1,41 @@
+﻿RangSelection;IdLivre;Titre;Auteurs;Editeur;Note;NbNotes;Pages;ISBN;TitreAuteurRepete;Scenario;Mouvement
+16;1357864;Fullmetal Alchemist, Tome 11 (Fullmetal Alchemist, #11);Hiromu Arakawa;Kurokawa;4.59;8069.0;192.0;2351421515;False;Initiale · 500;Entrée
+17;4794129;Fullmetal Alchemist, Tome 17 (Fullmetal Alchemist, #17);Hiromu Arakawa;Kurokawa;4.59;6898.0;192.0;2351423186;False;Initiale · 500;Entrée
+18;23734;Nausicaä De La Vallée Du Vent, Tome 4;Hayao Miyazaki;Glénat;4.59;2292.0;144.0;2723433927;False;Initiale · 500;Entrée
+19;2241736;Le Grand Cirque 2000: Mémoires d'un pilote de chasse FFL dans la R.A.F. (Nouvelle Édition Illustrée);Pierre Clostermann;Éditions J'ai Lu;4.59;1782.0;665.0;2290324302;False;Initiale · 500;Entrée
+20;2270627;Fullmetal Alchemist, Tome 06 (Fullmetal Alchemist, #6);Hiromu Arakawa;Kurokawa;4.58;10730.0;192.0;2351420462;False;Initiale · 500;Entrée
+4;1602249;La Citadelle des Ombres, Tome 4 (L'Assassin Royal, #10-13);Robin Hobb;Pygmalion;4.68;104.0;1144.0;2756400963;False;Initiale · 500;Sortie
+9;2473593;Les paroles cachées;Bahá'u'lláh;Altess;4.63;446.0;62.0;290521998X;False;Initiale · 500;Sortie
+10;2554495;Le Désir D'être Inutile: Souvenirs Et Réflexions (Collection Vécu);Hugo Pratt;Robert Laffont;4.63;104.0;280.0;2221066456;False;Initiale · 500;Sortie
+17;1263543;En Guerre et en Paix, journal 1940-1944;Andrzej Bobkowski;Noir sur blanc;4.61;154.0;613.0;2882500238;False;Initiale · 500;Sortie
+18;1597015;La Citadelle des Ombres. Tome 3 (L'Assassin Royal, #7-9);Robin Hobb;Pygmalion;4.61;135.0;1035.0;2857049943;False;Initiale · 500;Sortie
+16;1357864;Fullmetal Alchemist, Tome 11 (Fullmetal Alchemist, #11);Hiromu Arakawa;Kurokawa;4.59;8069.0;192.0;2351421515;False;Initiale · 1000;Entrée
+17;4794129;Fullmetal Alchemist, Tome 17 (Fullmetal Alchemist, #17);Hiromu Arakawa;Kurokawa;4.59;6898.0;192.0;2351423186;False;Initiale · 1000;Entrée
+18;23734;Nausicaä De La Vallée Du Vent, Tome 4;Hayao Miyazaki;Glénat;4.59;2292.0;144.0;2723433927;False;Initiale · 1000;Entrée
+19;2241736;Le Grand Cirque 2000: Mémoires d'un pilote de chasse FFL dans la R.A.F. (Nouvelle Édition Illustrée);Pierre Clostermann;Éditions J'ai Lu;4.59;1782.0;665.0;2290324302;False;Initiale · 1000;Entrée
+20;2270627;Fullmetal Alchemist, Tome 06 (Fullmetal Alchemist, #6);Hiromu Arakawa;Kurokawa;4.58;10730.0;192.0;2351420462;False;Initiale · 1000;Entrée
+4;1602249;La Citadelle des Ombres, Tome 4 (L'Assassin Royal, #10-13);Robin Hobb;Pygmalion;4.68;104.0;1144.0;2756400963;False;Initiale · 1000;Sortie
+9;2473593;Les paroles cachées;Bahá'u'lláh;Altess;4.63;446.0;62.0;290521998X;False;Initiale · 1000;Sortie
+10;2554495;Le Désir D'être Inutile: Souvenirs Et Réflexions (Collection Vécu);Hugo Pratt;Robert Laffont;4.63;104.0;280.0;2221066456;False;Initiale · 1000;Sortie
+17;1263543;En Guerre et en Paix, journal 1940-1944;Andrzej Bobkowski;Noir sur blanc;4.61;154.0;613.0;2882500238;False;Initiale · 1000;Sortie
+18;1597015;La Citadelle des Ombres. Tome 3 (L'Assassin Royal, #7-9);Robin Hobb;Pygmalion;4.61;135.0;1035.0;2857049943;False;Initiale · 1000;Sortie
+16;4542238;Yotsuba, tome 5 (Yotsuba&! #5);Kiyohiko Azuma;Kurokawa;4.57;3743.0;204.0;2351421531;False;Deux par auteur · 500;Entrée
+17;315242;Oeuvres Complètes De Fernando Pessoa, Tome 3:  Poésies Et Proses De Alvaro De Campos;Fernando Pessoa;La Différence;4.57;1635.0;244.0;2729103376;False;Deux par auteur · 500;Entrée
+18;1663723;"Maus : Mon père saigne l'histoire ; Et c'est là que mes ennuis ont: commencé (Coffret 2 volumes)";Art Spiegelman;Flammarion;4.5600000000000005;130506.0;295.0;2080666770;False;Deux par auteur · 500;Entrée
+19;165018;Diadorim;João Guimarães Rosa;A. Michel: 10/18;4.5600000000000005;3379.0;627.0;2264021403;True;Deux par auteur · 500;Entrée
+20;2312550;Yotsuba, tome 6 (Yotsuba&! #6);Kiyohiko Azuma;Kurokawa;4.5600000000000005;3308.0;196.0;2351422104;False;Deux par auteur · 500;Entrée
+4;1602249;La Citadelle des Ombres, Tome 4 (L'Assassin Royal, #10-13);Robin Hobb;Pygmalion;4.68;104.0;1144.0;2756400963;False;Deux par auteur · 500;Sortie
+9;2473593;Les paroles cachées;Bahá'u'lláh;Altess;4.63;446.0;62.0;290521998X;False;Deux par auteur · 500;Sortie
+10;2554495;Le Désir D'être Inutile: Souvenirs Et Réflexions (Collection Vécu);Hugo Pratt;Robert Laffont;4.63;104.0;280.0;2221066456;False;Deux par auteur · 500;Sortie
+15;1263543;En Guerre et en Paix, journal 1940-1944;Andrzej Bobkowski;Noir sur blanc;4.61;154.0;613.0;2882500238;False;Deux par auteur · 500;Sortie
+16;1597015;La Citadelle des Ombres. Tome 3 (L'Assassin Royal, #7-9);Robin Hobb;Pygmalion;4.61;135.0;1035.0;2857049943;False;Deux par auteur · 500;Sortie
+16;4542238;Yotsuba, tome 5 (Yotsuba&! #5);Kiyohiko Azuma;Kurokawa;4.57;3743.0;204.0;2351421531;False;Deux par auteur · 1000;Entrée
+17;315242;Oeuvres Complètes De Fernando Pessoa, Tome 3:  Poésies Et Proses De Alvaro De Campos;Fernando Pessoa;La Différence;4.57;1635.0;244.0;2729103376;False;Deux par auteur · 1000;Entrée
+18;1663723;"Maus : Mon père saigne l'histoire ; Et c'est là que mes ennuis ont: commencé (Coffret 2 volumes)";Art Spiegelman;Flammarion;4.5600000000000005;130506.0;295.0;2080666770;False;Deux par auteur · 1000;Entrée
+19;165018;Diadorim;João Guimarães Rosa;A. Michel: 10/18;4.5600000000000005;3379.0;627.0;2264021403;True;Deux par auteur · 1000;Entrée
+20;2312550;Yotsuba, tome 6 (Yotsuba&! #6);Kiyohiko Azuma;Kurokawa;4.5600000000000005;3308.0;196.0;2351422104;False;Deux par auteur · 1000;Entrée
+4;1602249;La Citadelle des Ombres, Tome 4 (L'Assassin Royal, #10-13);Robin Hobb;Pygmalion;4.68;104.0;1144.0;2756400963;False;Deux par auteur · 1000;Sortie
+9;2473593;Les paroles cachées;Bahá'u'lláh;Altess;4.63;446.0;62.0;290521998X;False;Deux par auteur · 1000;Sortie
+10;2554495;Le Désir D'être Inutile: Souvenirs Et Réflexions (Collection Vécu);Hugo Pratt;Robert Laffont;4.63;104.0;280.0;2221066456;False;Deux par auteur · 1000;Sortie
+15;1263543;En Guerre et en Paix, journal 1940-1944;Andrzej Bobkowski;Noir sur blanc;4.61;154.0;613.0;2882500238;False;Deux par auteur · 1000;Sortie
+16;1597015;La Citadelle des Ombres. Tome 3 (L'Assassin Royal, #7-9);Robin Hobb;Pygmalion;4.61;135.0;1035.0;2857049943;False;Deux par auteur · 1000;Sortie

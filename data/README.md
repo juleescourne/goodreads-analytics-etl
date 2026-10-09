@@ -25,9 +25,16 @@ Exécuter les trois notebooks avec `python main.py`. Le séparateur des exports 
 | controle_kpi.csv | Une ligne de KPI globaux ; les pourcentages sont déjà multipliés par 100 |
 | livres_powerbi.csv | Une fiche conservée avec segments, indicateurs de qualité et marqueurs de sélection |
 | langues.csv | Une catégorie de langue par ligne ; dimension du rapport |
+| selection_initiale.csv | Les 20 fiches initiales sans plafond auteur |
+| comparaison_selections.csv | Six scénarios : stabilité, diversité, notes et tailles des groupes |
+| listes_scenarios.csv | Les six listes recalculées, soit 120 lignes |
+| mouvements_selections.csv | Les entrées et sorties par rapport au seuil 100 de chaque règle |
 | sensibilite.csv | Un couple de seuils de note et de volume ; 9 combinaisons |
-| selection_francais.csv | Une proposition par ligne ; liste ordonnée de 20 fiches |
+| selection_francais.csv | Une proposition par ligne ; 20 fiches, maximum deux par libellé auteur |
 
-Le modèle Power BI importe `livres_powerbi.csv`, `langues.csv`, `controle_qualite.csv` et `sensibilite.csv`. Cette dernière table est indépendante : ses neuf scénarios décrivent le catalogue français complet, avant rapprochement titre/auteur. Les menus du rapport ne les recalculent pas. Les autres exports servent à l'analyse et au contrôle. `python scripts/verifier_exports.py` rapproche les exports, les règles de sélection et les neuf scénarios.
+Le modèle Power BI importe `livres_powerbi.csv`, `langues.csv`, `controle_qualite.csv` et `sensibilite.csv`. La table de sensibilité est indépendante : ses neuf scénarios décrivent le catalogue français complet, avant rapprochement titre/auteur. Les menus du rapport ne les recalculent pas. Les autres exports servent à l'analyse et au contrôle. `python scripts/verifier_exports.py` rapproche les exports, les règles de sélection et les neuf scénarios.
 
 Les exports sont régénérables et exclus de Git. Les chiffres à commenter sont dans les notebooks exécutés et dans [Analyse.md](../docs/Analyse.md). Ne pas confondre « fiche Goodreads », « œuvre unique », « lecteur » et « vente ».
+
+
+Le modèle importe aussi comparaison_selections.csv dans ComparaisonSelections, indépendante des menus. Le script scripts/preparer_livrables.py copie uniquement les petites listes dans docs/livrables, génère les figures, la synthèse PDF et parcours.json pour le portfolio. Les 1,85 million de fiches ne sont pas embarquées dans le site.

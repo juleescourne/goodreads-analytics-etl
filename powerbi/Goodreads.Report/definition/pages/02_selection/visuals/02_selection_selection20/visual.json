@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'20 fiches à examiner · défiler pour voir la liste complète'"
+                  "Value": "'20 propositions · maximum 2 fiches par libellé auteur'"
                 }
               }
             },
@@ -152,7 +152,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Une fiche par titre/auteur normalisé. Classement fixé avant filtres : note, volume, puis Id.'"
+                  "Value": "'Note ≥ 4 · ≥ 100 notations · rang fixé avant filtres · séries et éditions à vérifier'"
                 }
               }
             },

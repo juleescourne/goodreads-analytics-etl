@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-09",
+  "tables": 5,
+  "mesures": 34,
+  "evolution": "Liste plafonnée à deux fiches par libellé auteur et six scénarios recalculés",
+  "controle_notebooks": "Trois notebooks exécutés sans erreur le 09/10/2026",
+  "controle_moteur_desktop": "Non réexécuté pour cette évolution",
+  "controle_visuel_desktop": "À effectuer après actualisation",
+  "historique": "controle_storytelling.json concerne la version à quatre tables du 03/10/2026",
+  "controle_exports": "Rapprochement complet des KPI, six listes, diversité et mouvements : OK",
+  "tests_regles": {
+    "nombre": 10,
+    "resultat": "OK"
+  },
+  "schemas_microsoft": {
+    "fichiers": 57,
+    "erreurs": 0
+  },
+  "pages": {
+    "nombre": 3,
+    "largeur": 1440,
+    "hauteur": 1080,
+    "chevauchements": 0
+  },
+  "pdf": "Synthèse Python de quatre pages, pas un export natif Power BI"
+}

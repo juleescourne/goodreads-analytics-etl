@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'2 · Examiner la diversité des auteurs'"
+                  "Value": "'2 · Lire la diversité de la proposition'"
                 }
               }
             },
@@ -152,7 +152,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Fiches de la liste par libellé auteur · suit les filtres · défiler si nécessaire'"
+                  "Value": "'Liste plafonnée à 2 par libellé auteur normalisé · suit les filtres'"
                 }
               }
             },

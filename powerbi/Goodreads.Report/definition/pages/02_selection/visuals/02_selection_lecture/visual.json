@@ -149,7 +149,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Comparer les seuils, puis relire les 20 propositions : équilibre des auteurs et séries, éditions et disponibilité à vérifier.",
+                    "value": "Comparer les listes recalculées, puis examiner la proposition à deux fiches maximum par auteur. Les séries, éditions et disponibilités restent à vérifier.",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "11pt",

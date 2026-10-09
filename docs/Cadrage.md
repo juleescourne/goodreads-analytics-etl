@@ -61,4 +61,9 @@ Le jeu est ancien et non représentatif du marché actuel. Il ne contient ni ven
 
 Le bilan des lignes doit retrouver le brut. La table principale doit avoir une clé unique et ne pas contenir d'identifiant mis en quarantaine. Les KPI des exports doivent retrouver ceux des notebooks. La liste doit respecter ses critères et éviter les répétitions textuelles de titre et auteur.
 
-Le modèle comprend quatre tables, dont les scénarios de sensibilité indépendants des filtres du catalogue. Les calculs sont rapprochés des exports ; les contrôles du moteur et leur périmètre sont documentés dans le [guide Power BI](../powerbi/LISEZ_MOI.txt). La lecture visuelle des pages reste à effectuer, le pilotage Windows étant indisponible. Avant un test commercial, il faudra vérifier les fiches proposées dans le catalogue réel de la librairie et actualiser les signaux Goodreads.
+Le modèle comprend cinq tables, dont les scénarios de sensibilité indépendants des filtres du catalogue. Les calculs sont rapprochés des exports ; les contrôles du moteur et leur périmètre sont documentés dans le [guide Power BI](../powerbi/LISEZ_MOI.txt). La lecture visuelle des pages reste à effectuer, le pilotage Windows étant indisponible. Avant un test commercial, il faudra vérifier les fiches proposées dans le catalogue réel de la librairie et actualiser les signaux Goodreads.
+
+
+## Évolution du 9 octobre 2026
+
+La proposition principale applique le plafond de deux fiches par libellé auteur. Six listes sont recalculées pour comparer les règles et les seuils de 100, 500 et 1 000 notations. La [relecture éditoriale](Relecture_selection.md) porte sur les titres visibles, sans validation du catalogue commercial. Le PDF de synthèse et le parcours du portfolio sont issus des résultats Python ; l’export natif Power BI reste à fournir après actualisation.

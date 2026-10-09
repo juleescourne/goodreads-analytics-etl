@@ -1,51 +1,57 @@
-# Goodreads — Du contrôle qualité à une sélection éditoriale
+# Goodreads — Du catalogue à une sélection éditoriale argumentée
 
-**Projet personnel de Data Analyst junior — Python, Pandas et Power BI.**
+**Projet personnel de Data Analyst junior — Jules Courné**
+Python · Pandas · Matplotlib · Power Query · Power BI · DAX
 
-Comment préparer une page de découverte de livres en français à partir d'un catalogue Goodreads imparfait ? Pour la librairie fictive **Lire & Choisir**, j'ai contrôlé les données, étudié les segments puis construit une liste de **20 fiches à vérifier** avant un éventuel test.
+Pour la librairie fictive **Lire & Choisir**, je prépare une sélection de livres en français à partir d’un catalogue imparfait. Je contrôle les données, construis une première liste de 20 fiches, puis compare sa diversité et sa stabilité avant de proposer une règle éditoriale simple.
 
-L'étude utilise les **23 fichiers de livres** du [dataset Kaggle de Bahram Jannesar](https://www.kaggle.com/datasets/bahramjannesarr/goodreads-book-datasets-10m), **version 18, décembre 2020**. Les résultats proviennent des données réelles du dataset. Le grain est une **fiche Goodreads**, qui peut correspondre à une édition ; ce n'est ni une vente ni nécessairement une œuvre unique.
+**[Explorer l’étude et les six listes](https://juleescourne.github.io/portfolio-data-analyst/#/goodreads)** · **[Lire la synthèse PDF](docs/livrables/Goodreads_synthese.pdf)** · **[Consulter les 20 propositions](docs/livrables/selection_francais.csv)**
 
-## Ce que j'ai trouvé
+## Ce que l’analyse apporte
 
-- **1 850 032 fiches conservées** sur 1 850 310 lignes : 112 répétitions retirées et 166 versions contradictoires isolées.
-- **86,40 % de langues absentes** et seulement **5 notations en médiane** par fiche : la qualité et le volume de notes doivent guider la lecture des scores.
-- **16 327 fiches explicitement en français**, dont **3 002 candidates**, puis **2 716 groupes titre/auteur** après rapprochement textuel. La liste de 20 demande encore une vérification des éditions, des séries et de la disponibilité.
+- **Qualité :** 1 850 032 fiches conservées ; 112 répétitions retirées et 166 versions contradictoires isolées. La langue manque pour 86,40 % des fiches.
+- **Sélection :** 16 327 fiches explicitement en français donnent 3 002 candidates et 2 716 groupes titre/auteur, avant sélection des 20 propositions.
+- **Diversité :** limiter la sélection à deux fiches par libellé auteur fait passer la liste de **12 à 16 libellés distincts**. Quatre fiches changent ; la note moyenne passe de **4,646 à 4,642 / 5** (arrondie).
+- **Stabilité :** passer de 100 à 500 notations remplace **5 fiches sur 20**, dans chaque règle. La liste initiale atteint alors **9 fiches pour un même auteur**, contre 6 au seuil 100. Un seuil plus strict ne suffit donc pas à diversifier la proposition.
 
-![Passage du catalogue français à la sélection](docs/images/selection-francais.png)
+![Diversité de la liste initiale et de la proposition](docs/images/diversite-selection.png)
 
-*Figure extraite du notebook d'analyse approfondie. Les seuils sont des choix de travail, pas une garantie de ventes.*
+**Recommandation :** retenir comme point de départ la variante à deux fiches maximum par libellé auteur et au moins 100 notations. Vérifier ensuite les séries, coffrets, éditions et disponibilités avant un test. Ce plafond est un choix éditorial discutable, pas un optimum statistique ni une promesse de ventes.
 
-## Parcours du projet
+## Des règles explicables
 
-| Étape | Livrable | Ce qu'on y trouve |
-|---|---|---|
-| 1. Poser le problème | [Sujet](subject.txt) et [cadrage](docs/Cadrage.md) | Décision, périmètre, acteurs, questions et limites |
-| 2. Définir les mesures | [Dictionnaire et KPI](docs/Dictionnaire.md) | Grain, dénominateurs et règles de sélection |
-| 3. Contrôler les données | [Notebook qualité](notebooks/01_data_quality.ipynb) et [rapport qualité](docs/Qualité.md) | Doublons, conflits, manquants, bornes, distributions de notes |
-| 4. Comprendre le catalogue | [Analyse globale](notebooks/02_analyse_globale.ipynb) | Langues, volume de notes, pagination et années renseignées |
-| 5. Approfondir | [Analyse ciblée](notebooks/03_analyse_approfondie.ipynb) et [synthèse](docs/Analyse.md) | Périmètre français, critères, sensibilité et liste de travail |
-| 6. Restituer | [Projet Power BI](powerbi/Goodreads.pbip) et [guide](powerbi/LISEZ_MOI.txt) | Trois pages : catalogue, sélection en français et qualité |
+1. Français renseigné, note exploitable ≥ 4/5, au moins 100 notations.
+2. Auteur et éditeur présents, pagination positive et ≤ 5 000.
+3. Une représentante par titre/auteur normalisé : plus grand nombre de notations, puis plus petit identifiant en cas d’égalité.
+4. Classement par note, volume de notations puis identifiant.
+5. Pour la proposition, maximum deux fiches par **libellé auteur normalisé**, puis les 20 premières. Les contributeurs ne sont pas séparés et les séries restent à relire.
 
-Les notebooks sont enregistrés **avec leurs résultats et graphiques** pour être lisibles sans relancer le traitement. Le code reste volontairement simple : filtres, regroupements, jointure contrôlée et exports CSV.
+Les six listes sont recalculées : règle initiale et règle plafonnée, chacune aux seuils de 100, 500 et 1 000 notations. Les fiches communes, entrantes et sortantes sont comparées au seuil 100 **de la même règle**. Les seuils 500 et 1 000 donnent ici les mêmes listes de 20.
 
-Le [script de démonstration vidéo](docs/Script_video.txt) suit les trois pages du rapport, avec le texte à dire et les gestes à l'écran.
+![Stabilité et concentration selon le seuil](docs/images/stabilite-selection.png)
 
-Les contrôles GitHub Actions vérifient les fichiers versionnés : syntaxe Python, notebooks exécutés sans erreur enregistrée, liens locaux et références des champs Power BI. Ils ne téléchargent pas le catalogue et ne remplacent pas l'exécution complète de l'analyse. Pour les lancer localement : `python scripts/verifier_livrables.py`.
+## Parcourir les livrables
 
-## Pourquoi ne pas simplement trier les notes ?
+| Livrable | Contenu |
+|---|---|
+| [Cadrage](docs/Cadrage.md) et [dictionnaire](docs/Dictionnaire.md) | Décision, grain, KPI et règles |
+| [Rapport qualité](docs/Qualité.md) | Anomalies, traitement et traçabilité |
+| [Trois notebooks exécutés](notebooks) | Qualité, analyse globale et sélection approfondie |
+| [Synthèse des analyses](docs/Analyse.md) | Comparaisons et décision proposée |
+| [Synthèse PDF](docs/livrables/Goodreads_synthese.pdf) | Quatre pages illustrées, générées depuis les résultats Python |
+| [Six listes complètes](docs/livrables/listes_scenarios.csv) | Titres, auteurs, rangs, notes, volumes et ISBN |
+| [Entrées et sorties](docs/livrables/mouvements_selections.csv) | Changements par rapport au seuil 100 de chaque règle |
+| [Relecture éditoriale](docs/Relecture_selection.md) | Points visibles dans les titres à vérifier avant publication |
+| [Projet Power BI](powerbi/Goodreads.pbip) et [guide](powerbi/LISEZ_MOI.txt) | Catalogue, sélection en français et qualité |
+| [Tests des règles](tests/test_regles_catalogue.py) | Petits cas de nettoyage et de sélection exécutés dans GitHub Actions |
 
-**79 824 fiches notées 5/5 ont moins de 100 notations.** La langue est souvent absente et plusieurs fiches peuvent décrire des éditions d'un même titre. Je combine donc la note, son volume et des métadonnées utilisables, puis je rapproche les titres et auteurs.
+Le portfolio présente les **résultats réels** des six scénarios. La synthèse PDF et les figures sont produites en Python. Le projet Power BI reste disponible au format source ; son nouvel affichage doit être vérifié après actualisation dans Desktop.
 
-Le seuil de 100 notes reste discutable : à note ≥ 4, passer à 500 notes réduit les candidats de 3 002 à 2 409. Cinq fiches du premier top 20 seraient concernées. Je présente cette sensibilité et les limites au décideur au lieu d'annoncer une sélection optimale.
+## Reproduire l’analyse
 
-![Sensibilité aux critères de sélection](docs/images/sensibilite.png)
+Sources : les 23 fichiers de livres Kaggle, version 18 de décembre 2020. Une ligne décrit une **fiche Goodreads**, éventuellement une édition ; elle ne représente ni une vente, ni nécessairement une œuvre unique. Les fichiers de notes individuelles ne sont pas utilisés.
 
-## Reproduire l'analyse
-
-Exécution vérifiée sous **Windows avec Python 3.10.9** et les versions de [requirements.txt](requirements.txt). Power BI Desktop est nécessaire pour ouvrir le rapport ; aucune licence Office n'est nécessaire pour les notebooks.
-
-Les CSV bruts représentent environ **1,17 Go**, et les exports environ **1,14 Go**. Prévoir plusieurs Go libres, en plus de l'environnement Python. Les notebooks chargent le catalogue en mémoire ; la durée dépend de la machine. La dernière exécution complète a pris environ quatre minutes sur la machine de préparation.
+Environnement initial : Python 3.10.9 sous Windows. Réexécution complète du 9 octobre 2026 sous Python 3.12, avec les versions d’analyse de [requirements.txt](requirements.txt). Prévoir plusieurs Go de mémoire et de disque : environ 1,17 Go de CSV bruts et 1,14 Go d’exports.
 
 Depuis la racine du dépôt, dans PowerShell :
 
@@ -56,68 +62,37 @@ python -m venv .venv
 .\.venv\Scripts\python.exe scripts/telecharger_donnees.py
 .\.venv\Scripts\python.exe main.py
 .\.venv\Scripts\python.exe scripts/verifier_exports.py
+.\.venv\Scripts\python.exe scripts/preparer_livrables.py
 ```
 
-Le téléchargement vise la **version 18**, vérifie chaque empreinte du [manifeste](data/sources.json) et réutilise les fichiers déjà présents si leur empreinte correspond. Si Kaggle demande une connexion ou bloque l'accès automatisé, télécharger cette version depuis la page du dataset et placer les 23 `book*.csv` dans `data/raw/kaggle_v18`, puis relancer le script de vérification du téléchargement.
+Le téléchargement vérifie les empreintes des 23 fichiers du [manifeste](data/sources.json). Si Kaggle bloque l’accès automatisé, placer les fichiers de la version 18 dans `data/raw/kaggle_v18` puis relancer cette vérification. Les sources et les gros exports restent exclus de Git. Les petites listes et figures se régénèrent avec `preparer_livrables.py`.
 
-`main.py` exécute les trois notebooks dans l'ordre et enregistre leurs résultats. Pour les parcourir à la main :
+## Vérifier sans télécharger le catalogue
 
-```powershell
-.\.venv\Scripts\python.exe -m jupyter lab
+```bash
+python -m pip install -r requirements-test.txt
+python -m unittest discover -s tests -v
+python scripts/verifier_livrables.py
 ```
 
-Choisir le noyau **Python (Goodreads)**, puis exécuter qualité → globale → approfondie. Les [données et exports](data/README.md) sont décrits séparément.
+Les tests couvrent : compteur négatif distinct du zéro, versions contradictoires, langue absente, édition représentante, égalités de classement, plafond auteur et recalcul des remplaçants. Les notebooks utilisent ces mêmes fonctions de [règles](scripts/regles_catalogue.py). Le contrôle des exports recalcule séparément les résultats sur tout le catalogue. GitHub Actions exécute les petits tests et les contrôles de fichiers, sans charger les sources complètes.
 
-## Ouvrir Power BI
+## Rapport Power BI
 
-Après génération des CSV, ouvrir [Goodreads.pbip](powerbi/Goodreads.pbip). Les deux dossiers voisins font partie du projet et doivent rester ensemble. Le rapport utilise un modèle à quatre tables, une relation à sens unique et **34 mesures DAX**. `Sensibilite` apporte les scénarios déjà calculés dans le notebook, indépendamment des filtres du catalogue.
+Le modèle contient **cinq tables et 34 mesures DAX**. `Langues` filtre `Livres` ; `AuditImport`, `Sensibilite` et `ComparaisonSelections` sont indépendantes. Ouvrir le PBIP avec ses deux dossiers voisins, renseigner `DossierDonnees` vers `data/processed`, puis actualiser.
 
-Sur un autre ordinateur, modifier le paramètre Power Query `DossierDonnees` vers le dossier `data/processed`, puis actualiser. Le chemin local de préparation est documenté dans le [guide](powerbi/LISEZ_MOI.txt).
+- **Catalogue :** KPI, langues et volumes de notations.
+- **Sélection :** comparaison des six listes, diversité et détail des 20 propositions plafonnées à deux par auteur.
+- **Qualité :** anomalies du périmètre filtré et bilan fixe de l’import.
 
-| Page | Usage |
-|---|---|
-| Comprendre le catalogue | Lire les KPI, les langues et les volumes de notes |
-| Sélection en français | Comparer les seuils de notations, examiner les auteurs et les 20 propositions |
-| Qualité des données | Lire les défauts du périmètre filtré et le bilan fixe de l'import |
+Les menus réduisent la liste proposée sans refaire son classement. La comparaison des six scénarios reste fixe, avec comme référence le seuil 100 de chaque règle. Les pages gardent leurs dimensions de 1 440 × 1 080 et les tableaux défilent à l’intérieur des visuels.
 
-Les filtres réduisent la liste proposée et son graphique d'auteurs sans recalculer le top 20. Les marqueurs de sélection sont calculés sur le catalogue complet. Le graphique des seuils reste sur le catalogue français complet : 3 002, 2 409 et 2 123 candidats pour au moins 100, 500 et 1 000 notations, à note ≥ 4. Les compteurs d'import restent fixes et les taux de qualité du catalogue suivent les filtres. Les tableaux gardent une hauteur fixe avec défilement interne et répartition automatique des colonnes dans leur largeur.
+**Vérification du 9 octobre :** trois notebooks réexécutés, exports rapprochés et règles testées. Les schémas, références et positions du rapport sont contrôlés. Les contrôles du moteur DAX du [3 octobre](powerbi/controle_storytelling.json) concernent la version précédente à quatre tables ; ils ne valent pas validation native de cette évolution. Le [bilan actuel](powerbi/controle_evolution.json) distingue ces périmètres.
 
-**Validation effectuée :** trois notebooks exécutés sans erreur ; rapprochement des exports ; contrôles des clés, des KPI et des critères ; 57 fichiers Power BI validés avec les schémas Microsoft ; références des champs et positions des visuels contrôlées. Le 3 octobre, les **quatre tables ont été actualisées dans une base de contrôle temporaire du moteur Power BI Desktop**, supprimée ensuite. Les 33 mesures du catalogue retrouvent Pandas dans six contextes, soit **198 comparaisons concordantes**. La nouvelle mesure de sensibilité retrouve les neuf scénarios et reste indépendante des filtres du catalogue ; la répartition des auteurs concorde avec la liste, avec et sans restriction aux fiches d'au moins 500 notations. Les [contrôles de cette version](powerbi/controle_storytelling.json) et les [contrôles initiaux du 1er octobre](powerbi/controle_resultats.json) sont conservés séparément.
+## Limites et suite métier
 
-**Validation visuelle à compléter :** les données et les calculs ont été contrôlés dans le moteur de Power BI Desktop ; le rendu des pages et leurs interactions restent à vérifier manuellement dans l'application. Le projet est fourni au format source PBIP sans cache de données versionné. Les images de ce README sont issues des notebooks.
+Le catalogue est une photographie de **2020**. Il manque les ventes, le stock, les prix et un historique daté des notations ; aucun genre n’est inventé. La langue est très incomplète et les éditions ne sont pas fusionnées pour annoncer des lecteurs uniques. Le plafond auteur ne garantit pas la diversité des séries ou des publics.
 
-## Limites et recommandation
+Après validation éditoriale et commerciale, un petit test de page pourrait suivre le taux de clic et le taux d’ajout au panier avec des règles de comptage fixées à l’avance. Aucun gain commercial n’est calculé dans cette étude.
 
-Cette photographie de 2020 n'est pas représentative du marché actuel. Il n'y a ni ventes, ni stock, ni prix, ni historique daté des notations dans les fichiers étudiés. Les genres ne sont pas fournis dans ce périmètre. Les compteurs d'éditions ne sont pas additionnés pour annoncer des lecteurs uniques.
-
-Je recommande une **relecture des 20 fiches**, une vérification dans le catalogue commercial, puis un petit test de mise en avant. La disponibilité et la diversité de la liste sont des garde-fous. Aucun gain commercial ni effet causal n'est revendiqué.
-
-## Organisation et versionnement
-
-```text
-Goodreads_ETL/
-├── subject.txt
-├── README.md
-├── main.py
-├── requirements.txt
-├── docs/                 # Cadrage, dictionnaire, qualité, analyse, figures
-├── notebooks/            # Trois notebooks exécutés
-├── scripts/              # Téléchargement et vérification des exports
-├── data/
-│   ├── sources.json      # Version, URLs, tailles et empreintes
-│   ├── raw/              # Fichiers source, exclus de Git
-│   └── processed/        # CSV régénérables, exclus de Git
-└── powerbi/              # PBIP, rapport PBIR, modèle et requêtes de contrôle
-```
-
-Les fichiers volumineux, les caches locaux Power BI et les environnements Python sont exclus de Git. Les résultats des notebooks, les documents et les définitions du rapport sont versionnés.
-
-### Évolution du projet
-
-Cette version prolonge le travail sur la qualité des données avec une étude métier complète sur les fichiers Kaggle : cadrage, analyse descriptive, sélection argumentée et restitution Power BI. Le [pipeline ETL précédent et sa démo synthétique](https://github.com/juleescourne/goodreads-analytics-etl/tree/8f0540dd420b14f6f3e97fa3f511692aa629c089) restent consultables dans l'historique, avec leurs tests et leur documentation. La démo interactive historique du portfolio utilise un jeu fictif distinct de cette analyse.
-
-## Source et licence
-
-Source : [Goodreads Book Datasets With User Rating 2M — Bahram Jannesar](https://www.kaggle.com/datasets/bahramjannesarr/goodreads-book-datasets-10m), version 18, mise à jour le 3 décembre 2020, téléchargée le 1er octobre 2026. Le titre et le slug de la page ne sont pas le décompte des lignes utilisées : les 23 fichiers de livres totalisent 1 850 310 lignes avant contrôle. Les sept fichiers `user_rating*.csv` sont hors périmètre.
-
-Kaggle déclare **CC0: Public Domain** pour ce dataset. Les fichiers bruts ne sont pas redistribués dans le dépôt. Le code du projet reste sous [licence MIT](LICENSE). Le [manifeste](data/sources.json) permet d'identifier précisément les fichiers analysés.
+Source : [Bahram Jannesar — Goodreads Book Datasets](https://www.kaggle.com/datasets/bahramjannesarr/goodreads-book-datasets-10m), version 18. Licence déclarée par Kaggle : CC0. Les fichiers bruts ne sont pas redistribués. Code sous [licence MIT](LICENSE).

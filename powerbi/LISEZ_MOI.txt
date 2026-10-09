@@ -1,116 +1,92 @@
 GOODREADS — RAPPORT POWER BI
+Évolution du 09/10/2026 : diversité et stabilité des propositions.
 
-1. PRÉPARER LES DONNÉES
+1. OUVRIR ET ACTUALISER
 
-Suivre le README à la racine : télécharger les 23 fichiers de livres, puis exécuter
-python main.py. Les CSV doivent se trouver dans data/processed.
+Ouvrir Goodreads.pbip avec Goodreads.Report et Goodreads.SemanticModel à côté.
+Après exécution des trois notebooks, renseigner le paramètre Power Query
+DossierDonnees vers le chemin absolu du dossier data/processed, puis actualiser.
+Fermer et rouvrir le PBIP pour charger les modifications des visuels sur disque.
+Conserver les modifications non enregistrées dans une copie avant de fermer.
 
-2. OUVRIR
+Le modèle importe cinq CSV : livres_powerbi.csv, langues.csv,
+controle_qualite.csv, sensibilite.csv et comparaison_selections.csv.
+Il contient cinq tables et 34 mesures. Langues filtre Livres à sens unique.
+AuditImport, Sensibilite et ComparaisonSelections restent indépendantes.
+CSV : séparateur ;, UTF-8 avec BOM, point décimal interprété en culture en-US.
 
-Ouvrir Goodreads.pbip avec Power BI Desktop récent, prenant en charge les projets
-PBIP et les définitions de rapport PBIR. Garder Goodreads.Report et
-Goodreads.SemanticModel à côté du fichier .pbip.
+2. LES TROIS PAGES
 
-Le paramètre Power Query DossierDonnees pointe actuellement vers :
-D:\formation\Goodreads_ETL\data\processed
+01 — Comprendre le catalogue : KPI, langues, notations, pagination et années.
+02 — Sélection en français : six listes recalculées, diversité de la proposition,
+puis détail des 20 fiches au seuil 100 avec maximum deux par libellé auteur.
+03 — Qualité : défauts du périmètre filtré et bilan fixe de l'import.
 
-Sur un autre ordinateur : Transformer les données > Gérer les paramètres,
-modifier DossierDonnees vers le dossier local data/processed, puis appliquer
-et actualiser. Il ne faut pas ouvrir directement les CSV dans Excel pour les
-réenregistrer : le modèle attend du UTF-8, des points décimaux et le séparateur ;.
+Dimensions conservées : 1 440 × 1 080. Les tableaux défilent dans leur visuel.
+La largeur des colonnes est répartie automatiquement (Grow to fit).
 
-Le projet ne contient pas de cache de données. La première actualisation est
-donc nécessaire. Le format source PBIP est fourni pour versionner le rapport.
+3. RÈGLES ET INTERACTIONS
 
-3. MODÈLE
+Candidature : français renseigné, note exploitable >= 4, >= 100 notations,
+auteur et éditeur renseignés, pagination entre 1 et 5 000 pages.
+Une représentante par clé titre/auteur : volume de notations, puis identifiant.
+Classement : note décroissante, volume décroissant, identifiant croissant.
+Proposition : au maximum deux fiches par libellé auteur normalisé, puis les 20
+premières. Le rang n'est renseigné que pour ces fiches. Les contributeurs ne
+sont pas séparés ; le plafond ne contrôle pas les séries ou les genres.
 
-Langues (1) ----> (*) Livres
-AuditImport : table séparée, sans relation.
-Sensibilite : table séparée, neuf couples de seuils, sans relation.
+Les menus réduisent la proposition sans recalculer le classement. Les clics
+sur les graphiques de la page de sélection ne filtrent pas ses autres visuels.
+Le tableau des six scénarios reste fixe, indépendant des menus du catalogue.
+« Communs / 20 » compare chaque scénario à 100 notations DE LA MÊME RÈGLE.
+Les marqueurs de la liste principale restent ceux de la variante à 100.
+Sensibilite conserve les neuf scénarios de candidature dans le modèle.
+Le bilan d'import reste fixe ; les taux de qualité du catalogue suivent les filtres.
 
-Livres : une fiche Goodreads par IdLivre. Ni une vente, ni une œuvre unique.
-Langues : filtre les fiches dans une seule direction.
-AuditImport : bilan fixe de l'import complet, insensible aux segments du rapport.
-33 mesures DAX sont regroupées dans Livres, plus une dans Sensibilite : 34 au total.
-Sensibilite importe sensibilite.csv, déjà produit par le notebook approfondi.
-Les scénarios sont calculés sur le français complet avant rapprochement titre/auteur.
-Les tranches du catalogue ont un ordre de tri.
-Pas de calendrier d'activité : l'année disponible est une année de publication.
+4. VALEURS DE CONTRÔLE SANS FILTRE
 
-4. PAGES
+Catalogue : 1 850 032 fiches ; 75,58 % de notes exploitables ; note moyenne 3,83 ;
+volume médian 5 ; langue absente 86,40 %. Français : 16 327 fiches.
+Candidats : 3 002 ; groupes titre/auteur : 2 716 ; proposition : 20 fiches.
+Proposition : 16 libellés auteur, maximum 2 fiches par libellé.
+Liste initiale : 12 libellés, maximum 6 ; 16 fiches communes avec la proposition.
+Note moyenne de liste : initiale 4,646 ; proposition 4,642 (arrondies).
 
-01 - Comprendre le catalogue : couverture, volumes de notes, langues et comparaisons.
-02 - Sélection en français : périmètre français fixé au niveau de la page,
-     candidats, représentants titre/auteur, sensibilité des seuils,
-     répartition des propositions par auteur et liste de travail.
-03 - Qualité : défauts du périmètre filtré, puis bilan de l'import complet.
+Tableau de stabilité (règle / seuil / communs / auteurs / maximum par auteur) :
+Initiale / 100 / 20 / 12 / 6
+Initiale / 500 / 15 / 10 / 9
+Initiale / 1000 / 15 / 10 / 9
+Deux par auteur / 100 / 20 / 16 / 2
+Deux par auteur / 500 / 15 / 16 / 2
+Deux par auteur / 1000 / 15 / 16 / 2
+Les seuils 500 et 1000 donnent les mêmes listes dans cette extraction.
 
-Sur la page 02, les segments ne recalculent pas la sélection. Ils peuvent afficher
-moins de 20 propositions. Effacer les sélections pour retrouver la liste complète.
-La liste évite les répétitions textuelles après normalisation ; elle ne garantit
-pas 20 œuvres uniques et demande une vérification éditoriale.
+Qualité : 451 777 fiches sans notation ; 328 paginations > 5 000.
+Import : 1 850 310 lignes brutes, 112 répétitions retirées, 166 lignes isolées.
+Un compteur manquant reste distinct du zéro : la mesure sans notation utilise
+== 0. Une moyenne reste vide dans un groupe sans note exploitable.
 
-Le graphique « Tester le seuil de notations » reste sur le catalogue français
-complet, avec note minimale 4 et métadonnées utilisables. Ses scénarios ne sont
-pas modifiés par les menus et ne sont pas un nouveau classement de vingt fiches.
-La mesure renvoie l'effectif du scénario, sans sommer les seuils cumulatifs.
-Le graphique des auteurs et le tableau suivent les menus. Sur cette page,
-les clics sur les graphiques et le tableau ne filtrent pas les autres visuels.
-Les tableaux ont une hauteur fixe, un défilement interne et le réglage Grow to fit
-pour répartir les colonnes dans la largeur disponible ; aucun élargissement manuel
-des colonnes n'est imposé dans les définitions.
+5. CONTRÔLES ET PÉRIMÈTRE
 
-5. VALEURS À RETROUVER SANS FILTRE
+Les trois notebooks ont été réexécutés le 9 octobre. Les contrôles des exports
+recalculent séparément les règles, les six listes, leurs métriques et mouvements.
+Dix petits tests vérifient les fonctions de nettoyage et de sélection.
+Les 57 fichiers concernés passent les schémas Microsoft ; références et positions
+sont contrôlées. Voir controle_evolution.json pour l'état de cette version.
 
-Catalogue : 1 850 032 fiches ; 75,58 % avec une note exploitable ; note moyenne
-3,83 ; médiane du nombre de notes 5 ; langue absente 86,40 %.
-Français : 16 327 fiches ; 3 002 candidats ; 2 716 représentants ; liste de 20.
-Seuil minimum de notations, à note >= 4 : 100 = 3 002 ; 500 = 2 409 ; 1 000 = 2 123.
-De 100 à 500 : 593 candidats de moins, soit 19,75 %. Cinq des 20 propositions
-initiales sont sous 500 notations ; cela ne calcule pas leurs remplaçantes.
-Auteurs de la liste sans filtre : 12 libellés ; Hiromu Arakawa = 6 fiches sur 20.
-Qualité : 451 777 fiches à zéro notation ; 328 paginations > 5 000.
-Import : 1 850 310 lignes brutes ; 112 répétitions retirées ; 166 lignes isolées.
+Les comparaisons du moteur DAX datées du 3 octobre (controle_storytelling.json)
+concernent la version précédente à quatre tables. Elles ne valident pas la
+nouvelle table, la nouvelle liste ni le rendu actuel dans Desktop.
+Après actualisation, comparer les valeurs ci-dessus, parcourir les 20 fiches,
+vérifier les titres longs et effacer les filtres. La comparaison des scénarios
+et le bilan d'import doivent rester fixes ; la liste et ses auteurs suivent les menus.
+Les requêtes DAX de contrôle sont dans Goodreads.SemanticModel/DAXQueries/Controle.dax.
 
-Attention : un compteur manquant reste distinct du zéro. La mesure sans notation
-utilise == 0 en DAX, car = 0 ferait aussi correspondre BLANK. Les notes moyennes
-et médianes restent vides dans un groupe sans note exploitable.
+6. CONSULTER LES RÉSULTATS
 
-Le fichier Goodreads.SemanticModel/DAXQueries/Controle.dax fournit les requêtes
-à exécuter dans la vue Requête DAX après actualisation, une par une si nécessaire.
-Les taux DAX sont des fractions formatées en pourcentage ; controle_kpi.csv les
-exprime déjà en pourcentage.
-
-6. VÉRIFICATIONS ET LIMITE ACTUELLE
-
-Réalisé : notebooks exécutés, rapprochement des CSV et recalcul des neuf scénarios,
-validation de 57 fichiers avec les schémas JSON Microsoft, références des champs
-et positions contrôlées. Le 3 octobre, les quatre tables ont été actualisées sans
-erreur dans une base temporaire du moteur local Power BI Desktop, supprimée ensuite.
-Les 33 mesures du catalogue ont été comparées à Pandas dans six contextes :
-catalogue, français, anglais, zéro notation, compteur absent et périmètre vide.
-Les 198 comparaisons concordent. La nouvelle mesure retrouve les neuf scénarios
-et reste indépendante des filtres du catalogue. Les auteurs retrouvent la liste,
-sans filtre et avec une restriction à au moins 500 notations.
-Le détail est conservé dans controle_storytelling.json. controle_resultats.json
-conserve séparément les contrôles de la première version, du 1er octobre.
-
-À terminer dans Desktop : contrôle visuel des trois pages, notamment des deux
-tableaux et de leurs interactions. Le composant de pilotage de l'application
-Windows était indisponible : les vérifications ont porté sur le moteur local,
-pas sur l'affichage. Les images du README proviennent des notebooks.
-
-Après ouverture : vérifier chaque page sans filtre, sélectionner Français puis
-une tranche de notes, effacer les sélections et confirmer que le bilan d'import
-reste identique. Sur le groupe « 0 note », la moyenne des notes doit rester vide.
-Sur la page française, vérifier les rangs, les titres longs et le défilement de
-la liste. Vérifier que les menus modifient la liste et ses auteurs, mais pas les
-trois barres des scénarios. Les clics sur les graphiques ne doivent pas filtrer
-les autres visuels de la page. Enregistrer le projet après actualisation.
-
-7. SCRIPT VIDÉO
-
-../docs/Script_video.txt suit le cadrage puis les trois pages, en 6 à 7 minutes.
-Le fil est : question, choix des KPI, résultats, décision à préparer, transition.
-Les consignes À L'ÉCRAN sont séparées du texte À DIRE. Réinitialiser les menus
-avant la capture et conserver le filtre de page Français.
+../docs/livrables/Goodreads_synthese.pdf : synthèse de quatre pages issue de Python.
+../docs/livrables/listes_scenarios.csv : les six listes, titres et ISBN complets.
+../docs/livrables/mouvements_selections.csv : entrées et sorties au regard du seuil 100.
+../docs/Relecture_selection.md : points éditoriaux à valider.
+https://juleescourne.github.io/portfolio-data-analyst/#/goodreads
+Le PDF et les figures analytiques sont issus des exports Python.

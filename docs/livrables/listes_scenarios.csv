@@ -1,0 +1,121 @@
+﻿RangSelection;IdLivre;Titre;Auteurs;Editeur;Note;NbNotes;Pages;ISBN;TitreAuteurRepete;Scenario;Regle;NotesMinimum
+1;788176;Mafalda, l'intégrale;Quino;Éditions Glénat;4.76;7749.0;575.0;2723429628;False;Initiale · 100;Initiale;100
+2;2014000;Le Monogramme;Odysseus Elytis;Fata Morgana;4.75;1713.0;40.0;2851944371;False;Initiale · 100;Initiale;100
+3;2752314;On est fait comme des rats!;Bill Watterson;Pocket B.D.;4.71;11823.0;126.0;2266061240;False;Initiale · 100;Initiale;100
+4;1602249;La Citadelle des Ombres, Tome 4 (L'Assassin Royal, #10-13);Robin Hobb;Pygmalion;4.68;104.0;1144.0;2756400963;False;Initiale · 100;Initiale;100
+5;380445;Harry Potter: Harry Potter à L'Ecole Des Sorciers / Harry Potter Et La Chambre Des Secrets / Harry Potter Et Le Prisonnaire D'Azkaban / Harry Potter et la Coupe de Feu (Harry Potter, #1-4);J.K. Rowling;Gallimard Jeunesse;4.67;50923.0;1899.0;2070549720;False;Initiale · 100;Initiale;100
+6;1024280;Calvin et Hobbes 17: La Flemme du dimanche soir;Bill Watterson;Hors Collection;4.67;20072.0;127.0;2258047781;False;Initiale · 100;Initiale;100
+7;4610292;Ellana, l'Envol (Le Pacte des MarchOmbres, #2);Pierre Bottero;Rageot;4.67;2176.0;449.0;2700234014;False;Initiale · 100;Initiale;100
+8;4356161;Ballade pour Georg Henig;Viktor Paskov;Rivages;4.66;1758.0;176.0;2869304137;False;Initiale · 100;Initiale;100
+9;2473593;Les paroles cachées;Bahá'u'lláh;Altess;4.63;446.0;62.0;290521998X;False;Initiale · 100;Initiale;100
+10;2554495;Le Désir D'être Inutile: Souvenirs Et Réflexions (Collection Vécu);Hugo Pratt;Robert Laffont;4.63;104.0;280.0;2221066456;False;Initiale · 100;Initiale;100
+11;3671054;Harry Potter et les Reliques de la Mort (Harry Potter, #7);J.K. Rowling;Gallimard Jeunesse;4.62;2795851.0;881.0;2070615375;True;Initiale · 100;Initiale;100
+12;1357863;Fullmetal Alchemist, Tome 13 (Fullmetal Alchemist, #13);Hiromu Arakawa;Kurokawa;4.62;8261.0;192.0;2351421574;False;Initiale · 100;Initiale;100
+13;1357876;Fullmetal Alchemist, Tome 10 (Fullmetal Alchemist, #10);Hiromu Arakawa;Kurokawa;4.61;9526.0;192.0;2351421477;False;Initiale · 100;Initiale;100
+14;2885737;Fullmetal Alchemist, Tome 15 (Fullmetal Alchemist, #15);Hiromu Arakawa;Kurokawa;4.61;7437.0;192.0;2351421590;False;Initiale · 100;Initiale;100
+15;4794128;Fullmetal Alchemist, Tome 18 (Fullmetal Alchemist, #18);Hiromu Arakawa;Kurokawa;4.61;6620.0;192.0;2351423259;False;Initiale · 100;Initiale;100
+16;330602;Le Cours de physique de Feynman: mécanique 1;Richard P. Feynman;Dunod;4.61;1350.0;342.0;2100045040;False;Initiale · 100;Initiale;100
+17;1263543;En Guerre et en Paix, journal 1940-1944;Andrzej Bobkowski;Noir sur blanc;4.61;154.0;613.0;2882500238;False;Initiale · 100;Initiale;100
+18;1597015;La Citadelle des Ombres. Tome 3 (L'Assassin Royal, #7-9);Robin Hobb;Pygmalion;4.61;135.0;1035.0;2857049943;False;Initiale · 100;Initiale;100
+19;1357862;Fullmetal Alchemist, Tome 12 (Fullmetal Alchemist, #12);Hiromu Arakawa;Kurokawa;4.6;7883.0;192.0;2351421566;False;Initiale · 100;Initiale;100
+20;1357875;Fullmetal Alchemist, Tome 14 (Fullmetal Alchemist, #14);Hiromu Arakawa;Kurokawa;4.59;9053.0;192.0;2351421582;False;Initiale · 100;Initiale;100
+1;788176;Mafalda, l'intégrale;Quino;Éditions Glénat;4.76;7749.0;575.0;2723429628;False;Initiale · 500;Initiale;500
+2;2014000;Le Monogramme;Odysseus Elytis;Fata Morgana;4.75;1713.0;40.0;2851944371;False;Initiale · 500;Initiale;500
+3;2752314;On est fait comme des rats!;Bill Watterson;Pocket B.D.;4.71;11823.0;126.0;2266061240;False;Initiale · 500;Initiale;500
+4;380445;Harry Potter: Harry Potter à L'Ecole Des Sorciers / Harry Potter Et La Chambre Des Secrets / Harry Potter Et Le Prisonnaire D'Azkaban / Harry Potter et la Coupe de Feu (Harry Potter, #1-4);J.K. Rowling;Gallimard Jeunesse;4.67;50923.0;1899.0;2070549720;False;Initiale · 500;Initiale;500
+5;1024280;Calvin et Hobbes 17: La Flemme du dimanche soir;Bill Watterson;Hors Collection;4.67;20072.0;127.0;2258047781;False;Initiale · 500;Initiale;500
+6;4610292;Ellana, l'Envol (Le Pacte des MarchOmbres, #2);Pierre Bottero;Rageot;4.67;2176.0;449.0;2700234014;False;Initiale · 500;Initiale;500
+7;4356161;Ballade pour Georg Henig;Viktor Paskov;Rivages;4.66;1758.0;176.0;2869304137;False;Initiale · 500;Initiale;500
+8;3671054;Harry Potter et les Reliques de la Mort (Harry Potter, #7);J.K. Rowling;Gallimard Jeunesse;4.62;2795851.0;881.0;2070615375;True;Initiale · 500;Initiale;500
+9;1357863;Fullmetal Alchemist, Tome 13 (Fullmetal Alchemist, #13);Hiromu Arakawa;Kurokawa;4.62;8261.0;192.0;2351421574;False;Initiale · 500;Initiale;500
+10;1357876;Fullmetal Alchemist, Tome 10 (Fullmetal Alchemist, #10);Hiromu Arakawa;Kurokawa;4.61;9526.0;192.0;2351421477;False;Initiale · 500;Initiale;500
+11;2885737;Fullmetal Alchemist, Tome 15 (Fullmetal Alchemist, #15);Hiromu Arakawa;Kurokawa;4.61;7437.0;192.0;2351421590;False;Initiale · 500;Initiale;500
+12;4794128;Fullmetal Alchemist, Tome 18 (Fullmetal Alchemist, #18);Hiromu Arakawa;Kurokawa;4.61;6620.0;192.0;2351423259;False;Initiale · 500;Initiale;500
+13;330602;Le Cours de physique de Feynman: mécanique 1;Richard P. Feynman;Dunod;4.61;1350.0;342.0;2100045040;False;Initiale · 500;Initiale;500
+14;1357862;Fullmetal Alchemist, Tome 12 (Fullmetal Alchemist, #12);Hiromu Arakawa;Kurokawa;4.6;7883.0;192.0;2351421566;False;Initiale · 500;Initiale;500
+15;1357875;Fullmetal Alchemist, Tome 14 (Fullmetal Alchemist, #14);Hiromu Arakawa;Kurokawa;4.59;9053.0;192.0;2351421582;False;Initiale · 500;Initiale;500
+16;1357864;Fullmetal Alchemist, Tome 11 (Fullmetal Alchemist, #11);Hiromu Arakawa;Kurokawa;4.59;8069.0;192.0;2351421515;False;Initiale · 500;Initiale;500
+17;4794129;Fullmetal Alchemist, Tome 17 (Fullmetal Alchemist, #17);Hiromu Arakawa;Kurokawa;4.59;6898.0;192.0;2351423186;False;Initiale · 500;Initiale;500
+18;23734;Nausicaä De La Vallée Du Vent, Tome 4;Hayao Miyazaki;Glénat;4.59;2292.0;144.0;2723433927;False;Initiale · 500;Initiale;500
+19;2241736;Le Grand Cirque 2000: Mémoires d'un pilote de chasse FFL dans la R.A.F. (Nouvelle Édition Illustrée);Pierre Clostermann;Éditions J'ai Lu;4.59;1782.0;665.0;2290324302;False;Initiale · 500;Initiale;500
+20;2270627;Fullmetal Alchemist, Tome 06 (Fullmetal Alchemist, #6);Hiromu Arakawa;Kurokawa;4.58;10730.0;192.0;2351420462;False;Initiale · 500;Initiale;500
+1;788176;Mafalda, l'intégrale;Quino;Éditions Glénat;4.76;7749.0;575.0;2723429628;False;Initiale · 1000;Initiale;1000
+2;2014000;Le Monogramme;Odysseus Elytis;Fata Morgana;4.75;1713.0;40.0;2851944371;False;Initiale · 1000;Initiale;1000
+3;2752314;On est fait comme des rats!;Bill Watterson;Pocket B.D.;4.71;11823.0;126.0;2266061240;False;Initiale · 1000;Initiale;1000
+4;380445;Harry Potter: Harry Potter à L'Ecole Des Sorciers / Harry Potter Et La Chambre Des Secrets / Harry Potter Et Le Prisonnaire D'Azkaban / Harry Potter et la Coupe de Feu (Harry Potter, #1-4);J.K. Rowling;Gallimard Jeunesse;4.67;50923.0;1899.0;2070549720;False;Initiale · 1000;Initiale;1000
+5;1024280;Calvin et Hobbes 17: La Flemme du dimanche soir;Bill Watterson;Hors Collection;4.67;20072.0;127.0;2258047781;False;Initiale · 1000;Initiale;1000
+6;4610292;Ellana, l'Envol (Le Pacte des MarchOmbres, #2);Pierre Bottero;Rageot;4.67;2176.0;449.0;2700234014;False;Initiale · 1000;Initiale;1000
+7;4356161;Ballade pour Georg Henig;Viktor Paskov;Rivages;4.66;1758.0;176.0;2869304137;False;Initiale · 1000;Initiale;1000
+8;3671054;Harry Potter et les Reliques de la Mort (Harry Potter, #7);J.K. Rowling;Gallimard Jeunesse;4.62;2795851.0;881.0;2070615375;True;Initiale · 1000;Initiale;1000
+9;1357863;Fullmetal Alchemist, Tome 13 (Fullmetal Alchemist, #13);Hiromu Arakawa;Kurokawa;4.62;8261.0;192.0;2351421574;False;Initiale · 1000;Initiale;1000
+10;1357876;Fullmetal Alchemist, Tome 10 (Fullmetal Alchemist, #10);Hiromu Arakawa;Kurokawa;4.61;9526.0;192.0;2351421477;False;Initiale · 1000;Initiale;1000
+11;2885737;Fullmetal Alchemist, Tome 15 (Fullmetal Alchemist, #15);Hiromu Arakawa;Kurokawa;4.61;7437.0;192.0;2351421590;False;Initiale · 1000;Initiale;1000
+12;4794128;Fullmetal Alchemist, Tome 18 (Fullmetal Alchemist, #18);Hiromu Arakawa;Kurokawa;4.61;6620.0;192.0;2351423259;False;Initiale · 1000;Initiale;1000
+13;330602;Le Cours de physique de Feynman: mécanique 1;Richard P. Feynman;Dunod;4.61;1350.0;342.0;2100045040;False;Initiale · 1000;Initiale;1000
+14;1357862;Fullmetal Alchemist, Tome 12 (Fullmetal Alchemist, #12);Hiromu Arakawa;Kurokawa;4.6;7883.0;192.0;2351421566;False;Initiale · 1000;Initiale;1000
+15;1357875;Fullmetal Alchemist, Tome 14 (Fullmetal Alchemist, #14);Hiromu Arakawa;Kurokawa;4.59;9053.0;192.0;2351421582;False;Initiale · 1000;Initiale;1000
+16;1357864;Fullmetal Alchemist, Tome 11 (Fullmetal Alchemist, #11);Hiromu Arakawa;Kurokawa;4.59;8069.0;192.0;2351421515;False;Initiale · 1000;Initiale;1000
+17;4794129;Fullmetal Alchemist, Tome 17 (Fullmetal Alchemist, #17);Hiromu Arakawa;Kurokawa;4.59;6898.0;192.0;2351423186;False;Initiale · 1000;Initiale;1000
+18;23734;Nausicaä De La Vallée Du Vent, Tome 4;Hayao Miyazaki;Glénat;4.59;2292.0;144.0;2723433927;False;Initiale · 1000;Initiale;1000
+19;2241736;Le Grand Cirque 2000: Mémoires d'un pilote de chasse FFL dans la R.A.F. (Nouvelle Édition Illustrée);Pierre Clostermann;Éditions J'ai Lu;4.59;1782.0;665.0;2290324302;False;Initiale · 1000;Initiale;1000
+20;2270627;Fullmetal Alchemist, Tome 06 (Fullmetal Alchemist, #6);Hiromu Arakawa;Kurokawa;4.58;10730.0;192.0;2351420462;False;Initiale · 1000;Initiale;1000
+1;788176;Mafalda, l'intégrale;Quino;Éditions Glénat;4.76;7749.0;575.0;2723429628;False;Deux par auteur · 100;Deux par auteur;100
+2;2014000;Le Monogramme;Odysseus Elytis;Fata Morgana;4.75;1713.0;40.0;2851944371;False;Deux par auteur · 100;Deux par auteur;100
+3;2752314;On est fait comme des rats!;Bill Watterson;Pocket B.D.;4.71;11823.0;126.0;2266061240;False;Deux par auteur · 100;Deux par auteur;100
+4;1602249;La Citadelle des Ombres, Tome 4 (L'Assassin Royal, #10-13);Robin Hobb;Pygmalion;4.68;104.0;1144.0;2756400963;False;Deux par auteur · 100;Deux par auteur;100
+5;380445;Harry Potter: Harry Potter à L'Ecole Des Sorciers / Harry Potter Et La Chambre Des Secrets / Harry Potter Et Le Prisonnaire D'Azkaban / Harry Potter et la Coupe de Feu (Harry Potter, #1-4);J.K. Rowling;Gallimard Jeunesse;4.67;50923.0;1899.0;2070549720;False;Deux par auteur · 100;Deux par auteur;100
+6;1024280;Calvin et Hobbes 17: La Flemme du dimanche soir;Bill Watterson;Hors Collection;4.67;20072.0;127.0;2258047781;False;Deux par auteur · 100;Deux par auteur;100
+7;4610292;Ellana, l'Envol (Le Pacte des MarchOmbres, #2);Pierre Bottero;Rageot;4.67;2176.0;449.0;2700234014;False;Deux par auteur · 100;Deux par auteur;100
+8;4356161;Ballade pour Georg Henig;Viktor Paskov;Rivages;4.66;1758.0;176.0;2869304137;False;Deux par auteur · 100;Deux par auteur;100
+9;2473593;Les paroles cachées;Bahá'u'lláh;Altess;4.63;446.0;62.0;290521998X;False;Deux par auteur · 100;Deux par auteur;100
+10;2554495;Le Désir D'être Inutile: Souvenirs Et Réflexions (Collection Vécu);Hugo Pratt;Robert Laffont;4.63;104.0;280.0;2221066456;False;Deux par auteur · 100;Deux par auteur;100
+11;3671054;Harry Potter et les Reliques de la Mort (Harry Potter, #7);J.K. Rowling;Gallimard Jeunesse;4.62;2795851.0;881.0;2070615375;True;Deux par auteur · 100;Deux par auteur;100
+12;1357863;Fullmetal Alchemist, Tome 13 (Fullmetal Alchemist, #13);Hiromu Arakawa;Kurokawa;4.62;8261.0;192.0;2351421574;False;Deux par auteur · 100;Deux par auteur;100
+13;1357876;Fullmetal Alchemist, Tome 10 (Fullmetal Alchemist, #10);Hiromu Arakawa;Kurokawa;4.61;9526.0;192.0;2351421477;False;Deux par auteur · 100;Deux par auteur;100
+14;330602;Le Cours de physique de Feynman: mécanique 1;Richard P. Feynman;Dunod;4.61;1350.0;342.0;2100045040;False;Deux par auteur · 100;Deux par auteur;100
+15;1263543;En Guerre et en Paix, journal 1940-1944;Andrzej Bobkowski;Noir sur blanc;4.61;154.0;613.0;2882500238;False;Deux par auteur · 100;Deux par auteur;100
+16;1597015;La Citadelle des Ombres. Tome 3 (L'Assassin Royal, #7-9);Robin Hobb;Pygmalion;4.61;135.0;1035.0;2857049943;False;Deux par auteur · 100;Deux par auteur;100
+17;23734;Nausicaä De La Vallée Du Vent, Tome 4;Hayao Miyazaki;Glénat;4.59;2292.0;144.0;2723433927;False;Deux par auteur · 100;Deux par auteur;100
+18;2241736;Le Grand Cirque 2000: Mémoires d'un pilote de chasse FFL dans la R.A.F. (Nouvelle Édition Illustrée);Pierre Clostermann;Éditions J'ai Lu;4.59;1782.0;665.0;2290324302;False;Deux par auteur · 100;Deux par auteur;100
+19;155741;La ligne verte, 6e épisode: Caffey sur la ligne;Stephen King;J'ai lu;4.57;14917.0;92.0;2290314161;False;Deux par auteur · 100;Deux par auteur;100
+20;2261583;Fruits Basket, Vol. 23;Natsuki Takaya;Delcourt;4.57;10983.0;194.0;2756008621;False;Deux par auteur · 100;Deux par auteur;100
+1;788176;Mafalda, l'intégrale;Quino;Éditions Glénat;4.76;7749.0;575.0;2723429628;False;Deux par auteur · 500;Deux par auteur;500
+2;2014000;Le Monogramme;Odysseus Elytis;Fata Morgana;4.75;1713.0;40.0;2851944371;False;Deux par auteur · 500;Deux par auteur;500
+3;2752314;On est fait comme des rats!;Bill Watterson;Pocket B.D.;4.71;11823.0;126.0;2266061240;False;Deux par auteur · 500;Deux par auteur;500
+4;380445;Harry Potter: Harry Potter à L'Ecole Des Sorciers / Harry Potter Et La Chambre Des Secrets / Harry Potter Et Le Prisonnaire D'Azkaban / Harry Potter et la Coupe de Feu (Harry Potter, #1-4);J.K. Rowling;Gallimard Jeunesse;4.67;50923.0;1899.0;2070549720;False;Deux par auteur · 500;Deux par auteur;500
+5;1024280;Calvin et Hobbes 17: La Flemme du dimanche soir;Bill Watterson;Hors Collection;4.67;20072.0;127.0;2258047781;False;Deux par auteur · 500;Deux par auteur;500
+6;4610292;Ellana, l'Envol (Le Pacte des MarchOmbres, #2);Pierre Bottero;Rageot;4.67;2176.0;449.0;2700234014;False;Deux par auteur · 500;Deux par auteur;500
+7;4356161;Ballade pour Georg Henig;Viktor Paskov;Rivages;4.66;1758.0;176.0;2869304137;False;Deux par auteur · 500;Deux par auteur;500
+8;3671054;Harry Potter et les Reliques de la Mort (Harry Potter, #7);J.K. Rowling;Gallimard Jeunesse;4.62;2795851.0;881.0;2070615375;True;Deux par auteur · 500;Deux par auteur;500
+9;1357863;Fullmetal Alchemist, Tome 13 (Fullmetal Alchemist, #13);Hiromu Arakawa;Kurokawa;4.62;8261.0;192.0;2351421574;False;Deux par auteur · 500;Deux par auteur;500
+10;1357876;Fullmetal Alchemist, Tome 10 (Fullmetal Alchemist, #10);Hiromu Arakawa;Kurokawa;4.61;9526.0;192.0;2351421477;False;Deux par auteur · 500;Deux par auteur;500
+11;330602;Le Cours de physique de Feynman: mécanique 1;Richard P. Feynman;Dunod;4.61;1350.0;342.0;2100045040;False;Deux par auteur · 500;Deux par auteur;500
+12;23734;Nausicaä De La Vallée Du Vent, Tome 4;Hayao Miyazaki;Glénat;4.59;2292.0;144.0;2723433927;False;Deux par auteur · 500;Deux par auteur;500
+13;2241736;Le Grand Cirque 2000: Mémoires d'un pilote de chasse FFL dans la R.A.F. (Nouvelle Édition Illustrée);Pierre Clostermann;Éditions J'ai Lu;4.59;1782.0;665.0;2290324302;False;Deux par auteur · 500;Deux par auteur;500
+14;155741;La ligne verte, 6e épisode: Caffey sur la ligne;Stephen King;J'ai lu;4.57;14917.0;92.0;2290314161;False;Deux par auteur · 500;Deux par auteur;500
+15;2261583;Fruits Basket, Vol. 23;Natsuki Takaya;Delcourt;4.57;10983.0;194.0;2756008621;False;Deux par auteur · 500;Deux par auteur;500
+16;4542238;Yotsuba, tome 5 (Yotsuba&! #5);Kiyohiko Azuma;Kurokawa;4.57;3743.0;204.0;2351421531;False;Deux par auteur · 500;Deux par auteur;500
+17;315242;Oeuvres Complètes De Fernando Pessoa, Tome 3:  Poésies Et Proses De Alvaro De Campos;Fernando Pessoa;La Différence;4.57;1635.0;244.0;2729103376;False;Deux par auteur · 500;Deux par auteur;500
+18;1663723;"Maus : Mon père saigne l'histoire ; Et c'est là que mes ennuis ont: commencé (Coffret 2 volumes)";Art Spiegelman;Flammarion;4.5600000000000005;130506.0;295.0;2080666770;False;Deux par auteur · 500;Deux par auteur;500
+19;165018;Diadorim;João Guimarães Rosa;A. Michel: 10/18;4.5600000000000005;3379.0;627.0;2264021403;True;Deux par auteur · 500;Deux par auteur;500
+20;2312550;Yotsuba, tome 6 (Yotsuba&! #6);Kiyohiko Azuma;Kurokawa;4.5600000000000005;3308.0;196.0;2351422104;False;Deux par auteur · 500;Deux par auteur;500
+1;788176;Mafalda, l'intégrale;Quino;Éditions Glénat;4.76;7749.0;575.0;2723429628;False;Deux par auteur · 1000;Deux par auteur;1000
+2;2014000;Le Monogramme;Odysseus Elytis;Fata Morgana;4.75;1713.0;40.0;2851944371;False;Deux par auteur · 1000;Deux par auteur;1000
+3;2752314;On est fait comme des rats!;Bill Watterson;Pocket B.D.;4.71;11823.0;126.0;2266061240;False;Deux par auteur · 1000;Deux par auteur;1000
+4;380445;Harry Potter: Harry Potter à L'Ecole Des Sorciers / Harry Potter Et La Chambre Des Secrets / Harry Potter Et Le Prisonnaire D'Azkaban / Harry Potter et la Coupe de Feu (Harry Potter, #1-4);J.K. Rowling;Gallimard Jeunesse;4.67;50923.0;1899.0;2070549720;False;Deux par auteur · 1000;Deux par auteur;1000
+5;1024280;Calvin et Hobbes 17: La Flemme du dimanche soir;Bill Watterson;Hors Collection;4.67;20072.0;127.0;2258047781;False;Deux par auteur · 1000;Deux par auteur;1000
+6;4610292;Ellana, l'Envol (Le Pacte des MarchOmbres, #2);Pierre Bottero;Rageot;4.67;2176.0;449.0;2700234014;False;Deux par auteur · 1000;Deux par auteur;1000
+7;4356161;Ballade pour Georg Henig;Viktor Paskov;Rivages;4.66;1758.0;176.0;2869304137;False;Deux par auteur · 1000;Deux par auteur;1000
+8;3671054;Harry Potter et les Reliques de la Mort (Harry Potter, #7);J.K. Rowling;Gallimard Jeunesse;4.62;2795851.0;881.0;2070615375;True;Deux par auteur · 1000;Deux par auteur;1000
+9;1357863;Fullmetal Alchemist, Tome 13 (Fullmetal Alchemist, #13);Hiromu Arakawa;Kurokawa;4.62;8261.0;192.0;2351421574;False;Deux par auteur · 1000;Deux par auteur;1000
+10;1357876;Fullmetal Alchemist, Tome 10 (Fullmetal Alchemist, #10);Hiromu Arakawa;Kurokawa;4.61;9526.0;192.0;2351421477;False;Deux par auteur · 1000;Deux par auteur;1000
+11;330602;Le Cours de physique de Feynman: mécanique 1;Richard P. Feynman;Dunod;4.61;1350.0;342.0;2100045040;False;Deux par auteur · 1000;Deux par auteur;1000
+12;23734;Nausicaä De La Vallée Du Vent, Tome 4;Hayao Miyazaki;Glénat;4.59;2292.0;144.0;2723433927;False;Deux par auteur · 1000;Deux par auteur;1000
+13;2241736;Le Grand Cirque 2000: Mémoires d'un pilote de chasse FFL dans la R.A.F. (Nouvelle Édition Illustrée);Pierre Clostermann;Éditions J'ai Lu;4.59;1782.0;665.0;2290324302;False;Deux par auteur · 1000;Deux par auteur;1000
+14;155741;La ligne verte, 6e épisode: Caffey sur la ligne;Stephen King;J'ai lu;4.57;14917.0;92.0;2290314161;False;Deux par auteur · 1000;Deux par auteur;1000
+15;2261583;Fruits Basket, Vol. 23;Natsuki Takaya;Delcourt;4.57;10983.0;194.0;2756008621;False;Deux par auteur · 1000;Deux par auteur;1000
+16;4542238;Yotsuba, tome 5 (Yotsuba&! #5);Kiyohiko Azuma;Kurokawa;4.57;3743.0;204.0;2351421531;False;Deux par auteur · 1000;Deux par auteur;1000
+17;315242;Oeuvres Complètes De Fernando Pessoa, Tome 3:  Poésies Et Proses De Alvaro De Campos;Fernando Pessoa;La Différence;4.57;1635.0;244.0;2729103376;False;Deux par auteur · 1000;Deux par auteur;1000
+18;1663723;"Maus : Mon père saigne l'histoire ; Et c'est là que mes ennuis ont: commencé (Coffret 2 volumes)";Art Spiegelman;Flammarion;4.5600000000000005;130506.0;295.0;2080666770;False;Deux par auteur · 1000;Deux par auteur;1000
+19;165018;Diadorim;João Guimarães Rosa;A. Michel: 10/18;4.5600000000000005;3379.0;627.0;2264021403;True;Deux par auteur · 1000;Deux par auteur;1000
+20;2312550;Yotsuba, tome 6 (Yotsuba&! #6);Kiyohiko Azuma;Kurokawa;4.5600000000000005;3308.0;196.0;2351422104;False;Deux par auteur · 1000;Deux par auteur;1000

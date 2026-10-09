@@ -63,7 +63,9 @@ candidats['Cle'] = (
     + ' | ' + candidats['Auteurs'].str.casefold().str.replace(r'\s+', ' ', regex=True).str.strip()
 )
 representants = candidats.sort_values(['NbNotes', 'IdLivre'], ascending=[False, True]).drop_duplicates('Cle')
-attendus = representants.sort_values(['Note', 'NbNotes', 'IdLivre'], ascending=[False, False, True]).head(20)
+classes = representants.sort_values(['Note', 'NbNotes', 'IdLivre'], ascending=[False, False, True])
+auteurs = classes['Auteurs'].str.casefold().str.replace(r'\s+', ' ', regex=True).str.strip()
+attendus = classes.loc[classes.groupby(auteurs).cumcount().lt(2)].head(20)
 assert set(livres.loc[livres['RepresentantSelection'], 'IdLivre']) == set(representants['IdLivre'])
 assert selection['IdLivre'].tolist() == attendus['IdLivre'].tolist()
 assert selection['IdLivre'].tolist() == livres.loc[livres['DansTop20']].sort_values('RangSelection')['IdLivre'].tolist()
@@ -90,10 +92,45 @@ for scenario in sensibilite.itertuples(index=False):
     assert len(groupe) == scenario.NbFiches
     assert groupe['Cle'].nunique() == scenario.NbTitresAuteurs
 
+# Comparer chaque liste recalculée et ses mouvements à la référence de la même règle.
+comparaison = pd.read_csv(dossier / 'comparaison_selections.csv', sep=';')
+listes = pd.read_csv(dossier / 'listes_scenarios.csv', sep=';')
+mouvements = pd.read_csv(dossier / 'mouvements_selections.csv', sep=';')
+assert len(comparaison) == 6 and comparaison['Scenario'].is_unique
+assert len(listes) == 120
+for ligne in comparaison.itertuples(index=False):
+    groupe = base_francais.loc[base_francais['Note'].ge(4) & base_francais['NbNotes'].ge(ligne.NotesMinimum)]
+    candidats_groupes = groupe.sort_values(['NbNotes', 'IdLivre'], ascending=[False, True]).drop_duplicates('Cle')
+    classes = candidats_groupes.sort_values(['Note', 'NbNotes', 'IdLivre'], ascending=[False, False, True])
+    if ligne.Regle == 'Deux par auteur':
+        auteurs = classes['Auteurs'].str.casefold().str.replace(r'\s+', ' ', regex=True).str.strip()
+        classes = classes.loc[classes.groupby(auteurs).cumcount().lt(2)]
+    attendu = classes.head(20)
+    obtenu = listes.loc[listes['Scenario'].eq(ligne.Scenario)].sort_values('RangSelection')
+    assert obtenu['IdLivre'].tolist() == attendu['IdLivre'].tolist()
+    assert len(groupe) == ligne.NbCandidats and len(candidats_groupes) == ligne.NbRepresentants
+    assert len(obtenu) == ligne.NbFiches == 20
+    assert obtenu['Auteurs'].nunique() == ligne.NbAuteurs
+    assert obtenu['Auteurs'].value_counts().max() == ligne.MaxParAuteur
+    assert math.isclose(obtenu['Note'].mean(), ligne.NoteMoyenne, abs_tol=1e-10)
+    assert obtenu['Note'].min() == ligne.NoteMinimum
+    reference = listes.loc[listes['Regle'].eq(ligne.Regle) & listes['NotesMinimum'].eq(100)]
+    ids, ids_ref = set(obtenu['IdLivre']), set(reference['IdLivre'])
+    assert len(ids & ids_ref) == ligne.NbCommunsReference
+    assert len(ids - ids_ref) == ligne.NbEntrees and len(ids_ref - ids) == ligne.NbSorties
+    for mouvement, attendus in [('Entrée', ids - ids_ref), ('Sortie', ids_ref - ids)]:
+        observes = mouvements.loc[mouvements['Scenario'].eq(ligne.Scenario) & mouvements['Mouvement'].eq(mouvement)]
+        assert set(observes['IdLivre']) == attendus
+    initiale = listes.loc[listes['Regle'].eq('Initiale') & listes['NotesMinimum'].eq(100)]
+    assert len(ids & set(initiale['IdLivre'])) == ligne.CommunsInitiale100
+assert selection['Auteurs'].value_counts().max() <= 2
+assert livres.loc[~livres['DansTop20'], 'RangSelection'].isna().all()
+
 # Le modèle doit lire les mêmes colonnes que les CSV et trier chaque tranche sans ambiguïté.
 modele = json.loads((racine / 'powerbi/Goodreads.SemanticModel/model.bim').read_text(encoding='utf-8'))['model']
 fichiers = {'Livres': 'livres_powerbi.csv', 'Langues': 'langues.csv',
-            'AuditImport': 'controle_qualite.csv', 'Sensibilite': 'sensibilite.csv'}
+            'AuditImport': 'controle_qualite.csv', 'Sensibilite': 'sensibilite.csv',
+            'ComparaisonSelections': 'comparaison_selections.csv'}
 for table in modele['tables']:
     colonnes_csv = pd.read_csv(dossier / fichiers[table['name']], sep=';', nrows=0).columns.tolist()
     assert [c['sourceColumn'] for c in table['columns']] == colonnes_csv
